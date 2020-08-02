@@ -1,0 +1,10 @@
+﻿{
+  "profiles": {
+    "LogCorner.EduSync.Speech.Producer": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
