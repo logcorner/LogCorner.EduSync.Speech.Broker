@@ -1,0 +1,1 @@
+# LogCorner.EduSync.Speech.ServiceBus
