@@ -9,6 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogCorner.EduSync.SignalR.S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogCorner.EduSync.SignalR.Server.IntegrationTests", "LogCorner.EduSync.SignalR.Server.IntegrationTests\LogCorner.EduSync.SignalR.Server.IntegrationTests.csproj", "{817179A4-7558-401F-AAF9-08291A2092E6}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogCorner.EduSync.Speech.Producer", "LogCorner.EduSync.Speech.Producer\LogCorner.EduSync.Speech.Producer.csproj", "{0DBEC403-BDB5-4105-86DD-AC326A6C5FD7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogCorner.EduSync.Speech.Producer.UnitTests", "LogCorner.EduSync.Speech.Producer.UnitTests\LogCorner.EduSync.Speech.Producer.UnitTests.csproj", "{A47F0CCC-8D9C-4761-9E4E-93DB57F1A2E9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{817179A4-7558-401F-AAF9-08291A2092E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{817179A4-7558-401F-AAF9-08291A2092E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{817179A4-7558-401F-AAF9-08291A2092E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DBEC403-BDB5-4105-86DD-AC326A6C5FD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DBEC403-BDB5-4105-86DD-AC326A6C5FD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DBEC403-BDB5-4105-86DD-AC326A6C5FD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DBEC403-BDB5-4105-86DD-AC326A6C5FD7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A47F0CCC-8D9C-4761-9E4E-93DB57F1A2E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A47F0CCC-8D9C-4761-9E4E-93DB57F1A2E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A47F0CCC-8D9C-4761-9E4E-93DB57F1A2E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A47F0CCC-8D9C-4761-9E4E-93DB57F1A2E9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

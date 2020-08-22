@@ -1,16 +1,38 @@
+using LogCorner.EduSync.SignalR.Common;
+using Microsoft.AspNetCore.SignalR.Client;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace LogCorner.EduSync.Speech.Producer.UnitTests
 {
-    public class BusUnitTest
+    public class ServiceBusUnitTest
     {
         [Fact]
-        public void Should_receive_messages_to_produce()
+        public async Task Should_receive_messages_to_produce()
         {
-            IHubConnectionInstance hubConnectionInstance = new HubConnectionInstance();
-            IBus bus = new Bus(hubConnectionInstance);
+            //Arrange
+            var eventStore = new EventStore
+            {
+                Id = "1"
+            };
+            IHubConnectionInstance hubConnectionInstance = new HubConnectionInstanceMock();
 
-            var result = bus.ReceiveAsync();
+            await hubConnectionInstance.ConnectAsync();
+            IServiceBus bus = new ServiceBus(hubConnectionInstance);
+
+            bus.ReceiveAsync();
+
+            //Act
+            //Assert
+            bus.ReceivedOnPublish += value =>
+            {
+                Assert.Equal(eventStore, value);
+            };
+
+            await hubConnectionInstance.Connection.StartAsync();
+
+            await hubConnectionInstance.Connection.InvokeAsync(nameof(IHubInvoker<EventStore>.Publish
+            ), eventStore);
         }
     }
 }
