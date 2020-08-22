@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogCorner.EduSync.Speech.Producer", "LogCorner.EduSync.Speech.Producer\LogCorner.EduSync.Speech.Producer.csproj", "{E46F7461-1D62-4C7C-995A-00A0BD53B052}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogCorner.EduSync.Speech.Producer", "LogCorner.EduSync.Speech.Producer\LogCorner.EduSync.Speech.Producer.csproj", "{E46F7461-1D62-4C7C-995A-00A0BD53B052}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogCorner.EduSync.Speech.Producer.UnitTests", "LogCorner.EduSync.Speech.Producer.UnitTests\LogCorner.EduSync.Speech.Producer.UnitTests.csproj", "{CFB6C584-4CCC-4F26-884F-440F50043FBA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{E46F7461-1D62-4C7C-995A-00A0BD53B052}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E46F7461-1D62-4C7C-995A-00A0BD53B052}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E46F7461-1D62-4C7C-995A-00A0BD53B052}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFB6C584-4CCC-4F26-884F-440F50043FBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFB6C584-4CCC-4F26-884F-440F50043FBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFB6C584-4CCC-4F26-884F-440F50043FBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFB6C584-4CCC-4F26-884F-440F50043FBA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
