@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using LogCorner.EduSync.SignalR.Common;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -18,7 +15,17 @@ namespace LogCorner.EduSync.Speech.Producer
             Host.CreateDefaultBuilder(args)
                 .ConfigureServices((hostContext, services) =>
                 {
-                    services.AddHostedService<Worker>();
+                    services.AddSingleton<IProducerService, ProducerService>();
+                    services.AddHostedService<ProducerHostedService>();
+                    services.AddSingleton<IServiceBus, ServiceBus>();
+
+                    services.AddSingleton<IHubConnectionInstance, HubConnectionInstance>(ctx =>
+                    {
+                        var hubConnectionInstance = new HubConnectionInstance();
+                        hubConnectionInstance.ConnectAsync().Wait();
+
+                        return hubConnectionInstance;
+                    });
                 });
     }
 }

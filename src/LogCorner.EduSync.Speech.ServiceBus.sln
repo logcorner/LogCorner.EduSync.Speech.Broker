@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogCorner.EduSync.SignalR.Common", "LogCorner.EduSync.SignalR.Common\LogCorner.EduSync.SignalR.Common.csproj", "{DCB28052-B09F-4FB9-BC95-6E2A25D9BD47}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogCorner.EduSync.SignalR.Server", "LogCorner.EduSync.SignalR.Server\LogCorner.EduSync.SignalR.Server.csproj", "{B6545C97-C9CF-4EFD-9C88-889DF1D8CCA5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogCorner.EduSync.SignalR.Server.IntegrationTests", "LogCorner.EduSync.SignalR.Server.IntegrationTests\LogCorner.EduSync.SignalR.Server.IntegrationTests.csproj", "{817179A4-7558-401F-AAF9-08291A2092E6}"
@@ -19,10 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DCB28052-B09F-4FB9-BC95-6E2A25D9BD47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DCB28052-B09F-4FB9-BC95-6E2A25D9BD47}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DCB28052-B09F-4FB9-BC95-6E2A25D9BD47}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DCB28052-B09F-4FB9-BC95-6E2A25D9BD47}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B6545C97-C9CF-4EFD-9C88-889DF1D8CCA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B6545C97-C9CF-4EFD-9C88-889DF1D8CCA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6545C97-C9CF-4EFD-9C88-889DF1D8CCA5}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -5,7 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\LogCorner.EduSync.SignalR.Common\LogCorner.EduSync.SignalR.Common.csproj" />
+    <Reference Include="LogCorner.EduSync.SignalR.Common">
+      <HintPath>..\..\..\LogCorner.EduSync.Command\src\LogCorner.EduSync.Speech\LogCorner.EduSync.SignalR.Common\bin\Debug\netstandard2.0\LogCorner.EduSync.SignalR.Common.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

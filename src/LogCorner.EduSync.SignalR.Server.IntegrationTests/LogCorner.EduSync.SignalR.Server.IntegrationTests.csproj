@@ -26,4 +26,10 @@
     <ProjectReference Include="..\LogCorner.EduSync.SignalR.Server\LogCorner.EduSync.SignalR.Server.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="LogCorner.EduSync.SignalR.Common">
+      <HintPath>..\..\..\LogCorner.EduSync.Command\src\LogCorner.EduSync.Speech\LogCorner.EduSync.SignalR.Common\bin\Debug\netstandard2.0\LogCorner.EduSync.SignalR.Common.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

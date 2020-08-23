@@ -1,6 +1,7 @@
 using LogCorner.EduSync.SignalR.Common;
 using Microsoft.AspNetCore.SignalR.Client;
 using System;
+using System.Threading.Tasks;
 
 namespace LogCorner.EduSync.Speech.Producer
 {
@@ -15,9 +16,15 @@ namespace LogCorner.EduSync.Speech.Producer
             _hubConnectionInstance = hubConnectionInstance;
         }
 
-        public void ReceiveAsync()
+        public async Task ReceiveAsync()
         {
             _hubConnectionInstance.Connection.On<EventStore>(nameof(IHubNotifier<EventStore>.OnPublish), u => ReceivedOnPublish?.Invoke(u));
+            await Task.CompletedTask;
+        }
+
+        public async Task Begin()
+        {
+            await _hubConnectionInstance.Connection.StartAsync();
         }
     }
 }

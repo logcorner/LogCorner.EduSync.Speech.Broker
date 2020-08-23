@@ -1,26 +1,19 @@
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR.Client;
+using System.Threading.Tasks;
 
 namespace LogCorner.EduSync.SignalR.Common
 {
     public class HubConnectionInstance : IHubConnectionInstance
     {
-       
-        public HubConnection Connection { get; set; }
+        public HubConnection Connection { get; private set; }
 
         public async Task ConnectAsync()
         {
-            var connection = new HubConnectionBuilder()
-                .WithUrl("http://localhost/echo")
+            Connection = new HubConnectionBuilder()
+                .WithUrl("https://localhost:5001/logcornerhub")
                 .Build();
 
-            connection.On<string>("OnMessageRecieved", msg =>
-            {
-               
-            });
-
-            await connection.StartAsync();
-           
+            await Connection.StartAsync();
         }
     }
 }

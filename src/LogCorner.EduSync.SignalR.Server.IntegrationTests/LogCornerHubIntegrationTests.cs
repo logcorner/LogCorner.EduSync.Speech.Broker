@@ -52,7 +52,6 @@ namespace LogCorner.EduSync.SignalR.Server.IntegrationTests
 
             ReceivedOnPublish += value =>
             {
-                
                 Assert.Equal(payloadToSend, value);
             };
         }

@@ -20,7 +20,7 @@ namespace LogCorner.EduSync.Speech.Producer.UnitTests
             await hubConnectionInstance.ConnectAsync();
             IServiceBus bus = new ServiceBus(hubConnectionInstance);
 
-            bus.ReceiveAsync();
+            await bus.ReceiveAsync();
 
             //Act
             //Assert
