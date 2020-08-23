@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="LogCorner.EduSync.SignalR.Common">
+      <HintPath>..\..\..\LogCorner.EduSync.Command\src\LogCorner.EduSync.Speech\LogCorner.EduSync.SignalR.Common\bin\Debug\netstandard2.0\LogCorner.EduSync.SignalR.Common.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
