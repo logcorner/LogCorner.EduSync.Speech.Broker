@@ -11,13 +11,14 @@ namespace LogCorner.EduSync.Speech.Producer
             CreateHostBuilder(args).Build().Run();
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
+        private static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureServices((hostContext, services) =>
                 {
                     services.AddSingleton<IProducerService, ProducerService>();
                     services.AddHostedService<ProducerHostedService>();
-                    services.AddSingleton<IServiceBus, ServiceBus>();
+                    services.AddSingleton<ISignalRNotifier, SignalRNotifier>();
+                    services.AddSingleton<ISignalRPublisher, SignalRPublisher>();
 
                     services.AddSingleton<IHubConnectionInstance, HubConnectionInstance>(ctx =>
                     {
