@@ -1,6 +1,6 @@
-using System.Threading.Tasks;
 using LogCorner.EduSync.SignalR.Common;
 using Moq;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace LogCorner.EduSync.Speech.Producer.UnitTests
@@ -17,7 +17,6 @@ namespace LogCorner.EduSync.Speech.Producer.UnitTests
                 .Raises((mock => mock.ReceivedOnPublishToTopic
                         += (topic, @event) =>
                         {
-
                             var x = topic;
                         }
                     ));
@@ -26,7 +25,7 @@ namespace LogCorner.EduSync.Speech.Producer.UnitTests
             mockSignalRPublisher.Setup(p => p.SubscribeAsync(It.IsAny<string>()))
                 .Returns(Task.CompletedTask);
 
-            IProducerService producerService = new ProducerService(mockNotifier.Object, mockSignalRPublisher.Object);
+            IProducerService producerService = new ProducerService(mockNotifier.Object, mockSignalRPublisher.Object, It.IsAny<IServiceBus>());
 
             producerService.DoWork();
         }

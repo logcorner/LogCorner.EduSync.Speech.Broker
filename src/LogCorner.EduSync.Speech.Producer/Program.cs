@@ -23,10 +23,13 @@ namespace LogCorner.EduSync.Speech.Producer
                     services.AddSingleton<IHubConnectionInstance, HubConnectionInstance>(ctx =>
                     {
                         var hubConnectionInstance = new HubConnectionInstance();
-                        hubConnectionInstance.ConnectAsync().Wait();
+                        //  Task.Run(() =>  hubConnectionInstance.ConnectAsync());/*.Wait();*/
+                        hubConnectionInstance.ConnectAsync();
 
                         return hubConnectionInstance;
                     });
+
+                    services.AddSingleton<IServiceBus, ServiceBus>(ctx => new ServiceBus("localhost:9092"));
                 });
     }
 }
