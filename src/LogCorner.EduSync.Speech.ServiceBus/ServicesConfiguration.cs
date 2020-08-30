@@ -7,8 +7,6 @@ namespace LogCorner.EduSync.Speech.ServiceBus
     {
         public static void AddServiceBus(this IServiceCollection services)
         {
-           
-
             services.AddSingleton<IKafkaClient, KafkaClient>(ctx =>
             {
                 string url = "localhost:9092";

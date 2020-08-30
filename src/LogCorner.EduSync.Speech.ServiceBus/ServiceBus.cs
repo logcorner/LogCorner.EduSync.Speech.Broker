@@ -16,7 +16,5 @@ namespace LogCorner.EduSync.Speech.ServiceBus
         {
             await _kafkaClient.SendAsync(topic, @event);
         }
-
-       
     }
 }

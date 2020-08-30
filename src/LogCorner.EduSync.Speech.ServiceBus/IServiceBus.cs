@@ -6,7 +6,5 @@ namespace LogCorner.EduSync.Speech.ServiceBus
     public interface IServiceBus
     {
         Task SendAsync(string topic, EventStore @event);
-
-       
     }
 }

@@ -6,7 +6,5 @@ namespace LogCorner.EduSync.Speech.ServiceBus
     public interface IKafkaClient
     {
         Task SendAsync(string topic, EventStore @event);
-
-       
     }
 }

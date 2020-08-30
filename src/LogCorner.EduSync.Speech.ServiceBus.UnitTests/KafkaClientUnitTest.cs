@@ -35,11 +35,11 @@ namespace LogCorner.EduSync.Speech.ServiceBus.UnitTests
             var mockProducer = new Mock<IProducer<Null, string>>();
             var t = mockProducer.Setup(m =>
                       m.ProduceAsync(It.IsAny<string>(), It.IsAny<Message<Null, string>>(), CancellationToken.None))
-                          /*.Callback(
-                              () =>
-                              {
-                                  throw new Exception();
-                              })*/;
+                              /*.Callback(
+                                  () =>
+                                  {
+                                      throw new Exception();
+                                  })*/;
 
             var mockIJsonSerializer = new Mock<IJsonSerializer>();
 

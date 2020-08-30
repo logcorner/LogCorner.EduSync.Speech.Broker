@@ -1,5 +1,4 @@
 using LogCorner.EduSync.SignalR.Common;
-using LogCorner.EduSync.Speech.ServiceBus;
 using LogCorner.EduSync.Speech.SharedKernel.Events;
 using Moq;
 using System.Threading.Tasks;

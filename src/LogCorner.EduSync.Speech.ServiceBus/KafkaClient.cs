@@ -10,19 +10,15 @@ namespace LogCorner.EduSync.Speech.ServiceBus
         private readonly IProducer<Null, string> _producer;
 
         private readonly IJsonSerializer _jsonSerializer;
-        
 
         public KafkaClient(IProducer<Null, string> producer, IJsonSerializer jsonSerializer)
         {
             _producer = producer;
             _jsonSerializer = jsonSerializer;
-          
         }
 
         public async Task SendAsync(string topic, EventStore @event)
         {
-        
-
             var jsonString = _jsonSerializer.Serialize(@event);
             var t = _producer.ProduceAsync(topic, new Message<Null, string> { Value = jsonString });
 
@@ -40,6 +36,5 @@ namespace LogCorner.EduSync.Speech.ServiceBus
                 }
             });
         }
-
     }
 }

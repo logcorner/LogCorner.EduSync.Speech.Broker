@@ -1,5 +1,4 @@
 ﻿using LogCorner.EduSync.SignalR.Common;
-using LogCorner.EduSync.Speech.ServiceBus;
 using System.Threading.Tasks;
 
 namespace LogCorner.EduSync.Speech.Producer
