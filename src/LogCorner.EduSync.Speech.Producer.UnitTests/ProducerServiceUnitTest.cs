@@ -1,4 +1,6 @@
 using LogCorner.EduSync.SignalR.Common;
+using LogCorner.EduSync.Speech.ServiceBus;
+using LogCorner.EduSync.Speech.SharedKernel.Events;
 using Moq;
 using System.Threading.Tasks;
 using Xunit;
@@ -8,26 +10,56 @@ namespace LogCorner.EduSync.Speech.Producer.UnitTests
     public class ProducerServiceUnitTest
     {
         [Fact]
-        public void DoWorkShouldRaiseReceivedOnPublishToTopicEvent()
+        public async Task DoWorkShouldRaiseReceivedOnPublishToTopicEvent()
         {
-            var mockNotifier = new Mock<ISignalRNotifier>();
+            var mockServiceBus = new Mock<IServiceBus>();
 
-            mockNotifier.Setup(n => n.OnPublish(It.IsAny<string>()))
-                .Returns(Task.CompletedTask)
-                .Raises((mock => mock.ReceivedOnPublishToTopic
-                        += (topic, @event) =>
-                        {
-                            var x = topic;
-                        }
-                    ));
+            mockServiceBus.Setup(m => m.SendAsync(It.IsAny<string>(), It.IsAny<EventStore>())).Verifiable();
 
-            var mockSignalRPublisher = new Mock<ISignalRPublisher>();
-            mockSignalRPublisher.Setup(p => p.SubscribeAsync(It.IsAny<string>()))
-                .Returns(Task.CompletedTask);
+            IHubConnectionInstance connectionInstance = new HubConnectionInstanceMock();
+            await connectionInstance.InitAsync();
+            ISignalRNotifier notifier = new SignalRNotifier(connectionInstance);
+            ISignalRPublisher publisher = new SignalRPublisher(connectionInstance);
 
-            IProducerService producerService = new ProducerService(mockNotifier.Object, mockSignalRPublisher.Object, It.IsAny<IServiceBus>());
+            IProducerService producerService = new ProducerService(notifier, publisher, mockServiceBus.Object);
+            await notifier.StartAsync();
+            await producerService.DoWorkAsync();
 
-            producerService.DoWork();
+            await publisher.PublishAsync(Topics.Speech, It.IsAny<EventStore>());
+
+            _ = Task.Run(() => mockServiceBus.Verify(r => r.SendAsync(Topics.Speech, It.IsAny<EventStore>())));
+        }
+
+        [Fact]
+        public async Task ShouldStartSignalRNotifier()
+        {
+            //Arrange
+            var moqISignalRNotifier = new Mock<ISignalRNotifier>();
+            moqISignalRNotifier.Setup(m => m.StartAsync()).Verifiable();
+
+            IProducerService producerService = new ProducerService(moqISignalRNotifier.Object, It.IsAny<ISignalRPublisher>(), It.IsAny<IServiceBus>());
+
+            //Act
+            await producerService.StartAsync();
+
+            //Assert
+            moqISignalRNotifier.Verify(r => r.StartAsync(), Times.Once);
+        }
+
+        [Fact]
+        public async Task ShouldStopSignalRNotifier()
+        {
+            //Arrange
+            var moqISignalRNotifier = new Mock<ISignalRNotifier>();
+            moqISignalRNotifier.Setup(m => m.StopAsync()).Verifiable();
+
+            IProducerService producerService = new ProducerService(moqISignalRNotifier.Object, It.IsAny<ISignalRPublisher>(), It.IsAny<IServiceBus>());
+
+            //Act
+            await producerService.StopAsync();
+
+            //Assert
+            moqISignalRNotifier.Verify(r => r.StopAsync(), Times.Once);
         }
     }
 }

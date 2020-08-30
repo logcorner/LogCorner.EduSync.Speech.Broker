@@ -7,6 +7,7 @@ namespace LogCorner.EduSync.SignalR.Common
     {
         HubConnection Connection { get; }
 
-        Task ConnectAsync();
+        Task InitAsync();
+        Task StartAsync();
     }
 }

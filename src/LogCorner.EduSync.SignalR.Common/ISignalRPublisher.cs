@@ -7,5 +7,6 @@ namespace LogCorner.EduSync.SignalR.Common
         Task SubscribeAsync(string topic);
 
         Task PublishAsync<T>(string topic, T payload);
+        
     }
 }

@@ -8,10 +8,12 @@ namespace LogCorner.EduSync.SignalR.Common
     {
         event Action<string, EventStore> ReceivedOnPublishToTopic;
 
-        Task Begin();
+        Task StartAsync();
 
         Task OnPublish();
 
         Task OnPublish(string topic);
+
+        Task StopAsync();
     }
 }

@@ -1,19 +1,21 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <UserSecretsId>dotnet-LogCorner.EduSync.Speech.Producer-5470968C-5C54-4980-BA6D-360865CAEEED</UserSecretsId>
+
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Confluent.Kafka" Version="1.5.1" />
-    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="3.1.7" />
-    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client.Core" Version="3.1.7" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.7" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
+    <PackageReference Include="Moq" Version="4.14.5" />
+    <PackageReference Include="xunit" Version="2.4.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
+    <PackageReference Include="coverlet.collector" Version="1.2.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\LogCorner.EduSync.SignalR.Common\LogCorner.EduSync.SignalR.Common.csproj" />
     <ProjectReference Include="..\LogCorner.EduSync.Speech.ServiceBus\LogCorner.EduSync.Speech.ServiceBus.csproj" />
   </ItemGroup>
 
@@ -22,4 +24,5 @@
       <HintPath>..\..\SharedKernel\LogCorner.EduSync.Speech.SharedKernel.dll</HintPath>
     </Reference>
   </ItemGroup>
+
 </Project>

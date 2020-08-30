@@ -16,7 +16,7 @@ namespace LogCorner.EduSync.SignalR.Common
         {
             if (_hubConnectionInstance.Connection.State != HubConnectionState.Connected)
             {
-                await _hubConnectionInstance.ConnectAsync();
+                await _hubConnectionInstance.StartAsync();
             }
             await _hubConnectionInstance.Connection.InvokeAsync(nameof(IHubInvoker<string>.Subscribe), topic);
         }
@@ -25,7 +25,7 @@ namespace LogCorner.EduSync.SignalR.Common
         {
             if (_hubConnectionInstance.Connection.State != HubConnectionState.Connected)
             {
-                await _hubConnectionInstance.ConnectAsync();
+                await _hubConnectionInstance.StartAsync();
             }
             await _hubConnectionInstance.Connection.InvokeAsync(nameof(IHubInvoker<object>.PublishToTopic), topic, payload);
         }

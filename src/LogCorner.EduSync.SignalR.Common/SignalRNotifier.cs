@@ -18,6 +18,11 @@ namespace LogCorner.EduSync.SignalR.Common
             _hubConnectionInstance = hubConnectionInstance;
         }
 
+        public async Task StartAsync()
+        {
+            await _hubConnectionInstance.Connection.StartAsync();
+        }
+
         public async Task OnPublish()
         {
             _hubConnectionInstance.Connection.On<EventStore>(nameof(IHubNotifier<EventStore>.OnPublish), u => ReceivedOnPublish?.Invoke(u));
@@ -30,9 +35,9 @@ namespace LogCorner.EduSync.SignalR.Common
             await Task.CompletedTask;
         }
 
-        public async Task Begin()
+        public async Task StopAsync()
         {
-            await _hubConnectionInstance.Connection.StartAsync();
+            await _hubConnectionInstance.Connection.StopAsync();
         }
     }
 }

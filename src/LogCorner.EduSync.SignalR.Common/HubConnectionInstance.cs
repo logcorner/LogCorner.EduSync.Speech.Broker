@@ -5,14 +5,25 @@ namespace LogCorner.EduSync.SignalR.Common
 {
     public class HubConnectionInstance : IHubConnectionInstance
     {
+        private string Url { get; }
         public HubConnection Connection { get; private set; }
 
-        public async Task ConnectAsync()
+        public HubConnectionInstance(string url)
+        {
+            Url = url;
+        }
+
+        public async Task InitAsync()
         {
             Connection = new HubConnectionBuilder()
-                .WithUrl("https://localhost:5001/logcornerhub")
+                .WithUrl(Url)
                 .Build();
 
+            await Task.CompletedTask;
+        }
+
+        public async Task StartAsync()
+        {
             await Connection.StartAsync();
         }
     }

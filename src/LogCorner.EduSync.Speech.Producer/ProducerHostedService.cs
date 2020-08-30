@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Hosting;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -13,18 +14,23 @@ namespace LogCorner.EduSync.Speech.Producer
             _scopedProcessingService = scopedProcessingService;
         }
 
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+        public override async Task StartAsync(CancellationToken cancellationToken)
         {
-            await DoWork();
+            await _scopedProcessingService.StartAsync();
+            Console.WriteLine("ProducerService is starting .....");
+            await base.StartAsync(cancellationToken);
         }
 
-        private async Task DoWork()
+        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            await _scopedProcessingService.DoWork();
+            await _scopedProcessingService.DoWorkAsync();
+            Console.WriteLine("ProducerService is running .....");
         }
 
         public override async Task StopAsync(CancellationToken stoppingToken)
         {
+            await _scopedProcessingService.StopAsync();
+            Console.WriteLine("ProducerService is stopping .....");
             await Task.CompletedTask;
         }
     }

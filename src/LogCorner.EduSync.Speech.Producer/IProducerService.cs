@@ -4,6 +4,10 @@ namespace LogCorner.EduSync.Speech.Producer
 {
     public interface IProducerService
     {
-        Task DoWork();
+        Task DoWorkAsync();
+
+        Task StopAsync();
+
+        Task StartAsync();
     }
 }
