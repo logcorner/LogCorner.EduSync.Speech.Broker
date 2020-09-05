@@ -1,5 +1,4 @@
-using LogCorner.EduSync.SignalR.Common;
-using LogCorner.EduSync.SignalR.Server.Hubs;
+﻿using LogCorner.EduSync.SignalR.Server.Hubs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SignalR.Client;
@@ -7,7 +6,7 @@ using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
 
-namespace LogCorner.EduSync.Speech.Producer.UnitTests
+namespace LogCorner.EduSync.SignalR.Common.IntegrationTests
 {
     public class HubConnectionInstanceMock : IHubConnectionInstance
     {
@@ -39,9 +38,9 @@ namespace LogCorner.EduSync.Speech.Producer.UnitTests
             await Task.CompletedTask;
         }
 
-        public Task StartAsync()
+        public async Task StartAsync()
         {
-            throw new System.NotImplementedException();
+            await Connection.StartAsync();
         }
     }
 }
