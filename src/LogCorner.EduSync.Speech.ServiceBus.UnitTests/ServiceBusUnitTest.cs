@@ -21,5 +21,21 @@ namespace LogCorner.EduSync.Speech.ServiceBus.UnitTests
             //Assert
             mockKafkaClient.Verify(m => m.SendAsync(It.IsAny<string>(), It.IsAny<EventStore>()), Times.Once);
         }
+
+        [Fact]
+        public async Task ServiceBusShouldReceiveMessageFromKafka()
+        {
+            //Arrange
+            string topic = "bus";
+            var mockKafkaClient = new Mock<IKafkaClient>();
+            mockKafkaClient.Setup(m => m.ReceiveAsync(topic, true)).Verifiable();
+
+            //Act
+            IServiceBus serviceBus = new ServiceBus(mockKafkaClient.Object);
+            await serviceBus.ReceiveAsync(topic);
+
+            //Assert
+            mockKafkaClient.Verify(m => m.ReceiveAsync(topic, true), Times.Once);
+        }
     }
 }
