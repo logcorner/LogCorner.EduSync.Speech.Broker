@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Worker">
+﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -11,5 +11,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LogCorner.EduSync.Speech.ServiceBus\LogCorner.EduSync.Speech.ServiceBus.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="LogCorner.EduSync.Speech.SharedKernel">
+      <HintPath>..\..\SharedKernel\LogCorner.EduSync.Speech.SharedKernel.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>
