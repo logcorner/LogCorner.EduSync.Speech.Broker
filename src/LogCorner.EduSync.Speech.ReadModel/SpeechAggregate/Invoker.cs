@@ -3,7 +3,7 @@ using System.Reflection;
 
 namespace LogCorner.EduSync.Speech.ReadModel.SpeechAggregate
 {
-    public class Invoker 
+    public class Invoker
     {
         public static T CreateInstanceOfAggregateRoot<T>()
         {

@@ -1,6 +1,6 @@
-﻿using System;
-using LogCorner.EduSync.Speech.ReadModel.SpeechAggregate;
+﻿using LogCorner.EduSync.Speech.ReadModel.SpeechAggregate;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace LogCorner.EduSync.Speech.ElasticSearch
 {
@@ -13,13 +13,12 @@ namespace LogCorner.EduSync.Speech.ElasticSearch
                 var elasticSearchClient = new ElasticSearchClient<T>(index);
                 if (!string.IsNullOrWhiteSpace(url))
                 {
-                  var setup =  elasticSearchClient.Init(url);
+                    var setup = elasticSearchClient.Init(url);
 
-                  if (setup.IsValid)
-                  {
-                      throw new Exception($"Cannot initialyze elastci search {url} {index} {setup.OriginalException}");
-                  }
-                  
+                    if (setup.IsValid)
+                    {
+                        throw new Exception($"Cannot initialyze elastci search {url} {index} {setup.OriginalException}");
+                    }
                 }
 
                 return elasticSearchClient;

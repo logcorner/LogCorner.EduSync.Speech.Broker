@@ -8,14 +8,13 @@ namespace LogCorner.EduSync.Speech.ServiceBus
         public static void AddServiceBus(this IServiceCollection services, string url)
         {
             services.AddSingleton<IChannelService, ChannelService>();
-          
+
             services.AddSingleton<IServiceBus, ServiceBus>();
             services.AddSingleton<IChannelService, ChannelService>();
             services.AddSingleton<IJsonSerializer, CustomJsonSerializer>();
 
             services.AddSingleton<IKafkaClient>(x =>
                 {
-
                     var producerConfig = new ProducerConfig { BootstrapServers = url };
 
                     var consumerConfig = new ConsumerConfig
@@ -26,7 +25,6 @@ namespace LogCorner.EduSync.Speech.ServiceBus
                     };
                     var consumer = new ConsumerBuilder<Null, string>(consumerConfig).Build();
                     var producer = new ProducerBuilder<Null, string>(producerConfig).Build();
-
 
                     return new KafkaClient(producer,
                         x.GetRequiredService<IJsonSerializer>(),

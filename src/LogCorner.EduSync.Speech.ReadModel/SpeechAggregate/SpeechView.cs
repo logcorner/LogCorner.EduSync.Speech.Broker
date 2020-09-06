@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using LogCorner.EduSync.Speech.SharedKernel.Events;
+﻿using LogCorner.EduSync.Speech.SharedKernel.Events;
+using System;
 
 namespace LogCorner.EduSync.Speech.ReadModel.SpeechAggregate
 {
@@ -12,11 +11,10 @@ namespace LogCorner.EduSync.Speech.ReadModel.SpeechAggregate
         public string Description { get; private set; }
         public string Type { get; private set; }
 
-      
         private SpeechView()
         {
-
         }
+
         public void Apply(SpeechCreatedEvent ev)
         {
             Id = ev.AggregateId;

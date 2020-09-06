@@ -1,10 +1,7 @@
-using System;
+using LogCorner.EduSync.Speech.SharedKernel.Serialyser;
 using Moq;
 using System.Threading.Channels;
 using System.Threading.Tasks;
-using LogCorner.EduSync.Speech.ElasticSearch;
-using LogCorner.EduSync.Speech.ReadModel.SpeechAggregate;
-using LogCorner.EduSync.Speech.SharedKernel.Serialyser;
 using Xunit;
 
 namespace LogCorner.EduSync.Speech.ServiceBus.UnitTests
@@ -19,7 +16,7 @@ namespace LogCorner.EduSync.Speech.ServiceBus.UnitTests
             string data = "test";
 
             //Act
-            IChannelService channelService = new ChannelService(It.IsAny<IEventSerializer>(),null);
+            IChannelService channelService = new ChannelService(It.IsAny<IEventSerializer>(), null);
             var task = channelService.Produce(channel.Writer, It.IsAny<int>(), data);
 
             //Assert
@@ -33,7 +30,7 @@ namespace LogCorner.EduSync.Speech.ServiceBus.UnitTests
             var channel = Channel.CreateUnbounded<string>();
 
             //Act
-            IChannelService channelService = new ChannelService(It.IsAny<IEventSerializer>(),null);
+            IChannelService channelService = new ChannelService(It.IsAny<IEventSerializer>(), null);
             var producer = channelService.Consume(channel.Reader, It.IsAny<int>());
             var consumer = channelService.Produce(channel.Writer, It.IsAny<int>(), "data");
 

@@ -1,7 +1,7 @@
-using System;
-using System.Collections.Generic;
 using LogCorner.EduSync.Speech.ReadModel.SpeechAggregate;
 using LogCorner.EduSync.Speech.SharedKernel.Events;
+using System;
+using System.Collections.Generic;
 using Xunit;
 
 namespace LogCorner.EduSync.Speech.ReadModel.UnitTests
@@ -13,18 +13,18 @@ namespace LogCorner.EduSync.Speech.ReadModel.UnitTests
         {
             //Arrange
             var speechView = Invoker.CreateInstanceOfAggregateRoot<SpeechView>();
-            var speechCreatedEvent = new SpeechCreatedEvent(Guid.NewGuid(), 
-                "my title","http://test.com","my desc","conferences");
+            var speechCreatedEvent = new SpeechCreatedEvent(Guid.NewGuid(),
+                "my title", "http://test.com", "my desc", "conferences");
 
             //Act
             speechView.Apply(speechCreatedEvent);
 
-             //Assert
+            //Assert
             Assert.Equal(speechCreatedEvent.AggregateId, speechView.Id);
-             Assert.Equal(speechCreatedEvent.Title, speechView.Title);
-             Assert.Equal(speechCreatedEvent.Description, speechView.Description);
-             Assert.Equal(speechCreatedEvent.Url, speechView.Url);
-             Assert.Equal(speechCreatedEvent.Type, speechView.Type);
+            Assert.Equal(speechCreatedEvent.Title, speechView.Title);
+            Assert.Equal(speechCreatedEvent.Description, speechView.Description);
+            Assert.Equal(speechCreatedEvent.Url, speechView.Url);
+            Assert.Equal(speechCreatedEvent.Type, speechView.Type);
         }
 
         [Fact]
@@ -111,8 +111,7 @@ namespace LogCorner.EduSync.Speech.ReadModel.UnitTests
             var speechUrlChangedEvent = new SpeechUrlChangedEvent(id, "my url");
 
             //Act
-            speechView.LoadFromHistory(new List<IDomainEvent> { speechCreatedEvent,speechTitleChangedEvent,speechDescriptionChangedEvent,speechUrlChangedEvent, speechTypeChangedEvent });
-
+            speechView.LoadFromHistory(new List<IDomainEvent> { speechCreatedEvent, speechTitleChangedEvent, speechDescriptionChangedEvent, speechUrlChangedEvent, speechTypeChangedEvent });
 
             //Assert
             Assert.Equal(speechCreatedEvent.AggregateId, speechView.Id); Assert.Equal(speechTitleChangedEvent.Title, speechView.Title);

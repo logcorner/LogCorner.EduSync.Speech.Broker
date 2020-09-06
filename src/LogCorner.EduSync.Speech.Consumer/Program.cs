@@ -22,7 +22,7 @@ namespace LogCorner.EduSync.Speech.Consumer
                     services.AddHostedService<ConsumerHostedService>();
 
                     services.AddSharedKernel();
-                   
+
                     services.AddElasticSearch<SpeechView>("http://localhost:9200", "speech");
                 });
     }

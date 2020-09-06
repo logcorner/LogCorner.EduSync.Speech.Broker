@@ -21,7 +21,7 @@ namespace LogCorner.EduSync.Speech.Producer
                     services.AddSingleton<IProducerService, ProducerService>();
                     services.AddHostedService<ProducerHostedService>();
                     services.AddSignalRServices();
-                    services.AddElasticSearch<SpeechView>(null,null);
+                    services.AddElasticSearch<SpeechView>(null, null);
                     services.AddSharedKernel();
 
                     services.AddServiceBus("localhost:9092");
