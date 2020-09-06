@@ -1,8 +1,8 @@
-﻿using Confluent.Kafka;
-using LogCorner.EduSync.Speech.SharedKernel.Events;
-using System;
+﻿using System;
 using System.Threading.Channels;
 using System.Threading.Tasks;
+using Confluent.Kafka;
+using LogCorner.EduSync.Speech.SharedKernel.Events;
 
 namespace LogCorner.EduSync.Speech.ServiceBus
 {
@@ -12,6 +12,7 @@ namespace LogCorner.EduSync.Speech.ServiceBus
         private readonly IJsonSerializer _jsonSerializer;
         private readonly IConsumer<Null, string> _consumer;
         private readonly IChannelService _channelService;
+       
 
         public KafkaClient(IProducer<Null, string> producer, IJsonSerializer jsonSerializer,
             IConsumer<Null, string> consumer, IChannelService channelService)
@@ -20,6 +21,7 @@ namespace LogCorner.EduSync.Speech.ServiceBus
             _jsonSerializer = jsonSerializer;
             _consumer = consumer;
             _channelService = channelService;
+     
         }
 
         public async Task SendAsync(string topic, EventStore @event)
@@ -63,6 +65,8 @@ namespace LogCorner.EduSync.Speech.ServiceBus
                 await producerTask.ContinueWith(_ => channel.Writer.Complete());
 
                 await consumerTask;
+
+              
             } while (forever);
         }
     }
