@@ -1,4 +1,7 @@
 using LogCorner.EduSync.SignalR.Common;
+using LogCorner.EduSync.Speech.ElasticSearch;
+using LogCorner.EduSync.Speech.ReadModel.SpeechAggregate;
+using LogCorner.EduSync.Speech.ServiceBus;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -17,16 +20,11 @@ namespace LogCorner.EduSync.Speech.Producer
                 {
                     services.AddSingleton<IProducerService, ProducerService>();
                     services.AddHostedService<ProducerHostedService>();
-                    services.AddSingleton<ISignalRNotifier, SignalRNotifier>();
-                    services.AddSingleton<ISignalRPublisher, SignalRPublisher>();
+                    services.AddSignalRServices();
+                    services.AddElasticSearch<SpeechView>(null, null);
+                    services.AddSharedKernel();
 
-                    services.AddSingleton<IHubConnectionInstance, HubConnectionInstance>(ctx =>
-                    {
-                        var hubConnectionInstance = new HubConnectionInstance();
-                        hubConnectionInstance.ConnectAsync().Wait();
-
-                        return hubConnectionInstance;
-                    });
+                    services.AddServiceBus("localhost:9092");
                 });
     }
 }

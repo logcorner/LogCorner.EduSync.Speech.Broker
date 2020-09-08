@@ -1,5 +1,6 @@
-﻿using System.Threading.Tasks;
-using LogCorner.EduSync.SignalR.Common;
+﻿using LogCorner.EduSync.SignalR.Common;
+using LogCorner.EduSync.Speech.ServiceBus;
+using System.Threading.Tasks;
 
 namespace LogCorner.EduSync.Speech.Producer
 {
@@ -7,22 +8,34 @@ namespace LogCorner.EduSync.Speech.Producer
     {
         private readonly ISignalRNotifier _notifier;
         private readonly ISignalRPublisher _publisher;
-       
-        public ProducerService(ISignalRNotifier notifier, ISignalRPublisher publisher)
+        private readonly IServiceBus _serviceBus;
+
+        public ProducerService(ISignalRNotifier notifier, ISignalRPublisher publisher, IServiceBus serviceBus)
         {
             _notifier = notifier;
             _publisher = publisher;
+            _serviceBus = serviceBus;
         }
 
-        public async Task DoWork()
+        public async Task StartAsync()
         {
-            await _publisher.SubscribeAsync("speech");
+            await _notifier.StartAsync();
+        }
 
-            await _notifier.OnPublish("speech");
+        public async Task StopAsync()
+        {
+            await _notifier.StopAsync();
+        }
 
-            _notifier.ReceivedOnPublishToTopic += (topic, @event) =>
+        public async Task DoWorkAsync()
+        {
+            await _publisher.SubscribeAsync(Topics.Speech);
+
+            await _notifier.OnPublish(Topics.Speech);
+
+            _notifier.ReceivedOnPublishToTopic += async (topic, @event) =>
             {
-               
+                await _serviceBus.SendAsync(Topics.Speech, @event);
             };
         }
     }

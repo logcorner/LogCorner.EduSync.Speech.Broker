@@ -13,7 +13,7 @@ namespace LogCorner.EduSync.Speech.Producer.UnitTests
     {
         public HubConnection Connection { get; private set; }
 
-        public async Task ConnectAsync()
+        public async Task InitAsync()
         {
             var webHostBuilder = new WebHostBuilder()
                 .ConfigureServices(services =>
@@ -35,6 +35,13 @@ namespace LogCorner.EduSync.Speech.Producer.UnitTests
                     "http://localhost/logcornerhub",
                     o => o.HttpMessageHandlerFactory = _ => server.CreateHandler())
                 .Build();
+
+            await Task.CompletedTask;
+        }
+
+        public Task StartAsync()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
