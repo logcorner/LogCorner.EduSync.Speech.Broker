@@ -5,21 +5,21 @@ namespace LogCorner.EduSync.Speech.ServiceBus
 {
     public class ServiceBus : IServiceBus
     {
-        private readonly IKafkaClient _kafkaClient;
+        private readonly IServiceBusProvider _serviceBusProvider;
 
-        public ServiceBus(IKafkaClient kafkaClient)
+        public ServiceBus(IServiceBusProvider kafkaClient)
         {
-            _kafkaClient = kafkaClient;
+            _serviceBusProvider = kafkaClient;
         }
 
         public async Task SendAsync(string topic, EventStore @event)
         {
-            await _kafkaClient.SendAsync(topic, @event);
+            await _serviceBusProvider.SendAsync(topic, @event);
         }
 
         public async Task ReceiveAsync(string topic)
         {
-            await _kafkaClient.ReceiveAsync(topic);
+            await _serviceBusProvider.ReceiveAsync(topic);
         }
     }
 }

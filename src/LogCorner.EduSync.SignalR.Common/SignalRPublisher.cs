@@ -5,9 +5,9 @@ namespace LogCorner.EduSync.SignalR.Common
 {
     public class SignalRPublisher : ISignalRPublisher
     {
-        private readonly IHubConnectionInstance _hubConnectionInstance;
+        private readonly IHubInstance _hubConnectionInstance;
 
-        public SignalRPublisher(IHubConnectionInstance hubConnectionInstance)
+        public SignalRPublisher(IHubInstance hubConnectionInstance)
         {
             _hubConnectionInstance = hubConnectionInstance;
         }

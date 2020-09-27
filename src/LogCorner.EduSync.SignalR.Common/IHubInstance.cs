@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace LogCorner.EduSync.SignalR.Common
 {
-    public interface IHubConnectionInstance
+    public interface IHubInstance
     {
         HubConnection Connection { get; }
 

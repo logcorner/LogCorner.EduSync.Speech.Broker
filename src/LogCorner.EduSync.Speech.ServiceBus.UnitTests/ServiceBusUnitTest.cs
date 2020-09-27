@@ -11,7 +11,7 @@ namespace LogCorner.EduSync.Speech.ServiceBus.UnitTests
         public async Task ServiceBusShouldSendMessageToKafka()
         {
             //Arrange
-            var mockKafkaClient = new Mock<IKafkaClient>();
+            var mockKafkaClient = new Mock<IServiceBusProvider>();
             mockKafkaClient.Setup(m => m.SendAsync(It.IsAny<string>(), It.IsAny<EventStore>())).Verifiable();
 
             //Act
@@ -27,7 +27,7 @@ namespace LogCorner.EduSync.Speech.ServiceBus.UnitTests
         {
             //Arrange
             string topic = "bus";
-            var mockKafkaClient = new Mock<IKafkaClient>();
+            var mockKafkaClient = new Mock<IServiceBusProvider>();
             mockKafkaClient.Setup(m => m.ReceiveAsync(topic, true)).Verifiable();
 
             //Act

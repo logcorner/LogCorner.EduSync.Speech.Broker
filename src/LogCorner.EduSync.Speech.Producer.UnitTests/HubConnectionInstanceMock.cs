@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace LogCorner.EduSync.Speech.Producer.UnitTests
 {
-    public class HubConnectionInstanceMock : IHubConnectionInstance
+    public class HubConnectionInstanceMock : IHubInstance
     {
         public HubConnection Connection { get; private set; }
 

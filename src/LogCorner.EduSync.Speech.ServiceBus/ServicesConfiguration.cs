@@ -13,7 +13,7 @@ namespace LogCorner.EduSync.Speech.ServiceBus
             services.AddSingleton<IChannelService, ChannelService>();
             services.AddSingleton<IJsonSerializer, CustomJsonSerializer>();
 
-            services.AddSingleton<IKafkaClient>(x =>
+            services.AddSingleton<IServiceBusProvider>(x =>
                 {
                     var producerConfig = new ProducerConfig { BootstrapServers = url };
 

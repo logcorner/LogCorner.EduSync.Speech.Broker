@@ -16,7 +16,7 @@ namespace LogCorner.EduSync.Speech.Producer.UnitTests
 
             mockServiceBus.Setup(m => m.SendAsync(It.IsAny<string>(), It.IsAny<EventStore>())).Verifiable();
 
-            IHubConnectionInstance connectionInstance = new HubConnectionInstanceMock();
+            IHubInstance connectionInstance = new HubConnectionInstanceMock();
             await connectionInstance.InitAsync();
             ISignalRNotifier notifier = new SignalRNotifier(connectionInstance);
             ISignalRPublisher publisher = new SignalRPublisher(connectionInstance);

@@ -13,7 +13,7 @@ namespace LogCorner.EduSync.SignalR.Common.IntegrationTests
             //Arrange
 
             string topic = "test";
-            IHubConnectionInstance hubConnectionInstance = new HubConnectionInstanceMock();
+            IHubInstance hubConnectionInstance = new HubConnectionInstanceMock();
             await hubConnectionInstance.InitAsync();
 
             ISignalRPublisher signalRPublisher = new SignalRPublisher(hubConnectionInstance);
@@ -32,7 +32,7 @@ namespace LogCorner.EduSync.SignalR.Common.IntegrationTests
             //Arrange
 
             string topic = "test";
-            IHubConnectionInstance hubConnectionInstance = new HubConnectionInstanceMock();
+            IHubInstance hubConnectionInstance = new HubConnectionInstanceMock();
             await hubConnectionInstance.InitAsync();
 
             ISignalRPublisher signalRPublisher = new SignalRPublisher(hubConnectionInstance);
