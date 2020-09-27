@@ -20,7 +20,7 @@ namespace LogCorner.EduSync.Speech.Producer
                     services.AddHostedService<ProducerHostedService>();
                     services.AddSignalRServices();
 
-                    services.AddServiceBus();
+                    services.AddServiceBus("localhost:9092");
                 });
     }
 }

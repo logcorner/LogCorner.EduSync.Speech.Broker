@@ -5,10 +5,9 @@ using System.Threading.Tasks;
 
 namespace LogCorner.EduSync.Speech.ServiceBus
 {
-    public class KafkaClient : IKafkaClient
+    public class KafkaClient : IServiceBusProvider
     {
         private readonly IProducer<Null, string> _producer;
-
         private readonly IJsonSerializer _jsonSerializer;
 
         public KafkaClient(IProducer<Null, string> producer, IJsonSerializer jsonSerializer)
@@ -20,7 +19,8 @@ namespace LogCorner.EduSync.Speech.ServiceBus
         public async Task SendAsync(string topic, EventStore @event)
         {
             var jsonString = _jsonSerializer.Serialize(@event);
-            var t = _producer.ProduceAsync(topic, new Message<Null, string> { Value = jsonString });
+            var t = _producer.ProduceAsync(topic, new Message<Null, string>
+            { Value = jsonString });
 
             await t.ContinueWith(task =>
             {
@@ -30,7 +30,7 @@ namespace LogCorner.EduSync.Speech.ServiceBus
                 }
                 else
                 {
-                    Console.WriteLine($"produced : ");
+                    Console.WriteLine($"produced : {jsonString}");
 
                     Console.WriteLine($"Wrote to offset: {task.Result?.Offset}");
                 }

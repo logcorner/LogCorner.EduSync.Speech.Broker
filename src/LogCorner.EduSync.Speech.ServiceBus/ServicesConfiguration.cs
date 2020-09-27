@@ -5,19 +5,22 @@ namespace LogCorner.EduSync.Speech.ServiceBus
 {
     public static class ServicesConfiguration
     {
-        public static void AddServiceBus(this IServiceCollection services)
+        public static void AddServiceBus(this IServiceCollection services, string url)
         {
-            services.AddSingleton<IKafkaClient, KafkaClient>(ctx =>
-            {
-                string url = "localhost:9092";
-
-                var producerConfig = new ProducerConfig { BootstrapServers = url };
-
-                var producer = new ProducerBuilder<Null, string>(producerConfig).Build();
-                return new KafkaClient(producer, new CustomJsonSerializer());
-            });
-
             services.AddSingleton<IServiceBus, ServiceBus>();
+
+            services.AddSingleton<IJsonSerializer, CustomJsonSerializer>();
+
+            services.AddSingleton<IServiceBusProvider>(x =>
+                {
+                    var producerConfig = new ProducerConfig { BootstrapServers = url };
+
+                    var producer = new ProducerBuilder<Null, string>(producerConfig).Build();
+
+                    return new KafkaClient(producer,
+                        x.GetRequiredService<IJsonSerializer>());
+                }
+            );
         }
     }
 }
