@@ -338,6 +338,6 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
-/LiveTesting
 /LieTest
+/LiveTesting
 /LiveTests
