@@ -1,4 +1,5 @@
-﻿using LogCorner.EduSync.Speech.SharedKernel.Events;
+﻿using System.Threading;
+using LogCorner.EduSync.Speech.SharedKernel.Events;
 using System.Threading.Tasks;
 
 namespace LogCorner.EduSync.Speech.ServiceBus
@@ -7,6 +8,6 @@ namespace LogCorner.EduSync.Speech.ServiceBus
     {
         Task SendAsync(string topic, EventStore @event);
 
-        Task ReceiveAsync(string topic, bool runAlawys = true);
+        Task ReceiveAsync(string topic, CancellationToken stoppingToken,bool runAlawys = true);
     }
 }
