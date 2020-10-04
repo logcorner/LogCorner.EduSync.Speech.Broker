@@ -20,7 +20,7 @@ namespace LogCorner.EduSync.Speech.ServiceBus
 
         public async Task ReceiveAsync(string topic, CancellationToken stoppingToken)
         {
-            await _kafkaClient.ReceiveAsync(topic, stoppingToken);
+            await _serviceBusProvider.ReceiveAsync(topic, stoppingToken);
         }
     }
 }

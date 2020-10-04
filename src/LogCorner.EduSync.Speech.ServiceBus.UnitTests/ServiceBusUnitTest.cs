@@ -28,7 +28,7 @@ namespace LogCorner.EduSync.Speech.ServiceBus.UnitTests
         {
             //Arrange
             string topic = "bus";
-            var mockKafkaClient = new Mock<IKafkaClient>();
+            var mockKafkaClient = new Mock<IServiceBusProvider>();
             mockKafkaClient.Setup(m => m.ReceiveAsync(topic, It.IsAny<CancellationToken>(),true)).Verifiable();
 
             //Act
