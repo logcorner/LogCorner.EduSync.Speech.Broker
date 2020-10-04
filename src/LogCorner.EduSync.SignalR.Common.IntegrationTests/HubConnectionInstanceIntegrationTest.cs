@@ -10,7 +10,7 @@ namespace LogCorner.EduSync.SignalR.Common.IntegrationTests
         public void ShouldInitHubConnectionInstance()
         {
             //Arrange
-            IHubConnectionInstance hubConnectionInstance = new HubConnectionInstance("http://localhost/logcornerhub");
+            IHubInstance hubConnectionInstance = new HubConnectionInstance("http://localhost/logcornerhub");
 
             //Act
             var t = hubConnectionInstance.InitAsync();
@@ -25,7 +25,7 @@ namespace LogCorner.EduSync.SignalR.Common.IntegrationTests
         public void ShouldStartHubConnectionInstance()
         {
             //Arrange
-            IHubConnectionInstance hubConnectionInstance = new HubConnectionInstance("http://localhost/logcornerhub");
+            IHubInstance hubConnectionInstance = new HubConnectionInstance("http://localhost/logcornerhub");
             var t = hubConnectionInstance.InitAsync();
 
             //Act
