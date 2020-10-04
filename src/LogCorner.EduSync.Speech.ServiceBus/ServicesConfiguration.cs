@@ -12,13 +12,13 @@ namespace LogCorner.EduSync.Speech.ServiceBus
         {
 
             services.AddSingleton<IServiceBus, ServiceBus>();
-          
+
             services.AddSingleton<IJsonSerializer, CustomJsonSerializer>();
 
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddTransient<INotifierMediatorService, NotifierMediatorService>();
 
-            services.AddSingleton<IKafkaClient>(x =>
+            services.AddSingleton<IServiceBusProvider>(x =>
                 {
                     var producerConfig = new ProducerConfig { BootstrapServers = url };
 
@@ -35,7 +35,7 @@ namespace LogCorner.EduSync.Speech.ServiceBus
                         x.GetRequiredService<IJsonSerializer>(),
                         consumer,
                         x.GetRequiredService<INotifierMediatorService>()
-                        );
+                    );
                 }
             );
         }

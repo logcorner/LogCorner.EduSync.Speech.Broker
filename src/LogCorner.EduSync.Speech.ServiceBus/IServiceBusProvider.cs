@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace LogCorner.EduSync.Speech.ServiceBus
 {
-    public interface IKafkaClient
+    public interface IServiceBusProvider
     {
         Task SendAsync(string topic, EventStore @event);
 

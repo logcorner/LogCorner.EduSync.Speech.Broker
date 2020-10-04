@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LogCorner.EduSync.Speech.ServiceBus
 {
-    public class KafkaClient : IKafkaClient
+    public class KafkaClient : IServiceBusProvider
     {
         private readonly IProducer<Null, string> _producer;
         private readonly IJsonSerializer _jsonSerializer;
