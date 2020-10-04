@@ -55,15 +55,12 @@ namespace LogCorner.EduSync.Speech.ServiceBus
                     forever = false;
                 }
 
-                if (forever)
-                {
-                    var data = _consumer.Consume();
-                    Console.WriteLine($"Key : {data.Message.Key}");
-                    Console.WriteLine($"Data : {data.Message.Value}");
-                    Console.WriteLine($"Partition : {data.Partition.Value}");
-                    Console.WriteLine($"Offset : {data.Offset.Value}");
-                    await _notifierMediatorService.Notify(data.Message.Value);
-                }
+                var data = _consumer.Consume();
+                Console.WriteLine($"Key : {data.Message.Key}");
+                Console.WriteLine($"Data : {data.Message.Value}");
+                Console.WriteLine($"Partition : {data.Partition.Value}");
+                Console.WriteLine($"Offset : {data.Offset.Value}");
+                await _notifierMediatorService.Notify(data.Message.Value);
             } while (forever);
         }
     }

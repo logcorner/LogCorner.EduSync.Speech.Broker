@@ -40,6 +40,8 @@ kafka-console-consumer --bootstrap-server 127.0.0.1:9092  --topic first_topic  -
 
 ##ELASTIC SEARCH
 
+delete speechindex
+
 GET speechindex/_search
 {
   "query": {

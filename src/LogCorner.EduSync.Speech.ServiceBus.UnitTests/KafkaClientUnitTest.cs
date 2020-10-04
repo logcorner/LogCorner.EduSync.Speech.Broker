@@ -35,7 +35,7 @@ namespace LogCorner.EduSync.Speech.ServiceBus.UnitTests
         {
             //Arrange
             var mockConsumer = new Mock<IConsumer<Null, string>>();
-            mockConsumer.Setup(m => m.Consume(CancellationToken.None)).Returns(new ConsumeResult<Null, string>()
+            mockConsumer.Setup(m => m.Consume(It.IsAny<CancellationToken>())).Returns(new ConsumeResult<Null, string>()
             {
                 Message = new Message<Null, string>()
                 {
