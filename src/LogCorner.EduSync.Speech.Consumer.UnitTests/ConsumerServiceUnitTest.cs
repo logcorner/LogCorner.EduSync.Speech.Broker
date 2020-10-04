@@ -1,3 +1,4 @@
+using System.Threading;
 using LogCorner.EduSync.Speech.ServiceBus;
 using Moq;
 using System.Threading.Tasks;
@@ -12,13 +13,13 @@ namespace LogCorner.EduSync.Speech.Consumer.UnitTests
         {
             var mockServiceBus = new Mock<IServiceBus>();
 
-            mockServiceBus.Setup(m => m.ReceiveAsync(It.IsAny<string>())).Verifiable();
+            mockServiceBus.Setup(m => m.ReceiveAsync(It.IsAny<string>(), It.IsAny<CancellationToken>())).Verifiable();
 
             IConsumerService consumerService = new ConsumerService(mockServiceBus.Object);
 
-            await consumerService.DoWorkAsync();
+            await consumerService.DoWorkAsync(It.IsAny<CancellationToken>());
 
-            _ = Task.Run(() => mockServiceBus.Verify(r => r.ReceiveAsync(It.IsAny<string>())));
+            _ = Task.Run(() => mockServiceBus.Verify(r => r.ReceiveAsync(It.IsAny<string>(), It.IsAny<CancellationToken>())));
         }
     }
 }

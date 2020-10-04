@@ -4,6 +4,7 @@ using Moq;
 using System.Threading;
 using System.Threading.Channels;
 using System.Threading.Tasks;
+using LogCorner.EduSync.Speech.ServiceBus.Mediator;
 using Xunit;
 
 namespace LogCorner.EduSync.Speech.ServiceBus.UnitTests
@@ -33,23 +34,19 @@ namespace LogCorner.EduSync.Speech.ServiceBus.UnitTests
         public async Task KafkaClientShouldReceiveMessageFromKafkaServer()
         {
             //Arrange
-            var mockProducer = new Mock<IProducer<Null, string>>();
-            var t = mockProducer.Setup(m =>
-                      m.ProduceAsync(It.IsAny<string>(), It.IsAny<Message<Null, string>>(), CancellationToken.None))
-                                  /*.Callback(
-                                      () =>
-                                      {
-                                          throw new Exception();
-                                      })*/;
-
-            var mockIJsonSerializer = new Mock<IJsonSerializer>();
-
-            string @event = "jjsonString";
-            mockIJsonSerializer.Setup(m => m.Serialize(It.IsAny<EventStore>())).Returns(@event);
-
+            var mockConsumer = new Mock<IConsumer<Null, string>>();
+            mockConsumer.Setup(m => m.Consume(It.IsAny<CancellationToken>())).Returns(new ConsumeResult<Null, string>()
+            {
+                Message = new Message<Null, string>()
+                {
+                    Value = "test"
+                }
+            });
+            var mockNotifierMediatorService = new Mock<INotifierMediatorService>();
+           
             //Act
-            var kafkaClient = new KafkaClient(mockProducer.Object, mockIJsonSerializer.Object);
-            await kafkaClient.SendAsync(It.IsAny<string>(), It.IsAny<EventStore>());
+            IKafkaClient kafkaClient = new KafkaClient(It.IsAny<IProducer<Null, string>>(), It.IsAny<IJsonSerializer>(), mockConsumer.Object, mockNotifierMediatorService.Object);
+            await kafkaClient.ReceiveAsync("topic", It.IsAny<CancellationToken>(),false);
 
             //Assert
             mockConsumer.Verify(m => m.Consume(CancellationToken.None), Times.Once);

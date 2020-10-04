@@ -1,7 +1,8 @@
 ﻿using Confluent.Kafka;
+using LogCorner.EduSync.Speech.ServiceBus.Mediator;
 using LogCorner.EduSync.Speech.SharedKernel.Events;
 using System;
-using System.Threading.Channels;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace LogCorner.EduSync.Speech.ServiceBus
@@ -11,15 +12,16 @@ namespace LogCorner.EduSync.Speech.ServiceBus
         private readonly IProducer<Null, string> _producer;
         private readonly IJsonSerializer _jsonSerializer;
         private readonly IConsumer<Null, string> _consumer;
-        private readonly IChannelService _channelService;
+
+        private readonly INotifierMediatorService _notifierMediatorService;
 
         public KafkaClient(IProducer<Null, string> producer, IJsonSerializer jsonSerializer,
-            IConsumer<Null, string> consumer, IChannelService channelService)
+            IConsumer<Null, string> consumer, INotifierMediatorService notifierMediatorService)
         {
             _producer = producer;
             _jsonSerializer = jsonSerializer;
             _consumer = consumer;
-            _channelService = channelService;
+            _notifierMediatorService = notifierMediatorService;
         }
 
         public async Task SendAsync(string topic, EventStore @event)
@@ -43,27 +45,23 @@ namespace LogCorner.EduSync.Speech.ServiceBus
             });
         }
 
-        public async Task ReceiveAsync(string topic, bool forever = true)
+        public async Task ReceiveAsync(string topic, CancellationToken stoppingToken, bool forever = true)
         {
             _consumer.Subscribe(topic);
             Console.WriteLine($"consuming on topic {topic}");
             do
             {
+                if (stoppingToken.IsCancellationRequested)
+                {
+                    forever = false;
+                }
+
                 var data = _consumer.Consume();
                 Console.WriteLine($"Key : {data.Message.Key}");
                 Console.WriteLine($"Data : {data.Message.Value}");
                 Console.WriteLine($"Partition : {data.Partition.Value}");
                 Console.WriteLine($"Offset : {data.Offset.Value}");
-
-                var channel = Channel.CreateUnbounded<string>();
-
-                var consumerTask = _channelService.Consume(channel.Reader, data.Partition.Value);
-
-                var producerTask = _channelService.Produce(channel.Writer, data.Partition.Value, data.Message.Value);
-
-                await producerTask.ContinueWith(_ => channel.Writer.Complete());
-
-                await consumerTask;
+                await _notifierMediatorService.Notify(data.Message.Value);
             } while (forever);
         }
     }
