@@ -1,7 +1,6 @@
 ﻿using System.Threading;
 using LogCorner.EduSync.Speech.ServiceBus;
 using System.Threading.Tasks;
-using LogCorner.EduSync.Speech.Producer;
 
 namespace LogCorner.EduSync.Speech.Consumer
 {

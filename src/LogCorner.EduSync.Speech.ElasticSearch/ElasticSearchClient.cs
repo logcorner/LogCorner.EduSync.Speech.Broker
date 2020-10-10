@@ -1,11 +1,11 @@
 ﻿using Elasticsearch.Net;
-using LogCorner.EduSync.Speech.ReadModel.SpeechAggregate;
 using Nest;
 using Nest.JsonNetSerializer;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System;
 using System.Threading.Tasks;
+using LogCorner.EduSync.Speech.Projection;
 
 namespace LogCorner.EduSync.Speech.ElasticSearch
 {

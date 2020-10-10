@@ -1,4 +1,4 @@
-﻿namespace LogCorner.EduSync.Speech.Producer
+﻿namespace LogCorner.EduSync.Speech.ServiceBus
 {
     public static class Topics
     {

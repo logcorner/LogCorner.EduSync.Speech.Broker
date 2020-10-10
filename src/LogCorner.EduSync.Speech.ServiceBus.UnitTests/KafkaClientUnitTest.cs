@@ -2,7 +2,6 @@ using Confluent.Kafka;
 using LogCorner.EduSync.Speech.SharedKernel.Events;
 using Moq;
 using System.Threading;
-using System.Threading.Channels;
 using System.Threading.Tasks;
 using LogCorner.EduSync.Speech.ServiceBus.Mediator;
 using Xunit;
