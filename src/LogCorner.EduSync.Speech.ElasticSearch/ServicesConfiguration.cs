@@ -1,6 +1,6 @@
-﻿using LogCorner.EduSync.Speech.ReadModel.SpeechAggregate;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using System;
+using LogCorner.EduSync.Speech.Projection;
 
 namespace LogCorner.EduSync.Speech.ElasticSearch
 {

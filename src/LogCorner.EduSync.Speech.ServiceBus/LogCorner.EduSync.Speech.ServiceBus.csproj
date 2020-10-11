@@ -16,7 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LogCorner.EduSync.Speech.ElasticSearch\LogCorner.EduSync.Speech.ElasticSearch.csproj" />
-    <ProjectReference Include="..\LogCorner.EduSync.Speech.ReadModel\LogCorner.EduSync.Speech.ReadModel.csproj" />
+    <ProjectReference Include="..\LogCorner.EduSync.Speech.Projection\LogCorner.EduSync.Speech.Projection.csproj" />
   </ItemGroup>
 
   <ItemGroup>

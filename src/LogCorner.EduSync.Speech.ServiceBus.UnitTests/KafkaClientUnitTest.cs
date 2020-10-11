@@ -2,7 +2,6 @@ using Confluent.Kafka;
 using LogCorner.EduSync.Speech.SharedKernel.Events;
 using Moq;
 using System.Threading;
-using System.Threading.Channels;
 using System.Threading.Tasks;
 using LogCorner.EduSync.Speech.ServiceBus.Mediator;
 using Xunit;
@@ -23,7 +22,7 @@ namespace LogCorner.EduSync.Speech.ServiceBus.UnitTests
             mockIJsonSerializer.Setup(m => m.Serialize(It.IsAny<EventStore>())).Returns(@event);
 
             //Act
-            var kafkaClient = new KafkaClient(mockProducer.Object, mockIJsonSerializer.Object,It.IsAny<IConsumer < Null, string >>(),It.IsAny<INotifierMediatorService>());
+            IServiceBusProvider kafkaClient = new KafkaClient(mockProducer.Object, mockIJsonSerializer.Object, null, null);
             await kafkaClient.SendAsync(It.IsAny<string>(), It.IsAny<EventStore>());
 
             //Assert
@@ -43,9 +42,9 @@ namespace LogCorner.EduSync.Speech.ServiceBus.UnitTests
                 }
             });
             var mockNotifierMediatorService = new Mock<INotifierMediatorService>();
-           
+
             //Act
-            var kafkaClient = new KafkaClient(It.IsAny<IProducer<Null, string>>(), It.IsAny<IJsonSerializer>(), mockConsumer.Object, mockNotifierMediatorService.Object);
+            IServiceBusProvider kafkaClient = new KafkaClient(It.IsAny<IProducer<Null, string>>(), It.IsAny<IJsonSerializer>(), mockConsumer.Object, mockNotifierMediatorService.Object);
             await kafkaClient.ReceiveAsync("topic", It.IsAny<CancellationToken>(),false);
 
             //Assert

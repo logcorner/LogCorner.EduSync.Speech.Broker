@@ -8,9 +8,9 @@ namespace LogCorner.EduSync.Speech.ServiceBus
     {
         private readonly IServiceBusProvider _serviceBusProvider;
 
-        public ServiceBus(IServiceBusProvider kafkaClient)
+        public ServiceBus(IServiceBusProvider serviceBusProvider)
         {
-            _serviceBusProvider = kafkaClient;
+            _serviceBusProvider = serviceBusProvider;
         }
 
         public async Task SendAsync(string topic, EventStore @event)
