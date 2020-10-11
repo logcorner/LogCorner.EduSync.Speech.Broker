@@ -7,3 +7,4 @@ namespace LogCorner.EduSync.Speech.Projection
         Task CreateAsync(T entity);
     }
 }
+

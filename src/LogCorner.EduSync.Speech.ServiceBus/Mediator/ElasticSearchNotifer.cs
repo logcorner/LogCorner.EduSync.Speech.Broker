@@ -27,7 +27,8 @@ namespace LogCorner.EduSync.Speech.ServiceBus.Mediator
             Debug.WriteLine($"Debugging from Notifier 1. Message  : {notification.Message} ");
 
             var eventStore = JsonSerializer.Deserialize<EventStore>(notification.Message);
-            var @event = _eventSerializer.Deserialize<Event>(eventStore.TypeName, eventStore.PayLoad);
+            var @event = _eventSerializer.Deserialize<Event>(eventStore.TypeName,
+                                                             eventStore.PayLoad);
             var projection = Invoker.CreateInstanceOfProjection<SpeechProjection>();
             projection.Project( @event );
             await _elasticSearchClient.CreateAsync(projection);

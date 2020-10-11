@@ -7,3 +7,5 @@ namespace LogCorner.EduSync.Speech.ElasticSearch
     {
     }
 }
+
+
