@@ -1,5 +1,5 @@
-using LogCorner.EduSync.Speech.ReadModel.SpeechAggregate;
 using System;
+using LogCorner.EduSync.Speech.Projection;
 using Xunit;
 
 namespace LogCorner.EduSync.Speech.ElasticSearch.UnitTests

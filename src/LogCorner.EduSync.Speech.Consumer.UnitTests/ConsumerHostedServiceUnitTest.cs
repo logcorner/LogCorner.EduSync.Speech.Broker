@@ -42,14 +42,14 @@ namespace LogCorner.EduSync.Speech.Consumer.UnitTests
         {
             //Arrange
             var mockConsumerService = new Mock<IConsumerService>();
-            mockConsumerService.Setup(m => m.DoWorkAsync()).Verifiable();
+            mockConsumerService.Setup(m => m.DoWorkAsync(It.IsAny<CancellationToken>())).Verifiable();
             var consumerHostedService = new ConsumerHostedServiceMock(mockConsumerService.Object);
 
             //Act
             await consumerHostedService.ExecuteAsync(It.IsAny<CancellationToken>());
 
             //Assert
-            mockConsumerService.Verify(m => m.DoWorkAsync(), Times.Once);
+            mockConsumerService.Verify(m => m.DoWorkAsync(It.IsAny<CancellationToken>()), Times.Once);
         }
     }
 }

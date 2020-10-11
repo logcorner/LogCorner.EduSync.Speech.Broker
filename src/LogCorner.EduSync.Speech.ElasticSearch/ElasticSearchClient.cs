@@ -1,5 +1,5 @@
 ﻿using Elasticsearch.Net;
-using LogCorner.EduSync.Speech.ReadModel.SpeechAggregate;
+using LogCorner.EduSync.Speech.Projection;
 using Nest;
 using Nest.JsonNetSerializer;
 using Newtonsoft.Json;
@@ -24,7 +24,7 @@ namespace LogCorner.EduSync.Speech.ElasticSearch
         {
             var pool = new SingleNodeConnectionPool(new Uri(url));
             var connectionSettings =
-                new ConnectionSettings(pool, sourceSerializer: (builtin, settings) => new JsonNetSerializer(
+                new ConnectionSettings(pool, (builtin, settings) => new JsonNetSerializer(
                     builtin, settings,
                     () => new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore },
                     resolver => resolver.NamingStrategy = new SnakeCaseNamingStrategy()
@@ -51,7 +51,7 @@ namespace LogCorner.EduSync.Speech.ElasticSearch
                         .DocAsUpsert());
 
             if (!result.IsValid)
-                throw new Exception("Error occured during update for ElasticReminderEntry", result.OriginalException);
+                throw new Exception("Error occured during update", result.OriginalException);
         }
     }
 }

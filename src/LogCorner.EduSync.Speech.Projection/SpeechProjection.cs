@@ -1,9 +1,9 @@
-﻿using LogCorner.EduSync.Speech.SharedKernel.Events;
-using System;
+﻿using System;
+using LogCorner.EduSync.Speech.SharedKernel.Events;
 
-namespace LogCorner.EduSync.Speech.ReadModel.SpeechAggregate
+namespace LogCorner.EduSync.Speech.Projection
 {
-    public class SpeechView : ReaModelAggregate<Guid>
+    public class SpeechProjection : Projection<Guid>
     {
         public string Title { get; private set; }
 
@@ -11,7 +11,7 @@ namespace LogCorner.EduSync.Speech.ReadModel.SpeechAggregate
         public string Description { get; private set; }
         public string Type { get; private set; }
 
-        private SpeechView()
+        private SpeechProjection()
         {
         }
 

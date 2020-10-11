@@ -1,4 +1,5 @@
-﻿using LogCorner.EduSync.Speech.ServiceBus;
+﻿using System.Threading;
+using LogCorner.EduSync.Speech.ServiceBus;
 using System.Threading.Tasks;
 
 namespace LogCorner.EduSync.Speech.Consumer
@@ -12,9 +13,9 @@ namespace LogCorner.EduSync.Speech.Consumer
             _serviceBus = serviceBus;
         }
 
-        public async Task DoWorkAsync()
+        public async Task DoWorkAsync(CancellationToken stoppingToken)
         {
-            await _serviceBus.ReceiveAsync("speech");
+            await _serviceBus.ReceiveAsync(Topics.Speech, stoppingToken);
         }
     }
 }

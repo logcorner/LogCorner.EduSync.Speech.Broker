@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LogCorner.EduSync.SignalR.Common.IntegrationTests
 {
-    public class HubConnectionInstanceMock : IHubConnectionInstance
+    public class HubConnectionInstanceMock : IHubInstance
     {
         public HubConnection Connection { get; private set; }
 

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Reflection;
 
-namespace LogCorner.EduSync.Speech.ReadModel.SpeechAggregate
+namespace LogCorner.EduSync.Speech.Projection
 {
     public class Invoker
     {
-        public static T CreateInstanceOfAggregateRoot<T>()
+        public static T CreateInstanceOfProjection<T>()
         {
             return (T)typeof(T)
                 .GetConstructor(BindingFlags.Instance | BindingFlags.NonPublic,

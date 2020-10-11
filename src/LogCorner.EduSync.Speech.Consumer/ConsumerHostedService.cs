@@ -22,7 +22,7 @@ namespace LogCorner.EduSync.Speech.Consumer
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            await _consumerService.DoWorkAsync();
+            await _consumerService.DoWorkAsync(stoppingToken);
             Console.WriteLine("ConsumerService is running .....");
         }
 

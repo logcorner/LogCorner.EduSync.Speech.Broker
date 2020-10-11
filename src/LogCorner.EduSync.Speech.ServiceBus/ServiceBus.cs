@@ -1,25 +1,26 @@
-﻿using LogCorner.EduSync.Speech.SharedKernel.Events;
+﻿using System.Threading;
+using LogCorner.EduSync.Speech.SharedKernel.Events;
 using System.Threading.Tasks;
 
 namespace LogCorner.EduSync.Speech.ServiceBus
 {
     public class ServiceBus : IServiceBus
     {
-        private readonly IKafkaClient _kafkaClient;
+        private readonly IServiceBusProvider _serviceBusProvider;
 
-        public ServiceBus(IKafkaClient kafkaClient)
+        public ServiceBus(IServiceBusProvider serviceBusProvider)
         {
-            _kafkaClient = kafkaClient;
+            _serviceBusProvider = serviceBusProvider;
         }
 
         public async Task SendAsync(string topic, EventStore @event)
         {
-            await _kafkaClient.SendAsync(topic, @event);
+            await _serviceBusProvider.SendAsync(topic, @event);
         }
 
-        public async Task ReceiveAsync(string topic)
+        public async Task ReceiveAsync(string topic, CancellationToken stoppingToken)
         {
-            await _kafkaClient.ReceiveAsync(topic);
+            await _serviceBusProvider.ReceiveAsync(topic, stoppingToken);
         }
     }
 }

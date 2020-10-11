@@ -9,7 +9,7 @@ namespace LogCorner.EduSync.SignalR.Common
             services.AddSingleton<ISignalRNotifier, SignalRNotifier>();
             services.AddSingleton<ISignalRPublisher, SignalRPublisher>();
 
-            services.AddSingleton<IHubConnectionInstance, HubConnectionInstance>(ctx =>
+            services.AddSingleton<IHubInstance, HubConnectionInstance>(ctx =>
             {
                 var hubConnectionInstance = new HubConnectionInstance("https://localhost:5001/logcornerhub");
                 hubConnectionInstance.InitAsync().Wait();

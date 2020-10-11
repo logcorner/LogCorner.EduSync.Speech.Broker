@@ -1,3 +1,4 @@
+using System.Threading;
 using LogCorner.EduSync.Speech.SharedKernel.Events;
 using Moq;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ namespace LogCorner.EduSync.Speech.ServiceBus.UnitTests
         public async Task ServiceBusShouldSendMessageToKafka()
         {
             //Arrange
-            var mockKafkaClient = new Mock<IKafkaClient>();
+            var mockKafkaClient = new Mock<IServiceBusProvider>();
             mockKafkaClient.Setup(m => m.SendAsync(It.IsAny<string>(), It.IsAny<EventStore>())).Verifiable();
 
             //Act
@@ -27,15 +28,15 @@ namespace LogCorner.EduSync.Speech.ServiceBus.UnitTests
         {
             //Arrange
             string topic = "bus";
-            var mockKafkaClient = new Mock<IKafkaClient>();
-            mockKafkaClient.Setup(m => m.ReceiveAsync(topic, true)).Verifiable();
+            var mockKafkaClient = new Mock<IServiceBusProvider>();
+            mockKafkaClient.Setup(m => m.ReceiveAsync(topic, It.IsAny<CancellationToken>(),true)).Verifiable();
 
             //Act
             IServiceBus serviceBus = new ServiceBus(mockKafkaClient.Object);
-            await serviceBus.ReceiveAsync(topic);
+            await serviceBus.ReceiveAsync(topic, It.IsAny<CancellationToken>());
 
             //Assert
-            mockKafkaClient.Verify(m => m.ReceiveAsync(topic, true), Times.Once);
+            mockKafkaClient.Verify(m => m.ReceiveAsync(topic, It.IsAny<CancellationToken>(), true), Times.Once);
         }
     }
 }

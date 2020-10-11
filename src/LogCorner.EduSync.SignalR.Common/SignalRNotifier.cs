@@ -11,33 +11,37 @@ namespace LogCorner.EduSync.SignalR.Common
 
         public event Action<string, EventStore> ReceivedOnPublishToTopic;
 
-        private readonly IHubConnectionInstance _hubConnectionInstance;
+        private readonly IHubInstance _hubInstance;
 
-        public SignalRNotifier(IHubConnectionInstance hubConnectionInstance)
+        public SignalRNotifier(IHubInstance hubInstance)
         {
-            _hubConnectionInstance = hubConnectionInstance;
+            _hubInstance = hubInstance;
         }
 
         public async Task StartAsync()
         {
-            await _hubConnectionInstance.Connection.StartAsync();
+            await _hubInstance.Connection.StartAsync();
         }
 
         public async Task OnPublish()
         {
-            _hubConnectionInstance.Connection.On<EventStore>(nameof(IHubNotifier<EventStore>.OnPublish), u => ReceivedOnPublish?.Invoke(u));
+            _hubInstance.Connection.On<EventStore>(nameof(IHubNotifier<EventStore>.OnPublish),
+                u => ReceivedOnPublish?.Invoke(u));
             await Task.CompletedTask;
         }
 
         public async Task OnPublish(string topic)
         {
-            _hubConnectionInstance.Connection.On<string, EventStore>(nameof(IHubNotifier<string>.OnPublish), (u, v) => ReceivedOnPublishToTopic?.Invoke(u, v));
+            _hubInstance.Connection.On<string, EventStore>(nameof(IHubNotifier<string>.OnPublish), 
+                (u, v) => ReceivedOnPublishToTopic?.Invoke(u, v));
             await Task.CompletedTask;
         }
 
         public async Task StopAsync()
         {
-            await _hubConnectionInstance.Connection.StopAsync();
+            await _hubInstance.Connection.StopAsync();
         }
     }
 }
+
+
