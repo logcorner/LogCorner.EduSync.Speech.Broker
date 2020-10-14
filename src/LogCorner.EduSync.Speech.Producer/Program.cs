@@ -2,6 +2,7 @@ using LogCorner.EduSync.SignalR.Common;
 using LogCorner.EduSync.Speech.ElasticSearch;
 using LogCorner.EduSync.Speech.Projection;
 using LogCorner.EduSync.Speech.ServiceBus;
+using LogCorner.EduSync.Speech.SharedKernel.Serialyser;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 

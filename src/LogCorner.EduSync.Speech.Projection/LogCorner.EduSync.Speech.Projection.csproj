@@ -5,9 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Reference Include="LogCorner.EduSync.Speech.SharedKernel">
-      <HintPath>..\..\SharedKernel\LogCorner.EduSync.Speech.SharedKernel.dll</HintPath>
-    </Reference>
+    <PackageReference Include="LogCorner.EduSync.Speech.SharedKernel" Version="1.0.0" />
   </ItemGroup>
 
 </Project>
