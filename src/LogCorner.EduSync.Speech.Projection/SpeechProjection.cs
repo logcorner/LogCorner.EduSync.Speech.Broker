@@ -9,7 +9,7 @@ namespace LogCorner.EduSync.Speech.Projection
 
         public string Url { get; private set; }
         public string Description { get; private set; }
-        public string Type { get; private set; }
+        public SpeechTypeEnum Type { get; private set; }
 
         private SpeechProjection()
         {

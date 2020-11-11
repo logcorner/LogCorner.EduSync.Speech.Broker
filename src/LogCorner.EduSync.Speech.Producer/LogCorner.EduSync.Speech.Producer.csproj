@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <UserSecretsId>dotnet-LogCorner.EduSync.Speech.Producer-5470968C-5C54-4980-BA6D-360865CAEEED</UserSecretsId>
   </PropertyGroup>
 

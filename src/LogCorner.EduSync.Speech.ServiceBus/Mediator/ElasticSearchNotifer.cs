@@ -1,24 +1,26 @@
 ﻿using LogCorner.EduSync.Speech.ElasticSearch;
+using LogCorner.EduSync.Speech.Projection;
 using LogCorner.EduSync.Speech.SharedKernel.Events;
 using LogCorner.EduSync.Speech.SharedKernel.Serialyser;
 using MediatR;
+using System;
 using System.Diagnostics;
-using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using LogCorner.EduSync.Speech.Projection;
 
 namespace LogCorner.EduSync.Speech.ServiceBus.Mediator
 {
     public class ElasticSearchNotifer : INotificationHandler<NotificationMessage<string>>
     {
         private readonly IEventSerializer _eventSerializer;
+        private readonly IJsonSerializer _jsonSerializer;
         private readonly IElasticSearchClient<SpeechProjection> _elasticSearchClient;
 
-        public ElasticSearchNotifer(IEventSerializer eventSerializer,
+        public ElasticSearchNotifer(IEventSerializer eventSerializer, IJsonSerializer jsonSerializer,
             IElasticSearchClient<SpeechProjection> elasticSearchClient)
         {
             _eventSerializer = eventSerializer;
+            _jsonSerializer = jsonSerializer;
             _elasticSearchClient = elasticSearchClient;
         }
 
@@ -26,12 +28,18 @@ namespace LogCorner.EduSync.Speech.ServiceBus.Mediator
         {
             Debug.WriteLine($"Debugging from Notifier 1. Message  : {notification.Message} ");
 
-            var eventStore = JsonSerializer.Deserialize<EventStore>(notification.Message);
-            var @event = _eventSerializer.Deserialize<Event>(eventStore.TypeName,
-                                                             eventStore.PayLoad);
-            var projection = Invoker.CreateInstanceOfProjection<SpeechProjection>();
-            projection.Project( @event );
-            await _elasticSearchClient.CreateAsync(projection);
+            try
+            {
+                var eventStore = _jsonSerializer.Deserialize<EventStore>(notification.Message);
+                var @event = _eventSerializer.Deserialize<Event>(eventStore.TypeName,eventStore.PayLoad);
+                var projection = Invoker.CreateInstanceOfProjection<SpeechProjection>();
+                projection.Project(@event);
+                await _elasticSearchClient.CreateAsync(projection);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+            }
         }
     }
 }

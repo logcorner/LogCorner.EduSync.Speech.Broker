@@ -13,7 +13,7 @@ namespace LogCorner.EduSync.Speech.Projection.UnitTests
             //Arrange
             var speechProjection = Invoker.CreateInstanceOfProjection<SpeechProjection>();
             var speechCreatedEvent = new SpeechCreatedEvent(Guid.NewGuid(),
-                "my title", "http://test.com", "my desc", "conferences");
+                "my title", "http://test.com", "my desc", new SpeechTypeEnum(1, "conferences"));
 
             //Act
             speechProjection.Apply(speechCreatedEvent);
@@ -84,7 +84,7 @@ namespace LogCorner.EduSync.Speech.Projection.UnitTests
         {
             //Arrange
             var SpeechProjection = Invoker.CreateInstanceOfProjection<SpeechProjection>();
-            var speechTypeChangedEvent = new SpeechTypeChangedEvent(Guid.NewGuid(), "my url");
+            var speechTypeChangedEvent = new SpeechTypeChangedEvent(Guid.NewGuid(), new SpeechTypeEnum(1, "my type"));
 
             //Act
             SpeechProjection.Apply(speechTypeChangedEvent);
@@ -102,21 +102,21 @@ namespace LogCorner.EduSync.Speech.Projection.UnitTests
         {
             //Arrange
             var id = Guid.NewGuid();
-            var SpeechProjection = Invoker.CreateInstanceOfProjection<SpeechProjection>();
-            var speechCreatedEvent = new SpeechCreatedEvent(id, "my title", "http://test.com", "my desc", "conferences");
+            var speechProjection = Invoker.CreateInstanceOfProjection<SpeechProjection>();
+            var speechCreatedEvent = new SpeechCreatedEvent(id, "my title", "http://test.com", "my desc", new SpeechTypeEnum(1, "conferences"));
             var speechTitleChangedEvent = new SpeechTitleChangedEvent(id, "my title");
-            var speechTypeChangedEvent = new SpeechTypeChangedEvent(id, "my url");
+            var speechTypeChangedEvent = new SpeechTypeChangedEvent(id, new SpeechTypeEnum(1, "my title"));
             var speechDescriptionChangedEvent = new SpeechDescriptionChangedEvent(id, "my desc");
             var speechUrlChangedEvent = new SpeechUrlChangedEvent(id, "my url");
 
             //Act
-            SpeechProjection.LoadFromHistory(new List<IDomainEvent> { speechCreatedEvent, speechTitleChangedEvent, speechDescriptionChangedEvent, speechUrlChangedEvent, speechTypeChangedEvent });
+            speechProjection.LoadFromHistory(new List<IDomainEvent> { speechCreatedEvent, speechTitleChangedEvent, speechDescriptionChangedEvent, speechUrlChangedEvent, speechTypeChangedEvent });
 
             //Assert
-            Assert.Equal(speechCreatedEvent.AggregateId, SpeechProjection.Id); Assert.Equal(speechTitleChangedEvent.Title, SpeechProjection.Title);
-            Assert.Equal(speechDescriptionChangedEvent.Description, SpeechProjection.Description);
-            Assert.Equal(speechUrlChangedEvent.Url, SpeechProjection.Url);
-            Assert.Equal(speechTypeChangedEvent.Type, SpeechProjection.Type);
+            Assert.Equal(speechCreatedEvent.AggregateId, speechProjection.Id); Assert.Equal(speechTitleChangedEvent.Title, speechProjection.Title);
+            Assert.Equal(speechDescriptionChangedEvent.Description, speechProjection.Description);
+            Assert.Equal(speechUrlChangedEvent.Url, speechProjection.Url);
+            Assert.Equal(speechTypeChangedEvent.Type, speechProjection.Type);
         }
     }
 }

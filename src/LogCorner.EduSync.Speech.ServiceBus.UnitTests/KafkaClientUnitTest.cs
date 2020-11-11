@@ -4,6 +4,7 @@ using Moq;
 using System.Threading;
 using System.Threading.Tasks;
 using LogCorner.EduSync.Speech.ServiceBus.Mediator;
+using LogCorner.EduSync.Speech.SharedKernel.Serialyser;
 using Xunit;
 
 namespace LogCorner.EduSync.Speech.ServiceBus.UnitTests

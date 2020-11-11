@@ -1,7 +1,7 @@
-﻿namespace LogCorner.EduSync.Speech.ServiceBus
-{
-    public interface IJsonSerializer
-    {
-        string Serialize<T>(T @event);
-    }
-}
+﻿//namespace LogCorner.EduSync.Speech.ServiceBus
+//{
+//    public interface IJsonSerializer
+//    {
+//        string Serialize<T>(T @event);
+//    }
+//}

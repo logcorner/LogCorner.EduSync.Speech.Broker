@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using Confluent.Kafka;
 using LogCorner.EduSync.Speech.ServiceBus.Mediator;
+using LogCorner.EduSync.Speech.SharedKernel.Serialyser;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,7 +14,7 @@ namespace LogCorner.EduSync.Speech.ServiceBus
 
             services.AddSingleton<IServiceBus, ServiceBus>();
 
-            services.AddSingleton<IJsonSerializer, CustomJsonSerializer>();
+           // services.AddSingleton<IJsonSerializer, CustomJsonSerializer>();
 
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddTransient<INotifierMediatorService, NotifierMediatorService>();

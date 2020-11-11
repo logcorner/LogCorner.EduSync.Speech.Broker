@@ -7,7 +7,7 @@
   "targets": {
     ".NETStandard,Version=v2.0": {},
     ".NETStandard,Version=v2.0/": {
-      "LogCorner.EduSync.Speech.SharedKernel/1.0.0": {
+      "LogCorner.EduSync.Speech.SharedKernel/1.0.2": {
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection.Abstractions": "3.1.7",
           "NETStandard.Library": "2.0.3",
@@ -42,7 +42,7 @@
     }
   },
   "libraries": {
-    "LogCorner.EduSync.Speech.SharedKernel/1.0.0": {
+    "LogCorner.EduSync.Speech.SharedKernel/1.0.2": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
