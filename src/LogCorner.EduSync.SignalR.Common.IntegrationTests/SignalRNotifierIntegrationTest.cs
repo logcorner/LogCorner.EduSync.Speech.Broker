@@ -1,4 +1,6 @@
 using System.Threading.Tasks;
+using LogCorner.EduSync.Speech.SharedKernel.Serialyser;
+using Moq;
 using Xunit;
 
 namespace LogCorner.EduSync.SignalR.Common.IntegrationTests
@@ -13,7 +15,7 @@ namespace LogCorner.EduSync.SignalR.Common.IntegrationTests
             IHubInstance hubConnectionInstance = new HubConnectionInstanceMock();
             await hubConnectionInstance.InitAsync();
 
-            ISignalRNotifier signalRPublisher = new SignalRNotifier(hubConnectionInstance);
+            ISignalRNotifier signalRPublisher = new SignalRNotifier(hubConnectionInstance, It.IsAny<IJsonSerializer>());
 
             //Act
             var t = signalRPublisher.StartAsync();
@@ -31,7 +33,7 @@ namespace LogCorner.EduSync.SignalR.Common.IntegrationTests
             IHubInstance hubConnectionInstance = new HubConnectionInstanceMock();
             await hubConnectionInstance.InitAsync();
 
-            ISignalRNotifier signalRPublisher = new SignalRNotifier(hubConnectionInstance);
+            ISignalRNotifier signalRPublisher = new SignalRNotifier(hubConnectionInstance, It.IsAny<IJsonSerializer>());
 
             //Act
             var t = signalRPublisher.StopAsync();
@@ -50,7 +52,7 @@ namespace LogCorner.EduSync.SignalR.Common.IntegrationTests
             IHubInstance hubConnectionInstance = new HubConnectionInstanceMock();
             await hubConnectionInstance.InitAsync();
 
-            ISignalRNotifier signalRPublisher = new SignalRNotifier(hubConnectionInstance);
+            ISignalRNotifier signalRPublisher = new SignalRNotifier(hubConnectionInstance, It.IsAny<IJsonSerializer>());
 
             //Act
             var t = signalRPublisher.OnPublish(topic);
@@ -68,7 +70,7 @@ namespace LogCorner.EduSync.SignalR.Common.IntegrationTests
             IHubInstance hubConnectionInstance = new HubConnectionInstanceMock();
             await hubConnectionInstance.InitAsync();
 
-            ISignalRNotifier signalRPublisher = new SignalRNotifier(hubConnectionInstance);
+            ISignalRNotifier signalRPublisher = new SignalRNotifier(hubConnectionInstance, It.IsAny<IJsonSerializer>());
 
             //Act
             var t = signalRPublisher.OnPublish();

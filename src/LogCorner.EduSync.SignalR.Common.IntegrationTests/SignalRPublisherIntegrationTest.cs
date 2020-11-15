@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.SignalR.Client;
 using Moq;
 using System.Threading.Tasks;
+using LogCorner.EduSync.Speech.SharedKernel.Serialyser;
 using Xunit;
 
 namespace LogCorner.EduSync.SignalR.Common.IntegrationTests
@@ -16,7 +17,7 @@ namespace LogCorner.EduSync.SignalR.Common.IntegrationTests
             IHubInstance hubConnectionInstance = new HubConnectionInstanceMock();
             await hubConnectionInstance.InitAsync();
 
-            ISignalRPublisher signalRPublisher = new SignalRPublisher(hubConnectionInstance);
+            ISignalRPublisher signalRPublisher = new SignalRPublisher(hubConnectionInstance, It.IsAny<IJsonSerializer>());
 
             //Act
             await signalRPublisher.SubscribeAsync(topic);
@@ -35,7 +36,7 @@ namespace LogCorner.EduSync.SignalR.Common.IntegrationTests
             IHubInstance hubConnectionInstance = new HubConnectionInstanceMock();
             await hubConnectionInstance.InitAsync();
 
-            ISignalRPublisher signalRPublisher = new SignalRPublisher(hubConnectionInstance);
+            ISignalRPublisher signalRPublisher = new SignalRPublisher(hubConnectionInstance, It.IsAny<IJsonSerializer>());
 
             //Act
             await signalRPublisher.PublishAsync(topic, It.IsAny<object>());

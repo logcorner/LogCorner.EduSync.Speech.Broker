@@ -7,6 +7,7 @@ zookeeper-server-start.bat  config\zookeeper.properties
 kafka-server-start.bat  config\server.properties
 
 # create a topic first_topic  
+kafka-topics --zookeeper 127.0.0.1:2181  --topic speech --create  --partitions 3  --replication-factor 1
 kafka-topics --zookeeper 127.0.0.1:2181  --topic eventbus --create  --partitions 3  --replication-factor 1
 
 kafka-topics --zookeeper 127.0.0.1:2181  --topic second_topic  --create  --partitions 3  --replication-factor 1

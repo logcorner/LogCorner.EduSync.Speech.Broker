@@ -3,6 +3,7 @@ using LogCorner.EduSync.Speech.ServiceBus;
 using LogCorner.EduSync.Speech.SharedKernel.Events;
 using Moq;
 using System.Threading.Tasks;
+using LogCorner.EduSync.Speech.SharedKernel.Serialyser;
 using Xunit;
 
 namespace LogCorner.EduSync.Speech.Producer.UnitTests
@@ -18,8 +19,8 @@ namespace LogCorner.EduSync.Speech.Producer.UnitTests
 
             IHubInstance connectionInstance = new HubConnectionInstanceMock();
             await connectionInstance.InitAsync();
-            ISignalRNotifier notifier = new SignalRNotifier(connectionInstance);
-            ISignalRPublisher publisher = new SignalRPublisher(connectionInstance);
+            ISignalRNotifier notifier = new SignalRNotifier(connectionInstance,It.IsAny<IJsonSerializer>());
+            ISignalRPublisher publisher = new SignalRPublisher(connectionInstance, It.IsAny<IJsonSerializer>());
 
             IProducerService producerService = new ProducerService(notifier, publisher, mockServiceBus.Object);
             await notifier.StartAsync();
