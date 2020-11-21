@@ -1,6 +1,6 @@
-using System.Threading.Tasks;
 using LogCorner.EduSync.Speech.SharedKernel.Serialyser;
 using Moq;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace LogCorner.EduSync.SignalR.Common.IntegrationTests

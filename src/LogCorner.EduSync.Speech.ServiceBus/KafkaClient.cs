@@ -1,10 +1,10 @@
 ﻿using Confluent.Kafka;
 using LogCorner.EduSync.Speech.ServiceBus.Mediator;
 using LogCorner.EduSync.Speech.SharedKernel.Events;
+using LogCorner.EduSync.Speech.SharedKernel.Serialyser;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using LogCorner.EduSync.Speech.SharedKernel.Serialyser;
 
 namespace LogCorner.EduSync.Speech.ServiceBus
 {
@@ -63,7 +63,8 @@ namespace LogCorner.EduSync.Speech.ServiceBus
                 Console.WriteLine($"Data : {data.Message.Value}");
                 Console.WriteLine($"Partition : {data.Partition.Value}");
                 Console.WriteLine($"Offset : {data.Offset.Value}");
-                await _notifierMediatorService.Notify(data.Message.Value);
+                var message = new NotificationMessage<string> { Message = data.Message.Value };
+                await _notifierMediatorService.Notify(message);
             } while (forever);
         }
     }

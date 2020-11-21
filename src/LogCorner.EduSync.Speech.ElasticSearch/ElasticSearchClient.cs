@@ -53,5 +53,12 @@ namespace LogCorner.EduSync.Speech.ElasticSearch
             if (!result.IsValid)
                 throw new Exception("Error occured during update", result.OriginalException);
         }
+
+        public async Task DeleteAsync(T entity)
+        {
+            var result = await _client.DeleteAsync<T>(entity.Id, u => u.Index(_indexName));
+            if (!result.IsValid)
+                throw new Exception("Error occured during delete", result.OriginalException);
+        }
     }
 }

@@ -1,10 +1,10 @@
 using Confluent.Kafka;
+using LogCorner.EduSync.Speech.ServiceBus.Mediator;
 using LogCorner.EduSync.Speech.SharedKernel.Events;
+using LogCorner.EduSync.Speech.SharedKernel.Serialyser;
 using Moq;
 using System.Threading;
 using System.Threading.Tasks;
-using LogCorner.EduSync.Speech.ServiceBus.Mediator;
-using LogCorner.EduSync.Speech.SharedKernel.Serialyser;
 using Xunit;
 
 namespace LogCorner.EduSync.Speech.ServiceBus.UnitTests
@@ -46,7 +46,7 @@ namespace LogCorner.EduSync.Speech.ServiceBus.UnitTests
 
             //Act
             IServiceBusProvider kafkaClient = new KafkaClient(It.IsAny<IProducer<Null, string>>(), It.IsAny<IJsonSerializer>(), mockConsumer.Object, mockNotifierMediatorService.Object);
-            await kafkaClient.ReceiveAsync("topic", It.IsAny<CancellationToken>(),false);
+            await kafkaClient.ReceiveAsync("topic", It.IsAny<CancellationToken>(), false);
 
             //Assert
             mockConsumer.Verify(m => m.Consume(CancellationToken.None), Times.Once);

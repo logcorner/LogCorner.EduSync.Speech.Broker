@@ -1,9 +1,10 @@
 using LogCorner.EduSync.SignalR.Common;
 using LogCorner.EduSync.Speech.ServiceBus;
 using LogCorner.EduSync.Speech.SharedKernel.Events;
-using Moq;
-using System.Threading.Tasks;
 using LogCorner.EduSync.Speech.SharedKernel.Serialyser;
+using Moq;
+using System;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace LogCorner.EduSync.Speech.Producer.UnitTests
@@ -16,19 +17,21 @@ namespace LogCorner.EduSync.Speech.Producer.UnitTests
             var mockServiceBus = new Mock<IServiceBus>();
 
             mockServiceBus.Setup(m => m.SendAsync(It.IsAny<string>(), It.IsAny<EventStore>())).Verifiable();
-
+            var payLoad = new EventStore(It.IsAny<Guid>(), It.IsAny<long>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<DateTime>(), It.IsAny<string>());
+            var mockJsonSerializer = new Mock<IJsonSerializer>();
+            mockJsonSerializer.Setup(m => m.Serialize(It.IsAny<object>())).Returns("");
             IHubInstance connectionInstance = new HubConnectionInstanceMock();
             await connectionInstance.InitAsync();
-            ISignalRNotifier notifier = new SignalRNotifier(connectionInstance,It.IsAny<IJsonSerializer>());
-            ISignalRPublisher publisher = new SignalRPublisher(connectionInstance, It.IsAny<IJsonSerializer>());
+            ISignalRNotifier notifier = new SignalRNotifier(connectionInstance, mockJsonSerializer.Object);
+            ISignalRPublisher publisher = new SignalRPublisher(connectionInstance, mockJsonSerializer.Object);
 
             IProducerService producerService = new ProducerService(notifier, publisher, mockServiceBus.Object);
             await notifier.StartAsync();
             await producerService.DoWorkAsync();
 
-            await publisher.PublishAsync(Topics.Speech, It.IsAny<EventStore>());
+            await publisher.PublishAsync(Topics.Speech, payLoad);
 
-            _ = Task.Run(() => mockServiceBus.Verify(r => r.SendAsync(Topics.Speech, It.IsAny<EventStore>())));
+            _ = Task.Run(() => mockServiceBus.Verify(r => r.SendAsync(Topics.Speech, payLoad)));
         }
 
         [Fact]

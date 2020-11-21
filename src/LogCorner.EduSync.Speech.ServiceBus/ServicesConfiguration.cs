@@ -1,9 +1,9 @@
-﻿using System.Reflection;
-using Confluent.Kafka;
+﻿using Confluent.Kafka;
 using LogCorner.EduSync.Speech.ServiceBus.Mediator;
 using LogCorner.EduSync.Speech.SharedKernel.Serialyser;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace LogCorner.EduSync.Speech.ServiceBus
 {
@@ -11,10 +11,7 @@ namespace LogCorner.EduSync.Speech.ServiceBus
     {
         public static void AddServiceBus(this IServiceCollection services, string url)
         {
-
             services.AddSingleton<IServiceBus, ServiceBus>();
-
-           // services.AddSingleton<IJsonSerializer, CustomJsonSerializer>();
 
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddTransient<INotifierMediatorService, NotifierMediatorService>();

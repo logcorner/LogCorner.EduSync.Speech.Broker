@@ -1,3 +1,4 @@
+using LogCorner.EduSync.SignalR.Common;
 using LogCorner.EduSync.Speech.ElasticSearch;
 using LogCorner.EduSync.Speech.Projection;
 using LogCorner.EduSync.Speech.ServiceBus;
@@ -21,7 +22,7 @@ namespace LogCorner.EduSync.Speech.Consumer
                     services.AddServiceBus("localhost:9092");
                     services.AddSingleton<IConsumerService, ConsumerService>();
                     services.AddHostedService<ConsumerHostedService>();
-
+                    services.AddSignalRServices("http://localhost:5000/logcornerhub");
                     services.AddSharedKernel();
 
                     services.AddElasticSearch<SpeechProjection>("http://localhost:9200", "speech");

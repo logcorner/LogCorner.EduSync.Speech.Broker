@@ -13,6 +13,16 @@ namespace LogCorner.EduSync.SignalR.Server
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("corsPolicy",
+                    builder =>
+                        builder.AllowAnyHeader()
+                            .AllowAnyMethod()
+                            .WithOrigins("http://localhost:4200")
+                            .AllowCredentials()
+                    );
+            });
             services.AddSignalR();
         }
 
@@ -24,6 +34,7 @@ namespace LogCorner.EduSync.SignalR.Server
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors("corsPolicy");
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>

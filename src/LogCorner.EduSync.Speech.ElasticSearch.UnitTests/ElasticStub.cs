@@ -1,5 +1,5 @@
-using System;
 using LogCorner.EduSync.Speech.Projection;
+using System;
 
 namespace LogCorner.EduSync.Speech.ElasticSearch.UnitTests
 {

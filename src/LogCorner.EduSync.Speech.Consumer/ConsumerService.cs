@@ -1,5 +1,5 @@
-﻿using System.Threading;
-using LogCorner.EduSync.Speech.ServiceBus;
+﻿using LogCorner.EduSync.Speech.ServiceBus;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace LogCorner.EduSync.Speech.Consumer

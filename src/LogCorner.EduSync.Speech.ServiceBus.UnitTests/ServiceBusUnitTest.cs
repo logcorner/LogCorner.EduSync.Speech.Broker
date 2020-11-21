@@ -1,6 +1,6 @@
-using System.Threading;
 using LogCorner.EduSync.Speech.SharedKernel.Events;
 using Moq;
+using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -29,7 +29,7 @@ namespace LogCorner.EduSync.Speech.ServiceBus.UnitTests
             //Arrange
             string topic = "bus";
             var mockKafkaClient = new Mock<IServiceBusProvider>();
-            mockKafkaClient.Setup(m => m.ReceiveAsync(topic, It.IsAny<CancellationToken>(),true)).Verifiable();
+            mockKafkaClient.Setup(m => m.ReceiveAsync(topic, It.IsAny<CancellationToken>(), true)).Verifiable();
 
             //Act
             IServiceBus serviceBus = new ServiceBus(mockKafkaClient.Object);

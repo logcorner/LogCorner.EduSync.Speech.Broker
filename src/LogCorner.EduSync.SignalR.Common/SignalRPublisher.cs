@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.SignalR.Client;
-using System.Threading.Tasks;
-using LogCorner.EduSync.SignalR.Common.Model;
+﻿using LogCorner.EduSync.SignalR.Common.Model;
 using LogCorner.EduSync.Speech.SharedKernel.Serialyser;
+using Microsoft.AspNetCore.SignalR.Client;
+using System.Threading.Tasks;
 
 namespace LogCorner.EduSync.SignalR.Common
 {
@@ -10,7 +10,7 @@ namespace LogCorner.EduSync.SignalR.Common
         private readonly IHubInstance _hubConnectionInstance;
         private readonly IJsonSerializer _eventSerializer;
 
-        public SignalRPublisher(IHubInstance hubConnectionInstance , IJsonSerializer eventSerializer)
+        public SignalRPublisher(IHubInstance hubConnectionInstance, IJsonSerializer eventSerializer)
         {
             _hubConnectionInstance = hubConnectionInstance;
             _eventSerializer = eventSerializer;

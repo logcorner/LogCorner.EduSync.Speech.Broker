@@ -1,5 +1,5 @@
-﻿using System;
-using LogCorner.EduSync.Speech.SharedKernel.Events;
+﻿using LogCorner.EduSync.Speech.SharedKernel.Events;
+using System;
 
 namespace LogCorner.EduSync.Speech.Projection
 {
@@ -10,6 +10,8 @@ namespace LogCorner.EduSync.Speech.Projection
         public string Url { get; private set; }
         public string Description { get; private set; }
         public SpeechTypeEnum Type { get; private set; }
+
+        public bool IsDeleted { get; private set; }
 
         private SpeechProjection()
         {
@@ -46,6 +48,12 @@ namespace LogCorner.EduSync.Speech.Projection
         {
             Id = ev.AggregateId;
             Type = ev.Type;
+        }
+
+        public void Apply(SpeechDeletedEvent ev)
+        {
+            Id = ev.AggregateId;
+            IsDeleted = ev.IsDeleted;
         }
     }
 }

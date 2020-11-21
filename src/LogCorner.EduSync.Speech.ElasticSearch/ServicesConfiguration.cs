@@ -1,6 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using LogCorner.EduSync.Speech.Projection;
+using Microsoft.Extensions.DependencyInjection;
 using System;
-using LogCorner.EduSync.Speech.Projection;
 
 namespace LogCorner.EduSync.Speech.ElasticSearch
 {

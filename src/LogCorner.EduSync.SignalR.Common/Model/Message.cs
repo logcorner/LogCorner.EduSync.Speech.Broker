@@ -1,6 +1,6 @@
 ﻿namespace LogCorner.EduSync.SignalR.Common.Model
 {
-   public class Message
+    public class Message
     {
         public Message(string type, string body)
         {
