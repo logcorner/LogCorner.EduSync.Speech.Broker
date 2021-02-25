@@ -341,3 +341,5 @@ healthchecksdb
 /LiveTesting
 /LieTest
 /LiveTests
+/src/docker-compose.override-signalr.yml
+/src/docker-compose-signalr.yml

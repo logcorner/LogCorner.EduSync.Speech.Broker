@@ -20,7 +20,7 @@ namespace LogCorner.EduSync.Speech.ElasticSearch
             _indexName = indexName;
         }
 
-        public AcknowledgedResponseBase Init(string url)
+        public void Init(string url)
         {
             var pool = new SingleNodeConnectionPool(new Uri(url));
             var connectionSettings =
@@ -35,11 +35,16 @@ namespace LogCorner.EduSync.Speech.ElasticSearch
             _client = new ElasticClient(connectionSettings);
 
             var result = _client.Indices.Exists(Indices.Index(_indexName));
-            if (result.Exists) return new CreateIndexResponse();
-            var createIndexResponse = _client.Indices.Create(_indexName, c => c
-                .Map<T>(m => m.AutoMap())
-            );
-            return createIndexResponse;
+            if (!result.Exists)
+            {
+                var createIndexResponse = _client.Indices.Create(_indexName, c => c
+                    .Map<T>(m => m.AutoMap())
+                );
+                if (!createIndexResponse.IsValid)
+                {
+                    throw new Exception($"Cannot initialyze elastci search {url} {_indexName} {createIndexResponse.OriginalException}");
+                }
+            }
         }
 
         public async Task CreateAsync(T entity)

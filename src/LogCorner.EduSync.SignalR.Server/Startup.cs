@@ -23,7 +23,11 @@ namespace LogCorner.EduSync.SignalR.Server
                             .AllowCredentials()
                     );
             });
-            services.AddSignalR();
+            services.AddSignalR(log =>
+            {
+                log.EnableDetailedErrors = true;
+
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <UserSecretsId>dotnet-LogCorner.EduSync.Speech.Producer-5470968C-5C54-4980-BA6D-360865CAEEED</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <ItemGroup>
@@ -10,6 +11,7 @@
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="5.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client.Core" Version="5.0.3" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,7 +21,7 @@
 
   <ItemGroup>
     <Reference Include="LogCorner.EduSync.Speech.SharedKernel">
-      <HintPath>..\..\SharedKernel\LogCorner.EduSync.Speech.SharedKernel.dll</HintPath>
+      <HintPath>..\SharedKernel\LogCorner.EduSync.Speech.SharedKernel.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>

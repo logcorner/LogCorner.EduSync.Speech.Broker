@@ -30,7 +30,7 @@
 
   <ItemGroup>
     <Reference Include="LogCorner.EduSync.Speech.SharedKernel">
-      <HintPath>..\..\SharedKernel\LogCorner.EduSync.Speech.SharedKernel.dll</HintPath>
+      <HintPath>..\SharedKernel\LogCorner.EduSync.Speech.SharedKernel.dll</HintPath>
     </Reference>
   </ItemGroup>
 
