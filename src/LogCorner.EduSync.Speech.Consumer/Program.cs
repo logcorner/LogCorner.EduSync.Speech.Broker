@@ -1,14 +1,13 @@
-using System;
-using System.IO;
 using LogCorner.EduSync.SignalR.Common;
 using LogCorner.EduSync.Speech.ElasticSearch;
 using LogCorner.EduSync.Speech.Projection;
 using LogCorner.EduSync.Speech.ServiceBus;
 using LogCorner.EduSync.Speech.SharedKernel;
-using LogCorner.EduSync.Speech.SharedKernel.Serialyser;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
+using System.IO;
 
 namespace LogCorner.EduSync.Speech.Consumer
 {
@@ -18,7 +17,6 @@ namespace LogCorner.EduSync.Speech.Consumer
 
         public static void Main(string[] args)
         {
-
             ConfigureEnvironment();
             CreateHostBuilder(args).Build().Run();
         }
@@ -33,6 +31,7 @@ namespace LogCorner.EduSync.Speech.Consumer
                 .AddEnvironmentVariables();
             _configuration = builder.Build();
         }
+
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureServices((hostContext, services) =>

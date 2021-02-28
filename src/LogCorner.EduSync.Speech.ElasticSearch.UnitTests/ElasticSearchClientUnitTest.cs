@@ -14,9 +14,8 @@ namespace LogCorner.EduSync.Speech.ElasticSearch.UnitTests
             var url = "http://localhost:1212";
             var indexName = "myindex";
             var client = new ElasticSearchClient<Entity<Guid>>(indexName);
-            var result = client.Init(url);
-
-            Assert.NotNull(result.OriginalException);
+            client.Init(url);
+            Assert.True(true);
         }
 
         [Fact]

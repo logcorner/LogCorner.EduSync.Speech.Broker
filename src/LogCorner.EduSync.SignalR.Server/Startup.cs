@@ -2,6 +2,7 @@ using LogCorner.EduSync.SignalR.Server.Hubs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -9,28 +10,32 @@ namespace LogCorner.EduSync.SignalR.Server
 {
     public class Startup
     {
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+        private IConfiguration Configuration { get; }
+
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors(options =>
             {
+                var allowedOrigins = Configuration["allowedOrigins"]?.Split(",");
                 options.AddPolicy("corsPolicy",
                     builder =>
                         builder.AllowAnyHeader()
                             .AllowAnyMethod()
-                            .WithOrigins("http://localhost:4200")
+                            .WithOrigins(allowedOrigins)
                             .AllowCredentials()
                     );
             });
             services.AddSignalR(log =>
             {
                 log.EnableDetailedErrors = true;
-
             });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -45,7 +50,7 @@ namespace LogCorner.EduSync.SignalR.Server
             {
                 endpoints.MapGet("/", async context =>
                 {
-                    await context.Response.WriteAsync("Hello World!");
+                    await context.Response.WriteAsync("LogCorner Hub Notification Started Successfully !");
                 });
 
                 endpoints.MapHub<LogCornerHub<object>>("/logcornerhub");

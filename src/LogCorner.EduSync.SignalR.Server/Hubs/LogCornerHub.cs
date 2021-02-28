@@ -7,6 +7,18 @@ namespace LogCorner.EduSync.SignalR.Server.Hubs
 {
     public class LogCornerHub<T> : Hub<IHubNotifier<T>>, IHubInvoker<T> where T : class
     {
+        public override Task OnConnectedAsync()
+        {
+            Console.WriteLine($"OnConnectedAsync :: client : {Context.ConnectionId}");
+            return base.OnConnectedAsync();
+        }
+
+        public override Task OnDisconnectedAsync(Exception? exception)
+        {
+            Console.WriteLine($"OnDisconnectedAsync :: client : {Context.ConnectionId}");
+            return base.OnDisconnectedAsync(exception);
+        }
+
         public async Task Publish(T payload)
         {
             await Clients.All.OnPublish(payload);
