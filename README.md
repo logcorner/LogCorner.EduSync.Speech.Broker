@@ -49,6 +49,7 @@ GET speechindex/_search
     "match_all": {}
   }
 }
+curl -X GET "http://localhost:9200/speech/_search?pretty"
 
 #KIBANA
 bin/kibana

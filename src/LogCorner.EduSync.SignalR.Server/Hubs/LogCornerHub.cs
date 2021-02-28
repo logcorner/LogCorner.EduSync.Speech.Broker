@@ -1,5 +1,6 @@
 ﻿using LogCorner.EduSync.SignalR.Common;
 using Microsoft.AspNetCore.SignalR;
+using System;
 using System.Threading.Tasks;
 
 namespace LogCorner.EduSync.SignalR.Server.Hubs
@@ -9,23 +10,27 @@ namespace LogCorner.EduSync.SignalR.Server.Hubs
         public async Task Publish(T payload)
         {
             await Clients.All.OnPublish(payload);
+            Console.WriteLine($"Publish :: payload : {payload} , client : {Context.ConnectionId}");
         }
 
         public async Task PublishToTopic(string topic, T payload)
         {
             await Clients.All.OnPublish(topic, payload);
+            Console.WriteLine($"PublishToTopic :: topic : {topic} , payload : {payload}, client : {Context.ConnectionId}");
         }
 
         public async Task Subscribe(string topic)
         {
             await Groups.AddToGroupAsync(Context.ConnectionId, topic);
             await Clients.Groups(topic).OnSubscribe(Context.ConnectionId, topic);
+            Console.WriteLine($"Subscribe :: topic : {topic} , client : {Context.ConnectionId}");
         }
 
         public async Task UnSubscribe(string topic)
         {
             await Groups.RemoveFromGroupAsync(Context.ConnectionId, topic);
             await Clients.Groups(topic).OnUnSubscribe(Context.ConnectionId, topic);
+            Console.WriteLine($"UnSubscribe :: topic : {topic} , client : {Context.ConnectionId}");
         }
     }
 }
