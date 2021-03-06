@@ -36,13 +36,13 @@ namespace LogCorner.EduSync.Speech.ServiceBus
             {
                 if (task.IsFaulted)
                 {
-                    Console.WriteLine($"error = {task.Exception?.Message}");
+                    Console.WriteLine($"**KafkaClient::SendAsync - error = {task.Exception?.Message}");
                 }
                 else
                 {
-                    Console.WriteLine($"produced : {jsonString}");
+                    Console.WriteLine($"**KafkaClient::SendAsync - produced : {@event.Id} - {@event.Name}");
 
-                    Console.WriteLine($"Wrote to offset: {task.Result?.Offset}");
+                    Console.WriteLine($"**KafkaClient::SendAsync - wrote to offset: {task.Result?.Offset}");
                 }
             });
         }
@@ -50,7 +50,7 @@ namespace LogCorner.EduSync.Speech.ServiceBus
         public async Task ReceiveAsync(string topic, CancellationToken stoppingToken, bool forever = true)
         {
             _consumer.Subscribe(topic);
-            Console.WriteLine($"consuming on topic {topic}");
+            Console.WriteLine($"**KafkaClient::ReceiveAsync - consuming on topic {topic}");
             do
             {
                 if (stoppingToken.IsCancellationRequested)
@@ -59,10 +59,10 @@ namespace LogCorner.EduSync.Speech.ServiceBus
                 }
 
                 var data = _consumer.Consume();
-                Console.WriteLine($"Key : {data.Message.Key}");
-                Console.WriteLine($"Data : {data.Message.Value}");
-                Console.WriteLine($"Partition : {data.Partition.Value}");
-                Console.WriteLine($"Offset : {data.Offset.Value}");
+                Console.WriteLine($"**KafkaClient::ReceiveAsync - key : {data.Message.Key}");
+               // Console.WriteLine($"Data : {data.Message.Value}");
+                Console.WriteLine($"**KafkaClient::ReceiveAsync - partition : {data.Partition.Value}");
+                Console.WriteLine($"**KafkaClient::ReceiveAsync - offset : {data.Offset.Value}");
                 var message = new NotificationMessage<string> { Message = data.Message.Value };
                 await _notifierMediatorService.Notify(message);
             } while (forever);

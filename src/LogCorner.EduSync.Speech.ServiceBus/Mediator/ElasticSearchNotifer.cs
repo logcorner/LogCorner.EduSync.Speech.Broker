@@ -38,13 +38,36 @@ namespace LogCorner.EduSync.Speech.ServiceBus.Mediator
             projection.Project(@event);
             if (projection.IsDeleted)
             {
-                await _elasticSearchClient.DeleteAsync(projection);
+                await _elasticSearchClient.DeleteAsync(projection).ContinueWith(
+                        result =>
+                        {
+                            if (result.Status == TaskStatus.RanToCompletion)
+                            {
+                                Console.WriteLine($"**ElasticSearchNotifer::Handle - DeleteAsync {projection.Id} ");
+                                _publisher.PublishAsync(Topics.ReadModelAcknowledged, projection);
+                            }
+                            else if (result.Status == TaskStatus.Faulted)
+                            {
+                                Console.WriteLine($"**ElasticSearchNotifer::Handle - DeleteAsync {result.Exception?.GetBaseException().Message}");
+                            }
+                        }, cancellationToken);
             }
             else
             {
-                await _elasticSearchClient.CreateAsync(projection);
+                await _elasticSearchClient.CreateAsync(projection).ContinueWith(
+                    result =>
+                    {
+                        if (result.Status == TaskStatus.RanToCompletion)
+                        {
+                            Console.WriteLine($"**ElasticSearchNotifer::Handle - CreateAsync {projection.Id} ");
+                            _publisher.PublishAsync(Topics.ReadModelAcknowledged, projection);
+                        }
+                        else if (result.Status == TaskStatus.Faulted)
+                        {
+                            Console.WriteLine($"**ElasticSearchNotifer::Handle - CreateAsync {result.Exception?.GetBaseException().Message}");
+                        }
+                    }, cancellationToken);
             }
-            await _publisher.PublishAsync(Topics.Speech, projection);
         }
     }
 }
