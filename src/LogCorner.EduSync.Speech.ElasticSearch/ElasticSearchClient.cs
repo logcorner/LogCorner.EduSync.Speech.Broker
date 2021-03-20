@@ -53,7 +53,8 @@ namespace LogCorner.EduSync.Speech.ElasticSearch
                 u =>
                     u.Index(_indexName)
                         .Doc(entity)
-                        .DocAsUpsert());
+                        .DocAsUpsert()
+                        .Refresh(Refresh.True));
 
             if (!result.IsValid)
                 throw new Exception("Error occured during update", result.OriginalException);
