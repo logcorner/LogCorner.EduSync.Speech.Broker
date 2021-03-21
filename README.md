@@ -7,6 +7,7 @@ zookeeper-server-start.bat  config\zookeeper.properties
 kafka-server-start.bat  config\server.properties
 
 # create a topic first_topic  
+kafka-topics --zookeeper 127.0.0.1:2181  --topic speech --create  --partitions 3  --replication-factor 1
 kafka-topics --zookeeper 127.0.0.1:2181  --topic eventbus --create  --partitions 3  --replication-factor 1
 
 kafka-topics --zookeeper 127.0.0.1:2181  --topic second_topic  --create  --partitions 3  --replication-factor 1
@@ -48,9 +49,17 @@ GET speechindex/_search
     "match_all": {}
   }
 }
+curl -X GET "http://localhost:9200/speech/_search?pretty"
 
 #KIBANA
 bin/kibana
 http://localhost:5601
 
 http://localhost:5601/app/dev_tools#/console
+
+
+SAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAV =>  https://dev.azure.com/logcorner-workshop/_git/EventSourcingCQRS-mongo-event-store
+
+docker network create speech_network
+
+ng serve --configuration=docker

@@ -1,12 +1,11 @@
-﻿using LogCorner.EduSync.Speech.SharedKernel.Events;
-using System;
+﻿using System;
 using System.Threading.Tasks;
 
 namespace LogCorner.EduSync.SignalR.Common
 {
     public interface ISignalRNotifier
     {
-        event Action<string, EventStore> ReceivedOnPublishToTopic;
+        event Action<string, object> ReceivedOnPublishToTopic;
 
         Task StartAsync();
 

@@ -1,5 +1,6 @@
-﻿using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
+using System;
+using System.Threading.Tasks;
 
 namespace LogCorner.EduSync.Speech.ServiceBus.Mediator
 {
@@ -12,9 +13,13 @@ namespace LogCorner.EduSync.Speech.ServiceBus.Mediator
             _mediator = mediator;
         }
 
-        public async Task Notify(string notifyText)
+        public async Task Notify<T>(NotificationMessage<T> notifyText)
         {
-          await  _mediator.Publish(new NotificationMessage<string> { Message = notifyText });
+            if (notifyText == null)
+            {
+                throw new ArgumentNullException(nameof(notifyText));
+            }
+            await _mediator.Publish(notifyText);
         }
     }
 }

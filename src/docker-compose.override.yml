@@ -1,0 +1,15 @@
+version: '3.4'
+services:
+  logcorner.edusync.signalr.server:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - ASPNETCORE_URLS=http://+:80
+    ports:
+      - "8081:80"
+  logcorner.edusync.speech.producer:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+ 
+  logcorner.edusync.speech.consumer:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker

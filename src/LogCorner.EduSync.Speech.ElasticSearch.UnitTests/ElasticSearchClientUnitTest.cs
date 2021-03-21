@@ -1,10 +1,11 @@
-using System;
 using LogCorner.EduSync.Speech.Projection;
+using System;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace LogCorner.EduSync.Speech.ElasticSearch.UnitTests
 {
-    //TODO : refactor
+    //TODO : refactor  this
     public class ElasticSearchClientUnitTest
     {
         [Fact]
@@ -13,20 +14,30 @@ namespace LogCorner.EduSync.Speech.ElasticSearch.UnitTests
             var url = "http://localhost:1212";
             var indexName = "myindex";
             var client = new ElasticSearchClient<Entity<Guid>>(indexName);
-            var result = client.Init(url);
-
-            Assert.NotNull(result.OriginalException);
+            client.Init(url);
+            Assert.True(true);
         }
 
         [Fact]
-        public void ShouldCreateIndex()
+        public async Task ShouldCreateIndex()
         {
             var url = "http://localhost:1212";
             var indexName = "myindex";
             var client = new ElasticSearchClient<Entity<Guid>>(indexName);
 
             client.Init(url);
-            var result = client.CreateAsync(new ElasticStub());
+            await client.CreateAsync(new ElasticStub());
+        }
+
+        [Fact]
+        public async Task ShouldDeleteIndex()
+        {
+            var url = "http://localhost:1212";
+            var indexName = "myindex";
+            var client = new ElasticSearchClient<Entity<Guid>>(indexName);
+
+            client.Init(url);
+            await client.DeleteAsync(new ElasticStub());
         }
     }
 }

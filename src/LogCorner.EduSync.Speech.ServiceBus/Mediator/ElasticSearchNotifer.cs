@@ -1,37 +1,73 @@
-﻿using LogCorner.EduSync.Speech.ElasticSearch;
+﻿using LogCorner.EduSync.SignalR.Common;
+using LogCorner.EduSync.Speech.ElasticSearch;
+using LogCorner.EduSync.Speech.Projection;
 using LogCorner.EduSync.Speech.SharedKernel.Events;
 using LogCorner.EduSync.Speech.SharedKernel.Serialyser;
 using MediatR;
-using System.Diagnostics;
-using System.Text.Json;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
-using LogCorner.EduSync.Speech.Projection;
 
 namespace LogCorner.EduSync.Speech.ServiceBus.Mediator
 {
     public class ElasticSearchNotifer : INotificationHandler<NotificationMessage<string>>
     {
         private readonly IEventSerializer _eventSerializer;
+        private readonly IJsonSerializer _jsonSerializer;
         private readonly IElasticSearchClient<SpeechProjection> _elasticSearchClient;
+        private readonly ISignalRPublisher _publisher;
 
-        public ElasticSearchNotifer(IEventSerializer eventSerializer,
-            IElasticSearchClient<SpeechProjection> elasticSearchClient)
+        public ElasticSearchNotifer(IEventSerializer eventSerializer, IJsonSerializer jsonSerializer,
+            IElasticSearchClient<SpeechProjection> elasticSearchClient, ISignalRPublisher publisher)
         {
             _eventSerializer = eventSerializer;
+            _jsonSerializer = jsonSerializer;
             _elasticSearchClient = elasticSearchClient;
+            _publisher = publisher;
         }
 
-        public async Task Handle(NotificationMessage<string> notification, CancellationToken cancellationToken)
+        public async Task Handle(NotificationMessage<string> notificationMessage, CancellationToken cancellationToken)
         {
-            Debug.WriteLine($"Debugging from Notifier 1. Message  : {notification.Message} ");
-
-            var eventStore = JsonSerializer.Deserialize<EventStore>(notification.Message);
-            var @event = _eventSerializer.Deserialize<Event>(eventStore.TypeName,
-                                                             eventStore.PayLoad);
+            if (notificationMessage == null)
+            {
+                throw new ArgumentNullException(nameof(notificationMessage));
+            }
+            var eventStore = _jsonSerializer.Deserialize<EventStore>(notificationMessage.Message);
+            var @event = _eventSerializer.Deserialize<Event>(eventStore.TypeName, eventStore.PayLoad);
             var projection = Invoker.CreateInstanceOfProjection<SpeechProjection>();
-            projection.Project( @event );
-            await _elasticSearchClient.CreateAsync(projection);
+            projection.Project(@event);
+            if (projection.IsDeleted)
+            {
+                await _elasticSearchClient.DeleteAsync(projection).ContinueWith(
+                        result =>
+                        {
+                            if (result.Status == TaskStatus.RanToCompletion)
+                            {
+                                Console.WriteLine($"**ElasticSearchNotifer::Handle - DeleteAsync {projection.Id} ");
+                                _publisher.PublishAsync(Topics.ReadModelAcknowledged, projection);
+                            }
+                            else if (result.Status == TaskStatus.Faulted)
+                            {
+                                Console.WriteLine($"**ElasticSearchNotifer::Handle - DeleteAsync {result.Exception?.GetBaseException().Message}");
+                            }
+                        }, cancellationToken);
+            }
+            else
+            {
+                await _elasticSearchClient.CreateAsync(projection).ContinueWith(
+                    result =>
+                    {
+                        if (result.Status == TaskStatus.RanToCompletion)
+                        {
+                            Console.WriteLine($"**ElasticSearchNotifer::Handle - CreateAsync {projection.Id} ");
+                            _publisher.PublishAsync(Topics.ReadModelAcknowledged, projection);
+                        }
+                        else if (result.Status == TaskStatus.Faulted)
+                        {
+                            Console.WriteLine($"**ElasticSearchNotifer::Handle - CreateAsync {result.Exception?.GetBaseException().Message}");
+                        }
+                    }, cancellationToken);
+            }
         }
     }
 }

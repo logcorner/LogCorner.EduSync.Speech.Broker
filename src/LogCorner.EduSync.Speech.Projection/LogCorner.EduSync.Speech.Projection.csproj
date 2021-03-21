@@ -1,12 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
     <Reference Include="LogCorner.EduSync.Speech.SharedKernel">
-      <HintPath>..\..\SharedKernel\LogCorner.EduSync.Speech.SharedKernel.dll</HintPath>
+      <HintPath>..\SharedKernel\LogCorner.EduSync.Speech.SharedKernel.dll</HintPath>
     </Reference>
   </ItemGroup>
 

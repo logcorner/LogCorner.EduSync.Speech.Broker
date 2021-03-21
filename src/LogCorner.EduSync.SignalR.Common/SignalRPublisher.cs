@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.SignalR.Client;
+﻿using LogCorner.EduSync.SignalR.Common.Model;
+using LogCorner.EduSync.Speech.SharedKernel.Serialyser;
+using Microsoft.AspNetCore.SignalR.Client;
 using System.Threading.Tasks;
 
 namespace LogCorner.EduSync.SignalR.Common
@@ -6,10 +8,12 @@ namespace LogCorner.EduSync.SignalR.Common
     public class SignalRPublisher : ISignalRPublisher
     {
         private readonly IHubInstance _hubConnectionInstance;
+        private readonly IJsonSerializer _eventSerializer;
 
-        public SignalRPublisher(IHubInstance hubConnectionInstance)
+        public SignalRPublisher(IHubInstance hubConnectionInstance, IJsonSerializer eventSerializer)
         {
             _hubConnectionInstance = hubConnectionInstance;
+            _eventSerializer = eventSerializer;
         }
 
         public async Task SubscribeAsync(string topic)
@@ -27,7 +31,13 @@ namespace LogCorner.EduSync.SignalR.Common
             {
                 await _hubConnectionInstance.StartAsync();
             }
-            await _hubConnectionInstance.Connection.InvokeAsync(nameof(IHubInvoker<object>.PublishToTopic), topic, payload);
+
+            var serializedBody = _eventSerializer.Serialize(payload);
+
+            var type = payload.GetType().AssemblyQualifiedName;
+            var message = new Message(type, serializedBody);
+
+            await _hubConnectionInstance.Connection.InvokeAsync(nameof(IHubInvoker<Message>.PublishToTopic), topic, message);
         }
     }
 }
