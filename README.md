@@ -60,6 +60,6 @@ http://localhost:5601/app/dev_tools#/console
 
 SAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAV =>  https://dev.azure.com/logcorner-workshop/_git/EventSourcingCQRS-mongo-event-store
 
-
+docker network create speech_network
 
 ng serve --configuration=docker

@@ -8,7 +8,7 @@ services:
     ports:
       - "2181:2181"
     networks:
-      - my_network
+      - speech_network
   kafka:
     image: wurstmeister/kafka
     container_name: kafka
@@ -19,7 +19,7 @@ services:
     links: 
      - zookeeper
     networks:
-      - my_network
+      - speech_network
     environment:
       KAFKA_ADVERTISED_HOST_NAME: kafka
       KAFKA_ADVERTISED_PORT: "9092"
@@ -47,7 +47,7 @@ services:
       network.host: 0.0.0.0
       discovery.type: single-node
     networks:
-      - my_network
+      - speech_network
 
   logcorner.edusync.signalr.server:
     image: ${DOCKER_REGISTRY-}logcorner-edusync-signalr-server
@@ -55,7 +55,7 @@ services:
       context: .
       dockerfile: LogCorner.EduSync.SignalR.Server/Dockerfile
     networks:
-      - my_network
+      - speech_network
 
   logcorner.edusync.speech.producer:
     image: ${DOCKER_REGISTRY-}logcorner-edusync-speech-producer
@@ -63,7 +63,7 @@ services:
       context: .
       dockerfile: LogCorner.EduSync.Speech.Producer/Dockerfile
     networks:
-      - my_network
+      - speech_network
     depends_on:
       - logcorner.edusync.signalr.server
       - kafka
@@ -73,7 +73,7 @@ services:
       context: .
       dockerfile: LogCorner.EduSync.Speech.Consumer/Dockerfile
     networks:
-      - my_network
+      - speech_network
     depends_on:
       - kafka
       - elasticsearch
@@ -91,9 +91,9 @@ volumes:
  # elastic:
  #   driver: bridge
 networks:
-  my_network:
+  speech_network:
     external:
-      name: my_network
+      name: speech_network
 
 
 

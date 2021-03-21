@@ -62,7 +62,7 @@ namespace LogCorner.EduSync.Speech.ElasticSearch
 
         public async Task DeleteAsync(T entity)
         {
-            var result = await _client.DeleteAsync<T>(entity.Id, u => u.Index(_indexName));
+            var result = await _client.DeleteAsync<T>(entity.Id, u => u.Index(_indexName).Refresh(Refresh.True));
             if (!result.IsValid)
                 throw new Exception("Error occured during delete", result.OriginalException);
         }
