@@ -9,6 +9,8 @@ namespace LogCorner.EduSync.SignalR.Common
 
         Task InitAsync();
 
+        Task InitConfidentialClientAsync();
+
         Task StartAsync();
     }
 }

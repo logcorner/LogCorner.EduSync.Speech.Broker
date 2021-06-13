@@ -39,6 +39,11 @@ namespace LogCorner.EduSync.Speech.Producer.UnitTests
             await Task.CompletedTask;
         }
 
+        public Task InitConfidentialClientAsync()
+        {
+            throw new System.NotImplementedException();
+        }
+
         public Task StartAsync()
         {
             throw new System.NotImplementedException();

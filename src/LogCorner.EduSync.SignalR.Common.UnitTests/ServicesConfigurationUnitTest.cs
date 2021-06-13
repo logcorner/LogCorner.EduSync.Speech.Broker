@@ -13,7 +13,7 @@ namespace LogCorner.EduSync.SignalR.Common.UnitTests
             IServiceCollection services = new ServiceCollection();
 
             //Act
-            services.AddSignalRServices("");
+            services.AddSignalRServices("",null);
             var contains = services.ToList();
             var signalRNotifier = contains.SingleOrDefault(c => c.ServiceType.Name == nameof(ISignalRNotifier) && c.Lifetime == ServiceLifetime.Singleton);
             var signalRPublisher = contains.SingleOrDefault(c => c.ServiceType.Name == nameof(ISignalRPublisher) && c.Lifetime == ServiceLifetime.Singleton);

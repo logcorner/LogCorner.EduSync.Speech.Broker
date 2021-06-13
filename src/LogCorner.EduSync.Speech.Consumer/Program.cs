@@ -43,7 +43,7 @@ namespace LogCorner.EduSync.Speech.Consumer
                     services.AddServiceBus(kafkaUrl);
                     services.AddSingleton<IConsumerService, ConsumerService>();
                     services.AddHostedService<ConsumerHostedService>();
-                    services.AddSignalRServices(hubUrl);
+                    services.AddSignalRServices(hubUrl, _configuration);
                     services.AddSharedKernel();
 
                     services.AddElasticSearch<SpeechProjection>(elasticSearchUrl, "speech");

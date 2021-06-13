@@ -38,6 +38,11 @@ namespace LogCorner.EduSync.SignalR.Common.IntegrationTests
             await Task.CompletedTask;
         }
 
+        public Task InitConfidentialClientAsync()
+        {
+            throw new System.NotImplementedException();
+        }
+
         public async Task StartAsync()
         {
             await Connection.StartAsync();

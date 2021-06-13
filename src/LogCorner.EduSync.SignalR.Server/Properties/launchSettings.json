@@ -5,5 +5,13 @@
       "ASPNETCORE_ENVIRONMENT": "Development"
     },
     "applicationUrl": "http://localhost:5000"
+  },
+  "profiles": {
+    "LogCorner.EduSync.SignalR.Server": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
   }
-} 
+}

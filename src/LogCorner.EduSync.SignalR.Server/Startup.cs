@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Identity.Web;
 
 namespace LogCorner.EduSync.SignalR.Server
 {
@@ -30,6 +31,9 @@ namespace LogCorner.EduSync.SignalR.Server
                             .AllowCredentials()
                     );
             });
+
+            services.AddMicrosoftIdentityWebApiAuthentication(Configuration);
+
             services.AddSignalR(log =>
             {
                 log.EnableDetailedErrors = true;
@@ -42,9 +46,12 @@ namespace LogCorner.EduSync.SignalR.Server
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            
             app.UseCors("corsPolicy");
             app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
