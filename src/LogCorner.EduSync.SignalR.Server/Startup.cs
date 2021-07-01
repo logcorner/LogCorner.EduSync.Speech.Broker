@@ -46,7 +46,7 @@ namespace LogCorner.EduSync.SignalR.Server
             {
                 app.UseDeveloperExceptionPage();
             }
-            
+
             app.UseCors("corsPolicy");
             app.UseRouting();
 
@@ -60,7 +60,7 @@ namespace LogCorner.EduSync.SignalR.Server
                     await context.Response.WriteAsync("LogCorner Hub Notification Started Successfully !");
                 });
 
-                endpoints.MapHub<LogCornerHub<object>>("/logcornerhub");
+                endpoints.MapHub<LogCornerHub<object>>("/logcornerhub").RequireAuthorization();
             });
         }
     }

@@ -1,19 +1,17 @@
 using Microsoft.AspNetCore.SignalR.Client;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Identity.Client;
 using System.Threading.Tasks;
 
 namespace LogCorner.EduSync.SignalR.Common
 {
     public class HubConnectionInstance : IHubInstance
     {
-        private readonly IConfiguration _configuration;
+        private readonly IIdentityProvider _identityProvider;
         private string Url { get; }
         public HubConnection Connection { get; private set; }
 
-        public HubConnectionInstance(string url, IConfiguration configuration)
+        public HubConnectionInstance(string url, IIdentityProvider identityProvider)
         {
-            _configuration = configuration;
+            _identityProvider = identityProvider;
             Url = url;
         }
 
@@ -29,18 +27,12 @@ namespace LogCorner.EduSync.SignalR.Common
         public async Task InitConfidentialClientAsync()
         {
             var scopes = new[] { "https://datasynchrob2c.onmicrosoft.com/signalr/hub/.default" };
-            string clientId = _configuration["AzureAd:ClientId"];
-            string clientSecret = _configuration["AzureAd:ClientSecret"];
-            var app = ConfidentialClientApplicationBuilder.Create(clientId)
-                .WithClientSecret(clientSecret)
-                .WithAuthority(AadAuthorityAudience.AzureAdMultipleOrgs)
-                .Build();
-
-            var result = await app.AcquireTokenForClient(scopes).ExecuteAsync();
+          
+            var accessToken = await _identityProvider.AcquireTokenForClient(scopes);
             Connection = new HubConnectionBuilder()
                 .WithUrl(Url, options =>
                 {
-                    options.AccessTokenProvider = () => Task.FromResult(result.AccessToken);
+                    options.AccessTokenProvider = () => Task.FromResult(accessToken);
                 })
                 .Build();
         }
