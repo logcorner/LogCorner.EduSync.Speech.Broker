@@ -13,7 +13,7 @@ namespace LogCorner.EduSync.SignalR.Common
             services.AddSingleton<IHubInstance, HubConnectionInstance>(ctx =>
             {
                 var hubConnectionInstance = new HubConnectionInstance(endpoint ,new IdentityProvider(config));
-                hubConnectionInstance.InitAsync().Wait();
+                hubConnectionInstance.InitConfidentialClientAsync().Wait();
                 return hubConnectionInstance;
             });
         }
