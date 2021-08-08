@@ -33,6 +33,7 @@ namespace LogCorner.EduSync.SignalR.Common
         public async Task InitConfidentialClientAsync()
         {
             var scopes = new[] { "https://datasynchrob2c.onmicrosoft.com/signalr/hub/.default" };
+
             var AccessToken = await _identityProvider.AcquireTokenForClient(scopes);
             Connection = new HubConnectionBuilder()
                 .WithUrl(Url, options =>

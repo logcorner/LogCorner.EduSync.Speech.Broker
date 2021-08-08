@@ -8,6 +8,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Identity.Web;
+using System.Net;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace LogCorner.EduSync.SignalR.Server
@@ -61,12 +63,11 @@ namespace LogCorner.EduSync.SignalR.Server
                             },
                             OnAuthenticationFailed = context =>
                             {
-                                /// context.Response.StatusCode = (int)HttpStatusCode.Forbidden;
-                                /// context.Response.ContentType = "application/json";
-                                ///  var err = context.Exception.ToString();
-                                //var result = JsonConvert.SerializeObject(new { err });
-                                //   return context.Response.WriteAsync(err);
-                                return Task.CompletedTask;
+                                context.Response.StatusCode = (int)HttpStatusCode.Forbidden;
+                                context.Response.ContentType = "application/json";
+                                var err = context.Exception.ToString();
+                                var result = JsonSerializer.Serialize(new { err });
+                                return context.Response.WriteAsync(err);
                             }
                         };
                     },

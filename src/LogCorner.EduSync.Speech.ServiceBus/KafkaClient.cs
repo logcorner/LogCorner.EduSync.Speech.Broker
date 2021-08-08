@@ -60,7 +60,7 @@ namespace LogCorner.EduSync.Speech.ServiceBus
 
                 var data = _consumer.Consume();
                 Console.WriteLine($"**KafkaClient::ReceiveAsync - key : {data.Message.Key}");
-                
+
                 Console.WriteLine($"**KafkaClient::ReceiveAsync - partition : {data.Partition.Value}");
                 Console.WriteLine($"**KafkaClient::ReceiveAsync - offset : {data.Offset.Value}");
                 var message = new NotificationMessage<string> { Message = data.Message.Value };

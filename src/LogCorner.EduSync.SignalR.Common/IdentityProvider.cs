@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Identity.Client;
 using System.Threading.Tasks;
 
 namespace LogCorner.EduSync.SignalR.Common
@@ -15,7 +14,8 @@ namespace LogCorner.EduSync.SignalR.Common
 
         public async Task<string> AcquireTokenForClient(string[] scopes)
         {
-            string clientId = _configuration["AzureAd:ClientId"];
+            //TODO : uncomment when client credential is enabled on Azure AD B2C
+            /*string clientId = _configuration["AzureAd:ClientId"];
             string clientSecret = _configuration["AzureAd:ClientSecret"];
             var app = ConfidentialClientApplicationBuilder.Create(clientId)
                 .WithClientSecret(clientSecret)
@@ -23,7 +23,8 @@ namespace LogCorner.EduSync.SignalR.Common
                 .Build();
 
             var result = await app.AcquireTokenForClient(scopes).ExecuteAsync();
-            return result.AccessToken;
+            return result.AccessToken;*/
+            return await Task.FromResult("this is a fake access token");
         }
     }
 }
