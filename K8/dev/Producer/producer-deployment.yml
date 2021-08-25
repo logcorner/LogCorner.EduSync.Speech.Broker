@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: event-producer-deployment
+  namespace: dev
+  labels:
+    app: LogCorner.EduSync.Speech.Producer
+    version: 1.0.0
+    environment: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: event-producer
+  template:
+    metadata:
+      labels:
+        app: LogCorner.EduSync.Speech.Producer
+        service: event-producer
+    spec:
+      containers:
+        - name: event-producer-container
+          image: local/logcorner-edusync-speech-producer:1.0.5
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: "Kubernetes"
+            
