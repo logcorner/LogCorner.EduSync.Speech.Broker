@@ -1,0 +1,30 @@
+kind: Service
+apiVersion: v1
+metadata:
+  namespace: dev
+  name: elk
+  labels:
+    app: elk
+    type: LoadBalancer  
+    # type: NodePort      
+spec:
+  # type: NodePort
+  type: LoadBalancer
+  ports:
+   - name: elasticsearch
+     protocol: TCP
+     port: 9200
+     targetPort: 9200
+     nodePort: 32201
+   - name: kibana
+     protocol: TCP
+     port: 5601
+     targetPort: 5601
+     nodePort: 32602
+   - name: logstash
+     protocol: TCP
+     port: 5044
+     targetPort: 5044
+     nodePort: 32045
+  selector:
+    app: elk
