@@ -4,7 +4,7 @@ metadata:
   name: signalrservice-deployment
   namespace: dev
 spec:
-  type: LoadBalancer
+  type: NodePort
   ports:
   - port: 80
     targetPort: 80

@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: event-consumer-deployment
+  namespace: dev
+  labels:
+    app: LogCorner.EduSync.Speech.consumer
+    version: 1.0.0
+    environment: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: event-consumer
+  template:
+    metadata:
+      labels:
+        app: LogCorner.EduSync.Speech.consumer
+        service: event-consumer
+    spec:
+      containers:
+        - name: event-consumer-container
+          image: logcornerhub/logcorner-edusync-speech-consumer:1.0.1
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: "Kubernetes"
+            
