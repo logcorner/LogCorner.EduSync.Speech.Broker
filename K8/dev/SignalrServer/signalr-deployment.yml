@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: signalrservice-container
-        image: local/logcorner-edusync-signalr-server:1.0.0
+        image: logcornerhub/logcorner-edusync-signalr-server:1.0.0
         imagePullPolicy: Never
         env:
         - name: ASPNETCORE_ENVIRONMENT

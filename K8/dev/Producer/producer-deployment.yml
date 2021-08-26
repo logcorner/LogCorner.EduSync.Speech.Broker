@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: event-producer-container
-          image: local/logcorner-edusync-speech-producer:1.0.5
+          image: logcornerhub/logcorner-edusync-speech-producer:1.0.0
           imagePullPolicy: Never
           ports:
             - containerPort: 80

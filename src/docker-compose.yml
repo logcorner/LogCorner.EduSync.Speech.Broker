@@ -50,7 +50,7 @@ services:
       - speech_network
 
   logcorner.edusync.signalr.server:
-    image: ${DOCKER_REGISTRY-}logcorner-edusync-signalr-server
+    image: ${DOCKER_REGISTRY-}/logcorner-edusync-signalr-server
     build:
       context: .
       dockerfile: LogCorner.EduSync.SignalR.Server/Dockerfile
@@ -58,7 +58,7 @@ services:
       - speech_network
 
   logcorner.edusync.speech.producer:
-    image: ${DOCKER_REGISTRY-}logcorner-edusync-speech-producer
+    image: ${DOCKER_REGISTRY-}/logcorner-edusync-speech-producer
     build:
       context: .
       dockerfile: LogCorner.EduSync.Speech.Producer/Dockerfile
@@ -68,7 +68,7 @@ services:
       - logcorner.edusync.signalr.server
       - kafka
   logcorner.edusync.speech.consumer:
-    image: ${DOCKER_REGISTRY-}logcorner-edusync-speech-consumer
+    image: ${DOCKER_REGISTRY-}/logcorner-edusync-speech-consumer
     build:
       context: .
       dockerfile: LogCorner.EduSync.Speech.Consumer/Dockerfile
