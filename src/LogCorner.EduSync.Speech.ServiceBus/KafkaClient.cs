@@ -31,7 +31,7 @@ namespace LogCorner.EduSync.Speech.ServiceBus
             var jsonString = _eventSerializer.Serialize(@event);
             var t = _producer.ProduceAsync(topic, new Message<Null, string>
             { Value = jsonString });
-
+            Console.WriteLine($"**KafkaClient::SendAsync - jsonString = {jsonString}");
             await t.ContinueWith(task =>
             {
                 if (task.IsFaulted)

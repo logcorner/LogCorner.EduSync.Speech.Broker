@@ -1,6 +1,7 @@
 ﻿using LogCorner.EduSync.SignalR.Common;
 using LogCorner.EduSync.Speech.ServiceBus;
 using LogCorner.EduSync.Speech.SharedKernel.Events;
+using System;
 using System.Threading.Tasks;
 
 namespace LogCorner.EduSync.Speech.Producer
@@ -36,8 +37,10 @@ namespace LogCorner.EduSync.Speech.Producer
 
             _notifier.ReceivedOnPublishToTopic += async (topic, @event) =>
             {
+                Console.WriteLine($"**ProducerService::DoWorkAsync - topic : {topic},@event : {@event} ");
                 if (@event is EventStore output)
                 {
+                    Console.WriteLine($"**ProducerService::DoWorkAsync - topic : {Topics.Speech},output : {output} ");
                     await _serviceBus.SendAsync(Topics.Speech, output);
                 }
             };
