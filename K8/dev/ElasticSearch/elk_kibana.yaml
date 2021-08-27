@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: kibana
-  namespace: elk
+  namespace: dev
   labels:
     app: kibana
 spec:

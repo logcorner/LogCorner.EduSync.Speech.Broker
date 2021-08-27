@@ -2,7 +2,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: elasticsearch
-  namespace: elk
+  namespace: dev
   labels:
     app: elasticsearch
 spec:
