@@ -1,0 +1,91 @@
+# why /usr/share/elasticsearch/, check https://github.com/elastic/dockerfiles
+# https://www.elastic.co/guide/en/elasticsearch/reference/current/advanced-configuration.html#set-jvm-options
+# https://www.elastic.co/guide/en/elasticsearch/reference/current/system-config.html
+# https://www.elastic.co/guide/en/elasticsearch/reference/current/vm-max-map-count.html
+# https://www.elastic.co/guide/en/elasticsearch/reference/current/file-descriptors.html
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: elk-cluster
+  namespace: elk
+  labels:
+    app: elasticsearch
+spec:
+  serviceName: elasticsearch
+  replicas: 3
+  selector:
+    matchLabels:
+      app: elasticsearch-node
+  template:
+    metadata:
+      labels:
+        app: elasticsearch-node
+    spec:
+      containers:
+      - name: elasticsearch
+        image: docker.elastic.co/elasticsearch/elasticsearch:7.13.1
+        ports:
+        - containerPort: 9200
+          name: client-node
+          protocol: TCP
+        - containerPort: 9300
+          name: inter-node
+          protocol: TCP
+        volumeMounts:
+        - name: data
+          mountPath: /usr/share/elasticsearch/data
+        env:
+          - name: cluster.name
+            valueFrom:
+              configMapKeyRef:
+                name: elk-cluster-settings
+                key: cluster.name
+          - name: discovery.seed_hosts
+            valueFrom:
+              configMapKeyRef:
+                name: elk-cluster-settings
+                key: discovery.seed_hosts
+          - name: cluster.initial_master_nodes
+            valueFrom:
+              configMapKeyRef:
+                name: elk-cluster-settings
+                key: cluster.initial_master_nodes
+          - name: ES_JAVA_OPTS
+            valueFrom:
+              configMapKeyRef:
+                name: elk-cluster-settings
+                key: ES_JAVA_OPTS
+          - name: node.name
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+      initContainers:
+      - name: grant-permissions
+        image: busybox
+        command: ["sh", "-c", "chown -R 1000:1000 /usr/share/elasticsearch/data"]
+        securityContext:
+          privileged: true
+        volumeMounts:
+        - name: data
+          mountPath: /usr/share/elasticsearch/data
+      - name: adjust-vm-max-map
+        image: busybox
+        command: ["sysctl", "-w", "vm.max_map_count=262144"]
+        securityContext:
+          privileged: true
+      - name: adjust-fd-ulimit
+        image: busybox
+        command: ["sh", "-c", "ulimit -n 65536"]
+        securityContext:
+          privileged: true
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+      labels:
+        app: elasticsearch-vpc
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi

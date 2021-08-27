@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: elk-cluster-settings
+  namespace: elk
+data:
+  cluster.name: "elk"
+  network.host: "0.0.0.0"
+  discovery.seed_hosts: "elasticsearch"
+  cluster.initial_master_nodes: "elk-cluster-0,elk-cluster-1,elk-cluster-2"
+  ES_JAVA_OPTS: "-Xms512m -Xmx512m"
