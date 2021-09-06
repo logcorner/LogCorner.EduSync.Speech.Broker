@@ -3,6 +3,10 @@ kind: ConfigMap
 metadata:
   name: elk-cluster-settings
   namespace: dev
+  labels:
+    version: 1.0.0
+    product: elasticsearch-configMap
+    environment: dev
 data:
   cluster.name: "elk"
   network.host: "0.0.0.0"

@@ -4,23 +4,25 @@ metadata:
   name: event-producer-deployment
   namespace: dev
   labels:
-    app: LogCorner.EduSync.Speech.Producer
     version: 1.0.0
+    product: speech-event-producer
     environment: dev
+
 spec:
   replicas: 1
   selector:
     matchLabels:
-      service: event-producer
+      app: speech-event-producer
+      env: dev
   template:
     metadata:
       labels:
-        app: LogCorner.EduSync.Speech.Producer
-        service: event-producer
+        app: speech-event-producer
+        env: dev
     spec:
       containers:
-        - name: event-producer-container
-          image: logcornerhub/logcorner-edusync-speech-producer:1.0.0
+        - name: event-producer
+          image: logcornerhub/logcorner-edusync-speech-producer
           imagePullPolicy: Never
           ports:
             - containerPort: 80

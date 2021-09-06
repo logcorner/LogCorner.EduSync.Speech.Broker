@@ -1,26 +1,27 @@
 # why /usr/share/elasticsearch/, check https://github.com/elastic/dockerfiles
 # https://www.elastic.co/guide/en/elasticsearch/reference/current/advanced-configuration.html#set-jvm-options
 # https://www.elastic.co/guide/en/elasticsearch/reference/current/system-config.html
-# https://www.elastic.co/guide/en/elasticsearch/reference/current/vm-max-map-count.html
-# https://www.elastic.co/guide/en/elasticsearch/reference/current/file-descriptors.html
-
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: elk-cluster
   namespace: dev
   labels:
-    app: elasticsearch
+     version: 1.0.0
+     product: elasticsearch
+     environment: dev
 spec:
   serviceName: elasticsearch
   replicas: 3
   selector:
     matchLabels:
       app: elasticsearch-node
+      env: dev
   template:
     metadata:
       labels:
         app: elasticsearch-node
+        env: dev
     spec:
       containers:
       - name: elasticsearch

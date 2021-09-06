@@ -4,10 +4,13 @@ metadata:
   name: elasticsearch
   namespace: dev
   labels:
-    app: elasticsearch
+    version: 1.0.0
+    product: elasticsearch
+    environment: dev
 spec:
   selector:
     app: elasticsearch-node
+    env: dev
   clusterIP: None
   ports:
     - port: 9200

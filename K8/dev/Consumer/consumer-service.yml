@@ -4,14 +4,14 @@ metadata:
   name: event-consumer-service
   namespace: dev
   labels:
-    app: LogCorner.EduSync.Speech.consumer
     version: 1.0.0
+    product: speech-event-consumer
     environment: dev
-    service: event-consumer
 spec:
   ports:
     - port: 80
       targetPort: 80
       protocol: TCP
   selector:
-    service: event-consumer
+    app: speech-event-consumer
+    env: dev

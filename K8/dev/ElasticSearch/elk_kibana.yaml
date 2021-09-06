@@ -4,16 +4,20 @@ metadata:
   name: kibana
   namespace: dev
   labels:
-    app: kibana
+    version: 1.0.0
+    product: kibana
+    environment: dev
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: kibana
+      env: dev
   template:
     metadata:
       labels:
         app: kibana
+        env: dev
     spec:
       containers:
       - name: kibana
