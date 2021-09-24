@@ -46,7 +46,7 @@ namespace LogCorner.EduSync.Speech.ServiceBus.UnitTests
 
             //Act
             IServiceBusProvider kafkaClient = new KafkaClient(It.IsAny<IProducer<Null, string>>(), It.IsAny<IJsonSerializer>(), mockConsumer.Object, mockNotifierMediatorService.Object);
-            await kafkaClient.ReceiveAsync("topic", It.IsAny<CancellationToken>(), false);
+            await kafkaClient.ReceiveAsync(new[] { "topic" }, It.IsAny<CancellationToken>(), false);
 
             //Assert
             mockConsumer.Verify(m => m.Consume(CancellationToken.None), Times.Once);

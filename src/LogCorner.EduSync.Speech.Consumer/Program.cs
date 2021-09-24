@@ -39,7 +39,9 @@ namespace LogCorner.EduSync.Speech.Consumer
                     var kafkaUrl = _configuration["kafkaUrl"];
                     var hubUrl = _configuration["hubUrl"];
                     var elasticSearchUrl = _configuration["elasticSearchUrl"];
-
+                    services.AddSingleton<IClusterManager, KafkaClusterManager>(
+                        ctx => new KafkaClusterManager(_configuration)
+                        );
                     services.AddServiceBus(kafkaUrl);
                     services.AddSingleton<IConsumerService, ConsumerService>();
                     services.AddHostedService<ConsumerHostedService>();

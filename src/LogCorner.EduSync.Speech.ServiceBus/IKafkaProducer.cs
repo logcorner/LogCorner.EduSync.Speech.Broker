@@ -1,13 +1,10 @@
 ﻿using LogCorner.EduSync.Speech.SharedKernel.Events;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace LogCorner.EduSync.Speech.ServiceBus
 {
-    public interface IServiceBus
+    public interface IKafkaProducer
     {
         Task SendAsync(string topic, EventStore @event);
-
-        Task ReceiveAsync(string[] topics, CancellationToken stoppingToken);
     }
 }

@@ -47,10 +47,14 @@ namespace LogCorner.EduSync.Speech.ServiceBus
             });
         }
 
-        public async Task ReceiveAsync(string topic, CancellationToken stoppingToken, bool forever = true)
+        public async Task ReceiveAsync(string[] topics, CancellationToken stoppingToken, bool forever = true)
         {
-            _consumer.Subscribe(topic);
-            Console.WriteLine($"**KafkaClient::ReceiveAsync - consuming on topic {topic}");
+            _consumer.Subscribe(topics);
+            foreach (var topic in topics)
+            {
+                Console.WriteLine($"**KafkaClient::ReceiveAsync - consuming on topic {topic}");
+            }
+
             do
             {
                 if (stoppingToken.IsCancellationRequested)

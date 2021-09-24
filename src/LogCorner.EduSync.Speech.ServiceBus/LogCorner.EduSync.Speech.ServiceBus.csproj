@@ -5,13 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Confluent.Kafka" Version="1.5.3" />
+    <PackageReference Include="Confluent.Kafka" Version="1.8.1" />
     <PackageReference Include="MediatR" Version="9.0.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.2" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
-    <PackageReference Include="NEST" Version="7.11.1" />
-    <PackageReference Include="NEST.JsonNetSerializer" Version="7.11.1" />
+    <PackageReference Include="NEST" Version="7.15.0" />
+    <PackageReference Include="NEST.JsonNetSerializer" Version="7.15.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,6 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="LogCorner.EduSync.SignalR.Common">
+      <HintPath>..\SharedKernel\LogCorner.EduSync.SignalR.Common.dll</HintPath>
+    </Reference>
     <Reference Include="LogCorner.EduSync.Speech.SharedKernel">
       <HintPath>..\SharedKernel\LogCorner.EduSync.Speech.SharedKernel.dll</HintPath>
     </Reference>
