@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Confluent.Kafka" Version="1.8.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="5.0.10" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client.Core" Version="5.0.10" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />

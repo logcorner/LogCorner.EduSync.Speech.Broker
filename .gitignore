@@ -343,3 +343,5 @@ healthchecksdb
 /LiveTests
 /src/docker-compose.override-signalr.yml
 /src/docker-compose-signalr.yml
+/src/LogCorner.EduSync.Speech.Consumer/appsettings.Development.save.json
+/src/LogCorner.EduSync.Speech.Producer/appsettings.Development.save.json
