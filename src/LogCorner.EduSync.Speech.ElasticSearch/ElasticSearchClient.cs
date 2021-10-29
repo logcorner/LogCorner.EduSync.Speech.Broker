@@ -58,6 +58,9 @@ namespace LogCorner.EduSync.Speech.ElasticSearch
 
             if (!result.IsValid)
                 throw new Exception("Error occured during update", result.OriginalException);
+
+            Console.WriteLine($"**ElasticSearchClient::CreateAsync - indexName = {_indexName}");
+            Console.WriteLine($"**ElasticSearchClient::CreateAsync - entity = {entity.Id}");
         }
 
         public async Task DeleteAsync(T entity)
@@ -65,6 +68,7 @@ namespace LogCorner.EduSync.Speech.ElasticSearch
             var result = await _client.DeleteAsync<T>(entity.Id, u => u.Index(_indexName).Refresh(Refresh.True));
             if (!result.IsValid)
                 throw new Exception("Error occured during delete", result.OriginalException);
+            Console.WriteLine($"**ElasticSearchClient::DeleteAsync - entity = {entity.Id}");
         }
     }
 }

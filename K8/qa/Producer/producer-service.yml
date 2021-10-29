@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: event-producer-service
+  namespace: qa
+  labels:
+    version: 1.0.0
+    product: speech-event-producer
+    environment: qa
+spec:
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+      name: tcp
+    - port: 443
+      targetPort: 443
+      protocol: TCP
+      name: ssl
+  selector:
+    app: speech-event-producer
+    env: qa

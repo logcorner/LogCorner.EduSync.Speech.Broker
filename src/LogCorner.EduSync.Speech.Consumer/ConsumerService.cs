@@ -7,15 +7,23 @@ namespace LogCorner.EduSync.Speech.Consumer
     public class ConsumerService : IConsumerService
     {
         private readonly IServiceBus _serviceBus;
+        private readonly IClusterManager _clusterManager;
 
-        public ConsumerService(IServiceBus serviceBus)
+        public ConsumerService(IServiceBus serviceBus, IClusterManager clusterManager)
         {
             _serviceBus = serviceBus;
+            _clusterManager = clusterManager;
         }
 
         public async Task DoWorkAsync(CancellationToken stoppingToken)
         {
-            await _serviceBus.ReceiveAsync(Topics.Speech, stoppingToken);
+            var topics = new[] { Topics.Speech, Topics.Synchro };
+            foreach (var topic in topics)
+            {
+                await _clusterManager.EnsureTopicExistAsync(topic);
+            }
+
+            await _serviceBus.ReceiveAsync(topics, stoppingToken);
         }
     }
 }

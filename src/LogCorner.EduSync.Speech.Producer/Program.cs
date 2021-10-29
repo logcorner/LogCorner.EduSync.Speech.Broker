@@ -38,8 +38,7 @@ namespace LogCorner.EduSync.Speech.Producer
                     var kafkaUrl = _configuration["kafkaUrl"];
                     services.AddSingleton<IProducerService, ProducerService>();
                     services.AddHostedService<ProducerHostedService>();
-                    services.AddSignalRServices(hubUrl);
-                    //services.AddElasticSearch<SpeechProjection>(null, null);
+                    services.AddSignalRServices($"{hubUrl}?clientName=LogCorner.EduSync.Speech.Producer", _configuration);
                     services.AddSharedKernel();
 
                     services.AddServiceBus(kafkaUrl);

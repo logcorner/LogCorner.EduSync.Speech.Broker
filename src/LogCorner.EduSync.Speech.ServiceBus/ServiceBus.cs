@@ -18,9 +18,9 @@ namespace LogCorner.EduSync.Speech.ServiceBus
             await _serviceBusProvider.SendAsync(topic, @event);
         }
 
-        public async Task ReceiveAsync(string topic, CancellationToken stoppingToken)
+        public async Task ReceiveAsync(string[] topics, CancellationToken stoppingToken)
         {
-            await _serviceBusProvider.ReceiveAsync(topic, stoppingToken);
+            await _serviceBusProvider.ReceiveAsync(topics, stoppingToken);
         }
     }
 }

@@ -39,11 +39,13 @@ namespace LogCorner.EduSync.Speech.Consumer
                     var kafkaUrl = _configuration["kafkaUrl"];
                     var hubUrl = _configuration["hubUrl"];
                     var elasticSearchUrl = _configuration["elasticSearchUrl"];
-
+                    services.AddSingleton<IClusterManager, KafkaClusterManager>(
+                        ctx => new KafkaClusterManager(_configuration)
+                        );
                     services.AddServiceBus(kafkaUrl);
                     services.AddSingleton<IConsumerService, ConsumerService>();
                     services.AddHostedService<ConsumerHostedService>();
-                    services.AddSignalRServices(hubUrl);
+                    services.AddSignalRServices($"{hubUrl}?clientName=LogCorner.EduSync.Speech.Consumer", _configuration);
                     services.AddSharedKernel();
 
                     services.AddElasticSearch<SpeechProjection>(elasticSearchUrl, "speech");

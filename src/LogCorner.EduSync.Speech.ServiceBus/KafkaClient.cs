@@ -31,7 +31,7 @@ namespace LogCorner.EduSync.Speech.ServiceBus
             var jsonString = _eventSerializer.Serialize(@event);
             var t = _producer.ProduceAsync(topic, new Message<Null, string>
             { Value = jsonString });
-
+            Console.WriteLine($"**KafkaClient::SendAsync - jsonString = {jsonString}");
             await t.ContinueWith(task =>
             {
                 if (task.IsFaulted)
@@ -40,17 +40,21 @@ namespace LogCorner.EduSync.Speech.ServiceBus
                 }
                 else
                 {
-                    Console.WriteLine($"**KafkaClient::SendAsync - produced : {@event.Id} - {@event.Name}");
+                    Console.WriteLine($"**KafkaClient::SendAsync - produced : {@event?.Id} - {@event?.Name}");
 
                     Console.WriteLine($"**KafkaClient::SendAsync - wrote to offset: {task.Result?.Offset}");
                 }
             });
         }
 
-        public async Task ReceiveAsync(string topic, CancellationToken stoppingToken, bool forever = true)
+        public async Task ReceiveAsync(string[] topics, CancellationToken stoppingToken, bool forever = true)
         {
-            _consumer.Subscribe(topic);
-            Console.WriteLine($"**KafkaClient::ReceiveAsync - consuming on topic {topic}");
+            _consumer.Subscribe(topics);
+            foreach (var topic in topics)
+            {
+                Console.WriteLine($"**KafkaClient::ReceiveAsync - consuming on topic {topic}");
+            }
+
             do
             {
                 if (stoppingToken.IsCancellationRequested)
@@ -60,10 +64,11 @@ namespace LogCorner.EduSync.Speech.ServiceBus
 
                 var data = _consumer.Consume();
                 Console.WriteLine($"**KafkaClient::ReceiveAsync - key : {data.Message.Key}");
-               // Console.WriteLine($"Data : {data.Message.Value}");
+
                 Console.WriteLine($"**KafkaClient::ReceiveAsync - partition : {data.Partition.Value}");
                 Console.WriteLine($"**KafkaClient::ReceiveAsync - offset : {data.Offset.Value}");
                 var message = new NotificationMessage<string> { Message = data.Message.Value };
+                Console.WriteLine($"**KafkaClient::ReceiveAsync - message : {message.Message}");
                 await _notifierMediatorService.Notify(message);
             } while (forever);
         }

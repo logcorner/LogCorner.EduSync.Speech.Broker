@@ -8,6 +8,6 @@ namespace LogCorner.EduSync.Speech.ServiceBus
     {
         Task SendAsync(string topic, EventStore @event);
 
-        Task ReceiveAsync(string topic, CancellationToken stoppingToken);
+        Task ReceiveAsync(string[] topics, CancellationToken stoppingToken);
     }
 }

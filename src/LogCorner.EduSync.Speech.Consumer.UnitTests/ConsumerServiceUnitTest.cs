@@ -12,14 +12,15 @@ namespace LogCorner.EduSync.Speech.Consumer.UnitTests
         public async Task DoWorkShouldRaiseReceivedOnPublishToTopicEvent()
         {
             var mockServiceBus = new Mock<IServiceBus>();
+            var mockClusterManager = new Mock<IClusterManager>();
 
-            mockServiceBus.Setup(m => m.ReceiveAsync(It.IsAny<string>(), It.IsAny<CancellationToken>())).Verifiable();
+            mockServiceBus.Setup(m => m.ReceiveAsync(It.IsAny<string[]>(), It.IsAny<CancellationToken>())).Verifiable();
 
-            IConsumerService consumerService = new ConsumerService(mockServiceBus.Object);
+            IConsumerService consumerService = new ConsumerService(mockServiceBus.Object, mockClusterManager.Object);
 
             await consumerService.DoWorkAsync(It.IsAny<CancellationToken>());
 
-            _ = Task.Run(() => mockServiceBus.Verify(r => r.ReceiveAsync(It.IsAny<string>(), It.IsAny<CancellationToken>())));
+            _ = Task.Run(() => mockServiceBus.Verify(r => r.ReceiveAsync(It.IsAny<string[]>(), It.IsAny<CancellationToken>())));
         }
     }
 }
