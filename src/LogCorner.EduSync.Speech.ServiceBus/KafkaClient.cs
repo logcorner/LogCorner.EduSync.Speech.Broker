@@ -68,6 +68,7 @@ namespace LogCorner.EduSync.Speech.ServiceBus
                 Console.WriteLine($"**KafkaClient::ReceiveAsync - partition : {data.Partition.Value}");
                 Console.WriteLine($"**KafkaClient::ReceiveAsync - offset : {data.Offset.Value}");
                 var message = new NotificationMessage<string> { Message = data.Message.Value };
+                Console.WriteLine($"**KafkaClient::ReceiveAsync - message : {message.Message}");
                 await _notifierMediatorService.Notify(message);
             } while (forever);
         }
