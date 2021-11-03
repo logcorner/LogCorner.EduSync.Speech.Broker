@@ -3,7 +3,7 @@
     "LogCorner.EduSync.Speech.Producer": {
       "commandName": "Project",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Kubernetes.qa"
+        "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
     "Docker": {

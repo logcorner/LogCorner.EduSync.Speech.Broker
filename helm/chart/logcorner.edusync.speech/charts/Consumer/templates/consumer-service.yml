@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: event-consumer-service
+  namespace: helm
+  labels:
+    version: 1.0.0
+    product: speech-event-consumer
+    environment: helm
+spec:
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+  selector:
+    app: speech-event-consumer
+    env: helm
