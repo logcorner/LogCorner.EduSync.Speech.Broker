@@ -40,22 +40,22 @@ spec:
           - name: cluster.name
             valueFrom:
               configMapKeyRef:
-                name: elk-cluster-settings
+                name: {{ .Release.Name }}-{{ .Chart.Name }}-elk-cluster-settings
                 key: cluster.name
           - name: discovery.seed_hosts
             valueFrom:
               configMapKeyRef:
-                name: elk-cluster-settings
+                name: {{ .Release.Name }}-{{ .Chart.Name }}-elk-cluster-settings
                 key: discovery.seed_hosts
           - name: cluster.initial_master_nodes
             valueFrom:
               configMapKeyRef:
-                name: elk-cluster-settings
+                name: {{ .Release.Name }}-{{ .Chart.Name }}-elk-cluster-settings
                 key: cluster.initial_master_nodes
           - name: ES_JAVA_OPTS
             valueFrom:
               configMapKeyRef:
-                name: elk-cluster-settings
+                name: {{ .Release.Name }}-{{ .Chart.Name }}-elk-cluster-settings
                 key: ES_JAVA_OPTS
           - name: node.name
             valueFrom:
