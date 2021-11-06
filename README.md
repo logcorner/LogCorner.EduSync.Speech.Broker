@@ -63,3 +63,10 @@ SAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAV =>  https://dev.azure.com/logcorner-workshop/
 docker network create speech_network
 
 ng serve --configuration=docker
+
+
+
+kubectl -n kafka run kafka-producer -ti --image=quay.io/strimzi/kafka:0.26.0-kafka-3.0.0 --rm=true --restart=Never -- bin/kafka-console-producer.sh --broker-list logconer-cluster-kafka-bootstrap.kafka:9092 --topic speech
+
+
+kubectl -n kafka run kafka-consumer -ti --image=quay.io/strimzi/kafka:0.26.0-kafka-3.0.0 --rm=true --restart=Never -- bin/kafka-console-consumer.sh --bootstrap-server logconer-cluster-kafka-bootstrap.kafka:9092 --topic speech --from-beginning
