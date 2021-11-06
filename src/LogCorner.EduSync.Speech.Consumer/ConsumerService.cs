@@ -1,4 +1,5 @@
 ﻿using LogCorner.EduSync.Speech.ServiceBus;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -18,12 +19,19 @@ namespace LogCorner.EduSync.Speech.Consumer
         public async Task DoWorkAsync(CancellationToken stoppingToken)
         {
             var topics = new[] { Topics.Speech, Topics.Synchro };
-            foreach (var topic in topics)
+            try
             {
-                await _clusterManager.EnsureTopicExistAsync(topic);
-            }
+                foreach (var topic in topics)
+                {
+                    await _clusterManager.EnsureTopicExistAsync(topic);
+                }
 
-            await _serviceBus.ReceiveAsync(topics, stoppingToken);
+                await _serviceBus.ReceiveAsync(topics, stoppingToken);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"ConsumerService::DoWorkAsync:errorMessage - {ex.Message} ");
+            }
         }
     }
 }
