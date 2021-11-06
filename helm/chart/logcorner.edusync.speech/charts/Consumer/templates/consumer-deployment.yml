@@ -1,25 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}-{{ .Chart.Name }}-deployment
+  name: event-consumer-deployment
   namespace: helm
   labels:
-    product: {{ .Release.Name }}-{{ .Chart.Name }}
+    version: 1.0.0
+    product: speech-event-consumer
     environment: helm
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ .Release.Name }}-{{ .Chart.Name }}-consumer
+      app: speech-event-consumer
       env: helm
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}-{{ .Chart.Name }}-consumer
+        app: speech-event-consumer
         env: helm
     spec:
       containers:
-        - name: {{ .Release.Name }}-{{ .Chart.Name }}-consumer
+        - name: speech-event-consumer
           image: logcornerhub/logcorner-edusync-speech-consumer
           imagePullPolicy: Never
           ports:

@@ -1,10 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Release.Name }}-{{ .Chart.Name }}-service
+  name: event-producer-service
   namespace: helm
   labels:
-    product: {{ .Release.Name }}-{{ .Chart.Name }}-producer
+    version: 1.0.0
+    product: speech-event-producer
     environment: helm
 spec:
   ports:
@@ -17,5 +18,5 @@ spec:
       protocol: TCP
       name: ssl
   selector:
-    app: {{ .Release.Name }}-{{ .Chart.Name }}-producer
+    app: speech-event-producer
     env: helm

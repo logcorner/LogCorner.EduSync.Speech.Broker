@@ -1,25 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}-{{ .Chart.Name }}-deployment
+  name: event-producer-deployment
   namespace: helm
   labels:
-    product: {{ .Release.Name }}-{{ .Chart.Name }}
+    version: 1.0.0
+    product: speech-event-producer
     environment: helm
+
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ .Release.Name }}-{{ .Chart.Name }}-producer
+      app: speech-event-producer
       env: helm
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}-{{ .Chart.Name }}-producer
+        app: speech-event-producer
         env: helm
     spec:
       containers:
-        - name: {{ .Release.Name }}-{{ .Chart.Name }}-producer
+        - name: event-producer
           image: logcornerhub/logcorner-edusync-speech-producer
           imagePullPolicy: Never
           ports:

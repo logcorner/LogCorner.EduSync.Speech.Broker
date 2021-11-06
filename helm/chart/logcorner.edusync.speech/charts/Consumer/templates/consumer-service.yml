@@ -1,10 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Release.Name }}-{{ .Chart.Name }}-service
+  name: event-consumer-service
   namespace: helm
   labels:
-    product: {{ .Release.Name }}-{{ .Chart.Name }}
+    version: 1.0.0
+    product: speech-event-consumer
     environment: helm
 spec:
   ports:
@@ -12,5 +13,5 @@ spec:
       targetPort: 80
       protocol: TCP
   selector:
-    app: {{ .Release.Name }}-{{ .Chart.Name }}-consumer
+    app: speech-event-consumer
     env: helm
