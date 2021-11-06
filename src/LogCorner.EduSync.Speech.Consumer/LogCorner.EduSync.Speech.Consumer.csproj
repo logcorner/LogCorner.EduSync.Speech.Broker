@@ -20,9 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="LogCorner.EduSync.SignalR.Common">
-      <HintPath>..\SharedKernel\LogCorner.EduSync.SignalR.Common.dll</HintPath>
-    </Reference>
     <Reference Include="LogCorner.EduSync.Speech.SharedKernel">
       <HintPath>..\SharedKernel\LogCorner.EduSync.Speech.SharedKernel.dll</HintPath>
     </Reference>

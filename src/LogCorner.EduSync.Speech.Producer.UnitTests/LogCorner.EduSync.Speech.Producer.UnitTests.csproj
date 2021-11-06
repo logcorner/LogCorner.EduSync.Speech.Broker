@@ -23,15 +23,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\LogCorner.EduSync.SignalR.Common\LogCorner.EduSync.SignalR.Common.csproj" />
-    <ProjectReference Include="..\LogCorner.EduSync.SignalR.Server\LogCorner.EduSync.SignalR.Server.csproj" />
     <ProjectReference Include="..\LogCorner.EduSync.Speech.Producer\LogCorner.EduSync.Speech.Producer.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="LogCorner.EduSync.SignalR.Common">
-      <HintPath>..\SharedKernel\LogCorner.EduSync.SignalR.Common.dll</HintPath>
-    </Reference>
     <Reference Include="LogCorner.EduSync.Speech.SharedKernel">
       <HintPath>..\SharedKernel\LogCorner.EduSync.Speech.SharedKernel.dll</HintPath>
     </Reference>
