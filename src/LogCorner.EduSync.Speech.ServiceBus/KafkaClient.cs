@@ -1,10 +1,10 @@
 ﻿using Confluent.Kafka;
 using LogCorner.EduSync.Speech.ServiceBus.Mediator;
-using LogCorner.EduSync.Speech.SharedKernel.Events;
-using LogCorner.EduSync.Speech.SharedKernel.Serialyser;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using LogCorner.EduSync.Speech.Command.SharedKernel.Events;
+using LogCorner.EduSync.Speech.Command.SharedKernel.Serialyser;
 
 namespace LogCorner.EduSync.Speech.ServiceBus
 {

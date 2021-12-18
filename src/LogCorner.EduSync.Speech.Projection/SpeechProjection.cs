@@ -1,5 +1,5 @@
-﻿using LogCorner.EduSync.Speech.SharedKernel.Events;
-using System;
+﻿using System;
+using LogCorner.EduSync.Speech.Command.SharedKernel.Events;
 
 namespace LogCorner.EduSync.Speech.Projection
 {

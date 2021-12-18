@@ -1,8 +1,8 @@
-﻿using LogCorner.EduSync.SignalR.Common;
-using LogCorner.EduSync.Speech.ServiceBus;
-using LogCorner.EduSync.Speech.SharedKernel.Events;
+﻿using LogCorner.EduSync.Speech.ServiceBus;
 using System;
 using System.Threading.Tasks;
+using LogCorner.EduSync.Notification.Common;
+using LogCorner.EduSync.Speech.Command.SharedKernel.Events;
 
 namespace LogCorner.EduSync.Speech.Producer
 {

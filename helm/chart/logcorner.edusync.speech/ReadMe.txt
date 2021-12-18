@@ -1,3 +1,4 @@
+helm repo add stable https://charts.helm.sh/stable
 helm install service-bus-infrastructure logcorner.edusync.speech
 
 helm get manifest logcorner-edusync-speech

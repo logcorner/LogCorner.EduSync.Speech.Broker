@@ -1,6 +1,6 @@
-using LogCorner.EduSync.Speech.SharedKernel.Events;
 using System;
 using System.Collections.Generic;
+using LogCorner.EduSync.Speech.Command.SharedKernel.Events;
 using Xunit;
 
 namespace LogCorner.EduSync.Speech.Projection.UnitTests
