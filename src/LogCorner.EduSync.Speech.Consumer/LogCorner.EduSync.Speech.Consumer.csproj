@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+   
     <ProjectReference Include="..\LogCorner.EduSync.Speech.ServiceBus\LogCorner.EduSync.Speech.ServiceBus.csproj" />
   </ItemGroup>
 

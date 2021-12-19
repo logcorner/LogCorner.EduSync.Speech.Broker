@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Confluent.Kafka" Version="1.8.1" />
-    <PackageReference Include="LogCorner.EduSync.Notification.Common" Version="1.0.7" />
+    <PackageReference Include="LogCorner.EduSync.Notification.Common" Version="1.0.8" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
     <PackageReference Include="Moq" Version="4.16.1" />
     <PackageReference Include="xunit" Version="2.4.1" />
