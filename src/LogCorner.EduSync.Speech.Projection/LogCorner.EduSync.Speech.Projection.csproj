@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="LogCorner.EduSync.Speech.Command.SharedKernel" Version="1.0.8" />
+    <PackageReference Include="LogCorner.EduSync.Speech.Command.SharedKernel" Version="1.0.10" />
   </ItemGroup>
 
 
