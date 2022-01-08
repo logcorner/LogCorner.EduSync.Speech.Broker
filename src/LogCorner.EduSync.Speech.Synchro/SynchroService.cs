@@ -1,11 +1,11 @@
 ﻿using LogCorner.EduSync.Speech.ServiceBus;
-using LogCorner.EduSync.Speech.SharedKernel.Events;
 using LogCorner.EduSync.Speech.Synchro.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LogCorner.EduSync.Speech.Command.SharedKernel.Events;
 
 namespace LogCorner.EduSync.Speech.Synchro
 {

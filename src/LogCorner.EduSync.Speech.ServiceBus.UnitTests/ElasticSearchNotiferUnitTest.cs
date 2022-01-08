@@ -1,14 +1,17 @@
-using LogCorner.EduSync.SignalR.Common;
+using LogCorner.EduSync.Notification.Common.Hub;
+using LogCorner.EduSync.Speech.Command.SharedKernel.Events;
+using LogCorner.EduSync.Speech.Command.SharedKernel.Serialyser;
 using LogCorner.EduSync.Speech.ElasticSearch;
 using LogCorner.EduSync.Speech.Projection;
 using LogCorner.EduSync.Speech.ServiceBus.Mediator;
-using LogCorner.EduSync.Speech.SharedKernel.Events;
-using LogCorner.EduSync.Speech.SharedKernel.Serialyser;
 using MediatR;
 using Moq;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using LogCorner.EduSync.Notification.Common;
+using LogCorner.EduSync.Speech.Command.SharedKernel.Events;
+using LogCorner.EduSync.Speech.Command.SharedKernel.Serialyser;
 using Xunit;
 
 namespace LogCorner.EduSync.Speech.ServiceBus.UnitTests

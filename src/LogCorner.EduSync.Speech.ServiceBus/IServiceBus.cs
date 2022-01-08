@@ -1,4 +1,4 @@
-﻿using LogCorner.EduSync.Speech.SharedKernel.Events;
+﻿using LogCorner.EduSync.Speech.Command.SharedKernel.Events;
 using System.Threading;
 using System.Threading.Tasks;
 

@@ -1,7 +1,7 @@
 ﻿using Confluent.Kafka;
+using LogCorner.EduSync.Speech.Command.SharedKernel.Events;
+using LogCorner.EduSync.Speech.Command.SharedKernel.Serialyser;
 using LogCorner.EduSync.Speech.ServiceBus.Mediator;
-using LogCorner.EduSync.Speech.SharedKernel.Events;
-using LogCorner.EduSync.Speech.SharedKernel.Serialyser;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -49,28 +49,64 @@ namespace LogCorner.EduSync.Speech.ServiceBus
 
         public async Task ReceiveAsync(string[] topics, CancellationToken stoppingToken, bool forever = true)
         {
-            _consumer.Subscribe(topics);
-            foreach (var topic in topics)
-            {
-                Console.WriteLine($"**KafkaClient::ReceiveAsync - consuming on topic {topic}");
-            }
+            /* _consumer.Subscribe(topics);
+             foreach (var topic in topics)
+             {
+                 Console.WriteLine($"**KafkaClient::ReceiveAsync - consuming on topic {topic}");
+             }
 
-            do
+             do
+             {
+                 if (stoppingToken.IsCancellationRequested)
+                 {
+                     forever = false;
+                 }
+
+                 var data = _consumer.Consume();
+                 Console.WriteLine($"**KafkaClient::ReceiveAsync - key : {data.Message.Key}");
+
+                 Console.WriteLine($"**KafkaClient::ReceiveAsync - partition : {data.Partition.Value}");
+                 Console.WriteLine($"**KafkaClient::ReceiveAsync - offset : {data.Offset.Value}");
+                 var message = new NotificationMessage<string> { Message = data.Message.Value };
+                 Console.WriteLine($"**KafkaClient::ReceiveAsync - message : {message.Message}");
+                 await _notifierMediatorService.Notify(message);
+             } while (forever);*/
+
+            try
             {
-                if (stoppingToken.IsCancellationRequested)
+                _consumer.Subscribe(topics);
+                Console.WriteLine($"**KafkaClient::ReceiveAsync - consuming on topic {string.Join(' ', topics)}");
+                while (true)
                 {
-                    forever = false;
+                    var data = _consumer.Consume();
+
+                    if (data?.Message?.Value == null)
+                    {
+                        continue;
+                    }
+
+                    Console.WriteLine($"**KafkaClient::ReceiveAsync - key : {data.Message.Key}");
+
+                    Console.WriteLine($"**KafkaClient::ReceiveAsync - partition : {data.Partition.Value}");
+                    Console.WriteLine($"**KafkaClient::ReceiveAsync - offset : {data.Offset.Value}");
+                    var message = new NotificationMessage<string> { Message = data.Message.Value };
+                    Console.WriteLine($"**KafkaClient::ReceiveAsync - message : {message.Message}");
+                    await _notifierMediatorService.Notify(message);
+
+                    _consumer.Commit(data);
+                    _consumer.StoreOffset(data);
+                    Thread.Sleep(TimeSpan.FromSeconds(5));
                 }
-
-                var data = _consumer.Consume();
-                Console.WriteLine($"**KafkaClient::ReceiveAsync - key : {data.Message.Key}");
-
-                Console.WriteLine($"**KafkaClient::ReceiveAsync - partition : {data.Partition.Value}");
-                Console.WriteLine($"**KafkaClient::ReceiveAsync - offset : {data.Offset.Value}");
-                var message = new NotificationMessage<string> { Message = data.Message.Value };
-                Console.WriteLine($"**KafkaClient::ReceiveAsync - message : {message.Message}");
-                await _notifierMediatorService.Notify(message);
-            } while (forever);
+            }
+            catch (KafkaException e)
+            {
+                Console.WriteLine($"Consume error: {e.Message}");
+                Console.WriteLine("Exiting producer...");
+            }
+            finally
+            {
+                _consumer.Close();
+            }
         }
     }
 }

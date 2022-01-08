@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-{{ .Chart.Name }}-elk-cluster-settings
+  namespace: helm
+  labels:
+    version: 1.0.0
+    product: {{ .Release.Name }}-{{ .Chart.Name }}-elk-cluster-configMap
+    environment: helm
+data:
+  cluster.name: "elk"
+  network.host: "0.0.0.0"
+  discovery.seed_hosts: "elasticsearch"
+  cluster.initial_master_nodes: "elk-cluster-0,elk-cluster-1,elk-cluster-2"
+  ES_JAVA_OPTS: "-Xms512m -Xmx512m"

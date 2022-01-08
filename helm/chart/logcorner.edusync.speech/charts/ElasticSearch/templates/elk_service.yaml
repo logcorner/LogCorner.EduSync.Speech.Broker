@@ -1,0 +1,19 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: elasticsearch
+  namespace: helm
+  labels:
+    version: 1.0.0
+    product: elasticsearch
+    environment: helm
+spec:
+  selector:
+    app: elasticsearch-node
+    env: helm
+  clusterIP: None
+  ports:
+    - port: 9200
+      name: client-node
+    - port: 9300
+      name: inter-node
