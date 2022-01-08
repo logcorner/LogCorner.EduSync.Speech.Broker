@@ -1,11 +1,11 @@
 ﻿using Confluent.Kafka;
+using LogCorner.EduSync.Speech.Command.SharedKernel.Serialyser;
 using LogCorner.EduSync.Speech.ServiceBus.Mediator;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Net;
 using System.Reflection;
-using LogCorner.EduSync.Speech.Command.SharedKernel.Serialyser;
 
 namespace LogCorner.EduSync.Speech.ServiceBus
 {

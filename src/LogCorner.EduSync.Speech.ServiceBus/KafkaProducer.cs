@@ -1,8 +1,8 @@
 ﻿using Confluent.Kafka;
-using System;
-using System.Threading.Tasks;
 using LogCorner.EduSync.Speech.Command.SharedKernel.Events;
 using LogCorner.EduSync.Speech.Command.SharedKernel.Serialyser;
+using System;
+using System.Threading.Tasks;
 
 namespace LogCorner.EduSync.Speech.ServiceBus
 {

@@ -1,3 +1,5 @@
+using LogCorner.EduSync.Notification.Common;
+using LogCorner.EduSync.Speech.Command.SharedKernel;
 using LogCorner.EduSync.Speech.ElasticSearch;
 using LogCorner.EduSync.Speech.Projection;
 using LogCorner.EduSync.Speech.ServiceBus;
@@ -6,8 +8,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.IO;
-using LogCorner.EduSync.Notification.Common;
-using LogCorner.EduSync.Speech.Command.SharedKernel;
 
 namespace LogCorner.EduSync.Speech.Consumer
 {
