@@ -32,16 +32,15 @@ namespace LogCorner.EduSync.Speech.Consumer
             _configuration = builder.Build();
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
+        private static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureServices((hostContext, services) =>
+                .ConfigureServices((_, services) =>
                 {
                     var kafkaUrl = _configuration["kafkaUrl"];
                     var hubUrl = _configuration["hubUrl"];
                     var elasticSearchUrl = _configuration["elasticSearchUrl"];
                     services.AddSingleton<IClusterManager, KafkaClusterManager>(
-                        ctx => new KafkaClusterManager(_configuration)
-                        );
+                        _ => new KafkaClusterManager(_configuration));
                     services.AddServiceBus(kafkaUrl);
                     services.AddSingleton<IConsumerService, ConsumerService>();
                     services.AddHostedService<ConsumerHostedService>();

@@ -2,7 +2,7 @@ version: '3.4'
 #KAFKA 
 services:
   zookeeper:
-    image: wurstmeister/zookeeper
+    image: wurstmeister/zookeeper:3.4.6
     container_name: zookeeper
     hostname: zookeeper
     ports:
@@ -10,12 +10,18 @@ services:
     networks:
       - speech_network
   kafka:
-    image: wurstmeister/kafka
+    image: wurstmeister/kafka:2.13-2.8.1
     container_name: kafka
     hostname: kafka
     ports:
       - "9092:9092"
       - "9094:9094"
+    healthcheck:
+      test:
+        ["CMD", "kafka-topics.sh", "--list", "--zookeeper", "zookeeper:2181"]
+      interval: 30s
+      timeout: 10s
+      retries: 4
     links: 
      - zookeeper
     networks:
@@ -54,6 +60,7 @@ services:
     build:
       context: .
       dockerfile: LogCorner.EduSync.Speech.Producer/Dockerfile
+    restart: on-failure
     networks:
       - speech_network
     depends_on:
@@ -64,35 +71,13 @@ services:
     build:
       context: .
       dockerfile: LogCorner.EduSync.Speech.Consumer/Dockerfile
+    restart: on-failure
     networks:
       - speech_network
     depends_on:
       - kafka
       - elasticsearch
-#TELEMETRY
-  zipkin:
-    image: openzipkin/zipkin:latest
-    container_name: zipkin
-    restart: on-failure
-    ports:
-      - 9412:9411
-    networks:
-      - speech_network
-
-  jaeger:
-    image: jaegertracing/all-in-one
-    container_name: jaeger
-    restart: on-failure
-    ports:
-      - 5775:5775/udp
-      - 5778:5778
-      - 6831:6831/udp
-      - 6832:6832/udp
-      - 9411:9411
-      - 14268:14268
-      - 16686:16686
-    networks:
-      - speech_network
+      - logcorner.edusync.speech.producer
 
 
 volumes:
