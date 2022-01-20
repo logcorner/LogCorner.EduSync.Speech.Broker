@@ -1,11 +1,13 @@
+using LogCorner.EduSync.Notification.Common;
+using LogCorner.EduSync.Speech.Command.SharedKernel;
 using LogCorner.EduSync.Speech.ServiceBus;
+using LogCorner.EduSync.Speech.Telemetry.Configuration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using System;
 using System.IO;
-using LogCorner.EduSync.Notification.Common;
-using LogCorner.EduSync.Speech.Command.SharedKernel;
 
 namespace LogCorner.EduSync.Speech.Producer
 {
@@ -40,8 +42,15 @@ namespace LogCorner.EduSync.Speech.Producer
                     services.AddHostedService<ProducerHostedService>();
                     services.AddSignalRServices($"{hubUrl}?clientName=LogCorner.EduSync.Speech.Producer", _configuration);
                     services.AddSharedKernel();
-
+                    services.AddOpenTelemetry(_configuration);
                     services.AddServiceBus(kafkaUrl);
+                })
+                .ConfigureLogging((_, loggingBuilder) =>
+                {
+                    loggingBuilder.ClearProviders();
+                    loggingBuilder.AddConsole();
+                    loggingBuilder.AddSerilog(_configuration);
+                    loggingBuilder.AddOpenTelemetry(_configuration);
                 });
     }
 }

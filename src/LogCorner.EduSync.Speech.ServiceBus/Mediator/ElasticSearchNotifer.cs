@@ -1,12 +1,12 @@
-﻿using LogCorner.EduSync.Speech.ElasticSearch;
+﻿using LogCorner.EduSync.Notification.Common;
+using LogCorner.EduSync.Speech.Command.SharedKernel.Events;
+using LogCorner.EduSync.Speech.Command.SharedKernel.Serialyser;
+using LogCorner.EduSync.Speech.ElasticSearch;
 using LogCorner.EduSync.Speech.Projection;
 using MediatR;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using LogCorner.EduSync.Notification.Common;
-using LogCorner.EduSync.Speech.Command.SharedKernel.Events;
-using LogCorner.EduSync.Speech.Command.SharedKernel.Serialyser;
 
 namespace LogCorner.EduSync.Speech.ServiceBus.Mediator
 {

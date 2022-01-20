@@ -1,7 +1,7 @@
+using LogCorner.EduSync.Speech.Command.SharedKernel.Events;
 using Moq;
 using System.Threading;
 using System.Threading.Tasks;
-using LogCorner.EduSync.Speech.Command.SharedKernel.Events;
 using Xunit;
 
 namespace LogCorner.EduSync.Speech.ServiceBus.UnitTests

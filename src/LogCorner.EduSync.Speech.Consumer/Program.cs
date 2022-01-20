@@ -1,13 +1,15 @@
+using LogCorner.EduSync.Notification.Common;
+using LogCorner.EduSync.Speech.Command.SharedKernel;
 using LogCorner.EduSync.Speech.ElasticSearch;
 using LogCorner.EduSync.Speech.Projection;
 using LogCorner.EduSync.Speech.ServiceBus;
+using LogCorner.EduSync.Speech.Telemetry.Configuration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using System;
 using System.IO;
-using LogCorner.EduSync.Notification.Common;
-using LogCorner.EduSync.Speech.Command.SharedKernel;
 
 namespace LogCorner.EduSync.Speech.Consumer
 {
@@ -47,8 +49,33 @@ namespace LogCorner.EduSync.Speech.Consumer
                     services.AddHostedService<ConsumerHostedService>();
                     services.AddSignalRServices($"{hubUrl}?clientName=LogCorner.EduSync.Speech.Consumer", _configuration);
                     services.AddSharedKernel();
+                    services.AddOpenTelemetry(_configuration);
 
+                    //
+                    //services.AddScoped<ITraceService, TraceService>();
+                    //services.AddOpenTelemetryTracing((builder) =>
+                    //{
+                    //    builder.AddAspNetCoreInstrumentation()
+                    //        .AddHttpClientInstrumentation()
+                    //        .AddSource("LogCorner.EduSync.Speech.Consumer.Program")
+                    //        .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService("consumer-service"))
+                    //        .AddJaegerExporter(opts =>
+                    //        {
+                    //            opts.AgentHost = "localhost";
+                    //            opts.AgentPort = 6831;
+                    //            opts.ExportProcessorType = ExportProcessorType.Simple;
+                    //        });
+                    //});
+
+                    //
                     services.AddElasticSearch<SpeechProjection>(elasticSearchUrl, "speech");
+                })
+                .ConfigureLogging((context, loggingBuilder) =>
+                {
+                    loggingBuilder.ClearProviders();
+                    loggingBuilder.AddConsole();
+                    loggingBuilder.AddSerilog(_configuration);
+                    loggingBuilder.AddOpenTelemetry(_configuration);
                 });
     }
 }

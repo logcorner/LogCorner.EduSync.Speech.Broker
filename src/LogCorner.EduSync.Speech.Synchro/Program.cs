@@ -1,4 +1,6 @@
 using Confluent.Kafka;
+using LogCorner.EduSync.Speech.Command.SharedKernel;
+using LogCorner.EduSync.Speech.Command.SharedKernel.Serialyser;
 using LogCorner.EduSync.Speech.ServiceBus;
 using LogCorner.EduSync.Speech.Synchro.Models;
 using Microsoft.EntityFrameworkCore;
@@ -7,8 +9,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.IO;
-using LogCorner.EduSync.Speech.Command.SharedKernel;
-using LogCorner.EduSync.Speech.Command.SharedKernel.Serialyser;
 
 namespace LogCorner.EduSync.Speech.Synchro
 {

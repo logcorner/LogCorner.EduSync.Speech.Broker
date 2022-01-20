@@ -1,11 +1,12 @@
 ﻿using Confluent.Kafka;
+using LogCorner.EduSync.Speech.Command.SharedKernel.Serialyser;
 using LogCorner.EduSync.Speech.ServiceBus.Mediator;
+using LogCorner.EduSync.Speech.Telemetry;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Net;
 using System.Reflection;
-using LogCorner.EduSync.Speech.Command.SharedKernel.Serialyser;
 
 namespace LogCorner.EduSync.Speech.ServiceBus
 {
@@ -68,7 +69,8 @@ namespace LogCorner.EduSync.Speech.ServiceBus
                     return new KafkaClient(producer,
                         x.GetRequiredService<IJsonSerializer>(),
                         consumer,
-                        x.GetRequiredService<INotifierMediatorService>()
+                        x.GetRequiredService<INotifierMediatorService>(),
+                        x.GetRequiredService<ITraceService>()
                     );
                 }
             );
