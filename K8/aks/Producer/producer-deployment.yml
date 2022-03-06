@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: event-producer-deployment
+  #namespace: qa
+  labels:
+    version: 1.0.0
+    product: speech-event-producer
+    environment: qa
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: speech-event-producer
+      env: qa
+  template:
+    metadata:
+      labels:
+        app: speech-event-producer
+        env: qa
+    spec:
+      containers:
+        - name: event-producer
+          image: logcornerhub/logcorner-edusync-speech-producer
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: "Kubernetes.aks"
+            
