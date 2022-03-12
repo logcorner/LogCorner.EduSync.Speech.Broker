@@ -8,6 +8,10 @@
     },
     "Docker": {
       "commandName": "Docker"
+    },
+    "Bridge to Kubernetes": {
+      "commandName": "AzureDevSpacesLocal",
+      "launchBrowser": true
     }
   }
 }

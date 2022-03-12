@@ -8,7 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="LogCorner.EduSync.Speech.Command.SharedKernel" Version="1.0.11" />
+    <Reference Include="LogCorner.EduSync.Notification.Common">
+      <HintPath>..\BINARIES\LogCorner.EduSync.Notification.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="LogCorner.EduSync.Speech.Command.SharedKernel">
+      <HintPath>..\BINARIES\LogCorner.EduSync.Speech.Command.SharedKernel.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 

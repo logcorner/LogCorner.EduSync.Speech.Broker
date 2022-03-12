@@ -21,5 +21,14 @@
     <ProjectReference Include="..\LogCorner.EduSync.Speech.ServiceBus\LogCorner.EduSync.Speech.ServiceBus.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="LogCorner.EduSync.Notification.Common">
+      <HintPath>..\BINARIES\LogCorner.EduSync.Notification.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="LogCorner.EduSync.Speech.Command.SharedKernel">
+      <HintPath>..\BINARIES\LogCorner.EduSync.Speech.Command.SharedKernel.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
   
 </Project>

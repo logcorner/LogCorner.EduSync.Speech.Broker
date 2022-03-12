@@ -43,7 +43,7 @@ kafka-console-consumer --bootstrap-server 127.0.0.1:9092  --topic first_topic  -
 
 delete speechindex
 
-GET speechindex/_search
+GET speech/_search
 {
   "query": {
     "match_all": {}
