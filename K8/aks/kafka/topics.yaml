@@ -2,7 +2,7 @@ apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaTopic
 metadata:
   name: speech
-  namespace: kafka 
+  namespace: aks 
   labels:
     strimzi.io/cluster: logconer-cluster
 spec:
@@ -17,7 +17,7 @@ apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaTopic
 metadata:
   name: synchro
-  namespace: kafka 
+  namespace: aks 
   labels:
     strimzi.io/cluster: logconer-cluster
 spec:
