@@ -1,16 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <AssemblyVersion>1.1.0.0</AssemblyVersion>
     <FileVersion>1.1.0.0</FileVersion>
     <Version>1.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <Reference Include="LogCorner.EduSync.Notification.Common">
-      <HintPath>..\BINARIES\LogCorner.EduSync.Notification.Common.dll</HintPath>
-    </Reference>
     <Reference Include="LogCorner.EduSync.Speech.Command.SharedKernel">
       <HintPath>..\BINARIES\LogCorner.EduSync.Speech.Command.SharedKernel.dll</HintPath>
     </Reference>

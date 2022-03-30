@@ -37,11 +37,11 @@ namespace LogCorner.EduSync.Speech.Producer
 
             _notifier.ReceivedOnPublishToTopic += (topic, @event) =>
            {
-               Console.WriteLine($"**ProducerService::DoWorkAsync - topic : {topic},@event : {@event} ");
+               Console.WriteLine($@"**ProducerService::DoWorkAsync - topic : {topic},@event : {@event} ");
                if (@event is EventStore output)
                {
                    Console.WriteLine(
-                       $"**ProducerService::DoWorkAsync - topic : {Topics.Speech},output : {output} ");
+                       $@"**ProducerService::DoWorkAsync - topic : {Topics.Speech},output : {output} ");
 
                    _serviceBus.SendAsync(Topics.Speech, output);
                }
