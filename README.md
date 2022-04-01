@@ -43,7 +43,7 @@ kafka-console-consumer --bootstrap-server 127.0.0.1:9092  --topic first_topic  -
 
 delete speechindex
 
-GET speechindex/_search
+GET speech/_search
 {
   "query": {
     "match_all": {}
@@ -56,10 +56,6 @@ bin/kibana
 http://localhost:5601
 
 http://localhost:5601/app/dev_tools#/console
-
-
-
-{"title":"this is the title","description":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.","url":"http://test.com","typeId":1}
 
 
 SAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAV =>  https://dev.azure.com/logcorner-workshop/_git/EventSourcingCQRS-mongo-event-store

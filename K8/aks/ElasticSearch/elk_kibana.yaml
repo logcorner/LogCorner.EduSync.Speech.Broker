@@ -39,7 +39,7 @@ spec:
   selector:
      app: kibana
      env: qa
-  type: LoadBalancer
+  type: NodePort
   ports:
     - nodePort: 30001
       port: 5601
