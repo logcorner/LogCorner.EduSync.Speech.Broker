@@ -1,16 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Confluent.Kafka" Version="1.8.1" />
-    <PackageReference Include="LogCorner.EduSync.Notification.Common" Version="1.0.13" />
-    <PackageReference Include="MediatR" Version="9.0.0" />
-    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client.Core" Version="5.0.11" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.0-rc.1.21451.13" />
+    <PackageReference Include="Confluent.Kafka" Version="1.8.2" />
+    <PackageReference Include="MediatR" Version="10.0.1" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client.Core" Version="6.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
     <PackageReference Include="NEST" Version="7.11.1" />
@@ -19,6 +18,15 @@
   <ItemGroup>
     <ProjectReference Include="..\LogCorner.EduSync.Speech.ElasticSearch\LogCorner.EduSync.Speech.ElasticSearch.csproj" />
     <ProjectReference Include="..\LogCorner.EduSync.Speech.Projection\LogCorner.EduSync.Speech.Projection.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="LogCorner.EduSync.Notification.Common">
+      <HintPath>..\BINARIES\LogCorner.EduSync.Notification.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="LogCorner.EduSync.Speech.Command.SharedKernel">
+      <HintPath>..\BINARIES\LogCorner.EduSync.Speech.Command.SharedKernel.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 

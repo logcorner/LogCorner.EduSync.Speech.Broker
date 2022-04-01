@@ -2,9 +2,9 @@ apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaTopic
 metadata:
   name: speech
-  namespace: aks 
+  #namespace: aks 
   labels:
-    strimzi.io/cluster: logconer-cluster
+    strimzi.io/cluster: logcorner-cluster
 spec:
   partitions: 1
   replicas: 1
@@ -17,9 +17,9 @@ apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaTopic
 metadata:
   name: synchro
-  namespace: aks 
+  #namespace: aks 
   labels:
-    strimzi.io/cluster: logconer-cluster
+    strimzi.io/cluster: logcorner-cluster
 spec:
   partitions: 1
   replicas: 1

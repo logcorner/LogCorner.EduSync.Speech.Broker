@@ -1,9 +1,13 @@
-# kubectl create -f 'https://strimzi.io/install/latest?namespace=kafka' -n kafka
+# https://strimzi.io/quickstarts/
+# kubectl create -f 'https://strimzi.io/install/latest?namespace=default' -n default
+# kubectl wait kafka/logcorner-cluster --for=condition=Ready
+# kubectl -n default run kafka-producer -ti --image=quay.io/strimzi/kafka:0.28.0-kafka-3.1.0 --rm=true --restart=Never -- bin/kafka-console-producer.sh --broker-list logcorner-cluster-kafka-bootstrap:9092 --topic my-topic
+# kubectl -n default run kafka-consumer -ti --image=quay.io/strimzi/kafka:0.28.0-kafka-3.1.0 --rm=true --restart=Never -- bin/kafka-console-consumer.sh --bootstrap-server logcorner-cluster-kafka-bootstrap:9092 --topic my-topic --from-beginning
 apiVersion: kafka.strimzi.io/v1beta2
 kind: Kafka
 metadata:
-  name: logconer-cluster
-  namespace: aks 
+  name: logcorner-cluster
+  #namespace: aks 
 spec:
   kafka:
     version: 3.0.0
