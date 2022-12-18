@@ -25,6 +25,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogCorner.EduSync.Speech.Co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogCorner.EduSync.Speech.ElasticSearch.UnitTests", "LogCorner.EduSync.Speech.ElasticSearch.UnitTests\LogCorner.EduSync.Speech.ElasticSearch.UnitTests.csproj", "{9792DE90-207C-4032-B8A5-3B2087243639}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogCorner.EduSync.Speech.Producer.UnitTests", "LogCorner.EduSync.Speech.Producer.UnitTests\LogCorner.EduSync.Speech.Producer.UnitTests.csproj", "{0624017C-3475-4D62-AB6D-D1C6C17B9F18}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,10 @@ Global
 		{9792DE90-207C-4032-B8A5-3B2087243639}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9792DE90-207C-4032-B8A5-3B2087243639}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9792DE90-207C-4032-B8A5-3B2087243639}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0624017C-3475-4D62-AB6D-D1C6C17B9F18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0624017C-3475-4D62-AB6D-D1C6C17B9F18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0624017C-3475-4D62-AB6D-D1C6C17B9F18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0624017C-3475-4D62-AB6D-D1C6C17B9F18}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
