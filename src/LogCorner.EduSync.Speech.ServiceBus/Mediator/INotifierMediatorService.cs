@@ -1,9 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿namespace LogCorner.EduSync.Speech.ServiceBus.Mediator;
 
-namespace LogCorner.EduSync.Speech.ServiceBus.Mediator
+public interface INotifierMediatorService
 {
-    public interface INotifierMediatorService
-    {
-        Task Notify<T>(NotificationMessage<T> notifyText);
-    }
+    Task Notify<T>(NotificationMessage<T> notifyText);
 }

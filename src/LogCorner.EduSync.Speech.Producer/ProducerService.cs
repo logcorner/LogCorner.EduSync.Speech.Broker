@@ -1,51 +1,25 @@
-﻿using LogCorner.EduSync.Notification.Common.Hub;
-using LogCorner.EduSync.Speech.Command.SharedKernel.Events;
-using LogCorner.EduSync.Speech.ServiceBus;
-using System;
-using System.Threading.Tasks;
+﻿using LogCorner.EduSync.Speech.ServiceBus;
+using Microsoft.Extensions.Logging;
 
 namespace LogCorner.EduSync.Speech.Producer
 {
     public class ProducerService : IProducerService
     {
-        private readonly ISignalRNotifier _notifier;
-        private readonly ISignalRPublisher _publisher;
-        private readonly IServiceBus _serviceBus;
+        private readonly IServiceBusProducer _serviceBus;
 
-        public ProducerService(ISignalRNotifier notifier, ISignalRPublisher publisher, IServiceBus serviceBus)
+        private readonly ILogger<ProducerService> _logger;
+
+        public ProducerService(IServiceBusProducer serviceBus, ILogger<ProducerService> logger)
         {
-            _notifier = notifier;
-            _publisher = publisher;
             _serviceBus = serviceBus;
+            _logger = logger;
         }
 
-        public async Task StartAsync()
+        public async Task ProduceAsync(string topic, string @event)
         {
-            await _notifier.StartAsync();
-        }
+            _logger.LogInformation($@"**ProducerService::DoWorkAsync - topic : {topic},@event : {@event} ");
 
-        public async Task StopAsync()
-        {
-            await _notifier.StopAsync();
-        }
-
-        public async Task DoWorkAsync()
-        {
-            await _publisher.SubscribeAsync(Topics.Speech);
-
-            await _notifier.OnPublish(Topics.Speech);
-
-            _notifier.ReceivedOnPublishToTopic += (topic, @event) =>
-           {
-               Console.WriteLine($"**ProducerService::DoWorkAsync - topic : {topic},@event : {@event} ");
-               if (@event is EventStore output)
-               {
-                   Console.WriteLine(
-                       $"**ProducerService::DoWorkAsync - topic : {Topics.Speech},output : {output} ");
-
-                   _serviceBus.SendAsync(Topics.Speech, output);
-               }
-           };
+            await _serviceBus.SendAsync(topic, @event);
         }
     }
 }

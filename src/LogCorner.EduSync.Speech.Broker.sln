@@ -1,0 +1,73 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32519.379
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogCorner.EduSync.Speech.Consumer", "LogCorner.EduSync.Speech.Consumer\LogCorner.EduSync.Speech.Consumer.csproj", "{BB20BFBB-1D75-4BD8-90FB-6A800C33283B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogCorner.EduSync.Speech.Producer", "LogCorner.EduSync.Speech.Producer\LogCorner.EduSync.Speech.Producer.csproj", "{310E7DF0-EB07-45FD-BC4B-C8CFE4CB999F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogCorner.EduSync.Speech.Projection", "LogCorner.EduSync.Speech.Projection\LogCorner.EduSync.Speech.Projection.csproj", "{1B9CABDD-7C21-41CE-995C-16A0A2997976}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogCorner.EduSync.Speech.Projection.UnitTests", "LogCorner.EduSync.Speech.Projection.UnitTests\LogCorner.EduSync.Speech.Projection.UnitTests.csproj", "{050B7108-71D6-42D7-BF2D-0FC5B485A657}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogCorner.EduSync.Speech.ServiceBus", "LogCorner.EduSync.Speech.ServiceBus\LogCorner.EduSync.Speech.ServiceBus.csproj", "{EC349F90-CDF5-4B2F-B70F-8E8B7CC05A93}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogCorner.EduSync.Speech.Resiliency", "LogCorner.EduSync.Speech.Resiliency\LogCorner.EduSync.Speech.Resiliency.csproj", "{8091D79C-F3FE-438E-A4B3-6AC1BB632631}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogCorner.EduSync.Speech.Telemetry", "LogCorner.EduSync.Speech.Telemetry\LogCorner.EduSync.Speech.Telemetry.csproj", "{22C05574-AC03-40D1-ABB5-9CF3B9F9B215}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogCorner.EduSync.Speech.Projection.WorkerService", "LogCorner.EduSync.Speech.Projection.WorkerService\LogCorner.EduSync.Speech.Projection.WorkerService.csproj", "{2E7E6B7D-DF28-4112-BBE2-8A887668A6C9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogCorner.EduSync.Speech.ElasticSearch", "LogCorner.EduSync.Speech.ElasticSearch\LogCorner.EduSync.Speech.ElasticSearch.csproj", "{3541CA40-ABE5-46E3-90CE-35E11A743010}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BB20BFBB-1D75-4BD8-90FB-6A800C33283B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB20BFBB-1D75-4BD8-90FB-6A800C33283B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB20BFBB-1D75-4BD8-90FB-6A800C33283B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB20BFBB-1D75-4BD8-90FB-6A800C33283B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{310E7DF0-EB07-45FD-BC4B-C8CFE4CB999F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{310E7DF0-EB07-45FD-BC4B-C8CFE4CB999F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{310E7DF0-EB07-45FD-BC4B-C8CFE4CB999F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{310E7DF0-EB07-45FD-BC4B-C8CFE4CB999F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B9CABDD-7C21-41CE-995C-16A0A2997976}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B9CABDD-7C21-41CE-995C-16A0A2997976}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B9CABDD-7C21-41CE-995C-16A0A2997976}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B9CABDD-7C21-41CE-995C-16A0A2997976}.Release|Any CPU.Build.0 = Release|Any CPU
+		{050B7108-71D6-42D7-BF2D-0FC5B485A657}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{050B7108-71D6-42D7-BF2D-0FC5B485A657}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{050B7108-71D6-42D7-BF2D-0FC5B485A657}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{050B7108-71D6-42D7-BF2D-0FC5B485A657}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC349F90-CDF5-4B2F-B70F-8E8B7CC05A93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC349F90-CDF5-4B2F-B70F-8E8B7CC05A93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC349F90-CDF5-4B2F-B70F-8E8B7CC05A93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC349F90-CDF5-4B2F-B70F-8E8B7CC05A93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8091D79C-F3FE-438E-A4B3-6AC1BB632631}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8091D79C-F3FE-438E-A4B3-6AC1BB632631}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8091D79C-F3FE-438E-A4B3-6AC1BB632631}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8091D79C-F3FE-438E-A4B3-6AC1BB632631}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22C05574-AC03-40D1-ABB5-9CF3B9F9B215}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22C05574-AC03-40D1-ABB5-9CF3B9F9B215}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22C05574-AC03-40D1-ABB5-9CF3B9F9B215}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22C05574-AC03-40D1-ABB5-9CF3B9F9B215}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E7E6B7D-DF28-4112-BBE2-8A887668A6C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E7E6B7D-DF28-4112-BBE2-8A887668A6C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E7E6B7D-DF28-4112-BBE2-8A887668A6C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E7E6B7D-DF28-4112-BBE2-8A887668A6C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3541CA40-ABE5-46E3-90CE-35E11A743010}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3541CA40-ABE5-46E3-90CE-35E11A743010}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3541CA40-ABE5-46E3-90CE-35E11A743010}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3541CA40-ABE5-46E3-90CE-35E11A743010}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {893CBEF3-C23E-4DE7-B7F2-2E61ACC22058}
+	EndGlobalSection
+EndGlobal

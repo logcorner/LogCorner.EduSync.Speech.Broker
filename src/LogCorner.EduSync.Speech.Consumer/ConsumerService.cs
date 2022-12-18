@@ -1,37 +1,27 @@
 ﻿using LogCorner.EduSync.Speech.ServiceBus;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 
-namespace LogCorner.EduSync.Speech.Consumer
+namespace LogCorner.EduSync.Speech.Consumer;
+
+public class ConsumerService : IConsumerService
 {
-    public class ConsumerService : IConsumerService
+    private readonly IServiceBusReceiver _serviceBus;
+    private readonly IKafkaClusterManager _clusterManager;
+
+    public ConsumerService(IServiceBusReceiver serviceBus, IKafkaClusterManager clusterManager)
     {
-        private readonly IServiceBus _serviceBus;
-        private readonly IClusterManager _clusterManager;
+        _serviceBus = serviceBus;
+        _clusterManager = clusterManager;
+    }
 
-        public ConsumerService(IServiceBus serviceBus, IClusterManager clusterManager)
+    public async Task DoWorkAsync(CancellationToken stoppingToken)
+    {
+        var topics = new[] { "speech", "synchro" };
+
+        foreach (var topic in topics)
         {
-            _serviceBus = serviceBus;
-            _clusterManager = clusterManager;
+            await _clusterManager.EnsureTopicExistAsync(topic);
         }
 
-        public async Task DoWorkAsync(CancellationToken stoppingToken)
-        {
-            var topics = new[] { Topics.Speech, Topics.Synchro };
-            try
-            {
-                foreach (var topic in topics)
-                {
-                    await _clusterManager.EnsureTopicExistAsync(topic);
-                }
-
-                await _serviceBus.ReceiveAsync(topics, stoppingToken);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"ConsumerService::DoWorkAsync:errorMessage - {ex.Message} ");
-            }
-        }
+        await _serviceBus.ReceiveAsync(topics, stoppingToken);
     }
 }

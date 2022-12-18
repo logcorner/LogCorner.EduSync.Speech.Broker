@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using LogCorner.EduSync.Speech.Command.SharedKernel;
 using LogCorner.EduSync.Speech.Command.SharedKernel.Events;
 using Xunit;
 
