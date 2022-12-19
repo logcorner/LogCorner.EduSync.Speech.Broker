@@ -7,11 +7,7 @@ namespace LogCorner.EduSync.Speech.Projection
     {
         public long Version { get; private set; }
 
-        protected Projection()
-        {
-        }
-
-        public void ApplyEvent(IDomainEvent @event)
+        private void ApplyEvent(IDomainEvent @event)
         {
             Version = @event.AggregateVersion;
             ((dynamic)this).Apply((dynamic)@event);

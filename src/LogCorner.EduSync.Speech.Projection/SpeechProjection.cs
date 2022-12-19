@@ -1,4 +1,5 @@
-﻿using LogCorner.EduSync.Speech.Command.SharedKernel.Events;
+﻿using LogCorner.EduSync.Speech.Command.SharedKernel;
+using LogCorner.EduSync.Speech.Command.SharedKernel.Events;
 using System;
 
 namespace LogCorner.EduSync.Speech.Projection
@@ -14,8 +15,7 @@ namespace LogCorner.EduSync.Speech.Projection
         public bool IsDeleted { get; private set; }
 
         private SpeechProjection()
-        {
-        }
+        { }
 
         public void Apply(SpeechCreatedEvent ev)
         {

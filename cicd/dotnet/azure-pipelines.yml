@@ -1,0 +1,46 @@
+
+resources:
+  repositories:
+  - repository: self
+    type: git
+    ref: develop
+jobs:
+- job: Job_1
+  displayName: Agent job 1
+  pool: 
+    name: LOGCORNER-POOL
+  steps:
+  - checkout: self
+  - task: DotNetCoreCLI@2
+    displayName: dotnet restore
+    inputs:
+      command: restore
+      projects: '**/*.csproj'
+  - task: DotNetCoreCLI@2
+    displayName: dotnet build
+    inputs:
+      projects: '**/*.csproj'
+  - task: DotNetCoreCLI@2
+    displayName: dotnet test
+    inputs:
+      command: test
+      projects: '**/*Unit[Tt]ests/*.csproj'
+  - task: DotNetCoreCLI@2
+    displayName: dotnet pack
+    inputs:
+      command: 'pack'
+      packagesToPack: '**/LogCorner.EduSync.Speech.Producer.csproj;**/LogCorner.EduSync.Speech.Resiliency.csproj;**/LogCorner.EduSync.Speech.Telemetry.csproj;**/LogCorner.EduSync.Speech.ServiceBus.csproj;**/LogCorner.EduSync.Speech.ElasticSearch.csproj;**/LogCorner.EduSync.Speech.Repository.csproj'
+      packDirectory: '$(Build.ArtifactStagingDirectory)/Nugets'
+      nobuild: true
+      versioningScheme: 'off'
+  
+  - task: NuGetCommand@2
+    displayName: NuGet push
+    inputs:
+      command: 'push'
+      packagesToPush: '$(Build.ArtifactStagingDirectory)/Nugets/*.nupkg'
+      nuGetFeedType: 'external'
+      publishFeedCredentials: 'nuget.org'
+      allowPackageConflicts: true
+    continueOnError: true
+...

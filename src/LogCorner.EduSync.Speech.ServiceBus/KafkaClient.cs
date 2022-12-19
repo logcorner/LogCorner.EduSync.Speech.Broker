@@ -49,29 +49,6 @@ namespace LogCorner.EduSync.Speech.ServiceBus
 
         public async Task ReceiveAsync(string[] topics, CancellationToken stoppingToken, bool forever = true)
         {
-            /* _consumer.Subscribe(topics);
-             foreach (var topic in topics)
-             {
-                 Console.WriteLine($"**KafkaClient::ReceiveAsync - consuming on topic {topic}");
-             }
-
-             do
-             {
-                 if (stoppingToken.IsCancellationRequested)
-                 {
-                     forever = false;
-                 }
-
-                 var data = _consumer.Consume();
-                 Console.WriteLine($"**KafkaClient::ReceiveAsync - key : {data.Message.Key}");
-
-                 Console.WriteLine($"**KafkaClient::ReceiveAsync - partition : {data.Partition.Value}");
-                 Console.WriteLine($"**KafkaClient::ReceiveAsync - offset : {data.Offset.Value}");
-                 var message = new NotificationMessage<string> { Message = data.Message.Value };
-                 Console.WriteLine($"**KafkaClient::ReceiveAsync - message : {message.Message}");
-                 await _notifierMediatorService.Notify(message);
-             } while (forever);*/
-
             try
             {
                 _consumer.Subscribe(topics);

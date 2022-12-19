@@ -1,51 +1,31 @@
 ﻿using Confluent.Kafka;
-using LogCorner.EduSync.Speech.Command.SharedKernel.Serialyser;
+using LogCorner.EduSync.Speech.Command.SharedKernel;
+using LogCorner.EduSync.Speech.Resiliency;
 using LogCorner.EduSync.Speech.ServiceBus.Mediator;
+using LogCorner.EduSync.Speech.Telemetry;
+using LogCorner.EduSync.Speech.Telemetry.Configuration;
 using MediatR;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Net;
+using Microsoft.Extensions.Logging;
 using System.Reflection;
 
 namespace LogCorner.EduSync.Speech.ServiceBus
 {
     public static class ServicesConfiguration
     {
-        public static void AddServiceBus(this IServiceCollection services, string bootstrapServer)
+        public static void AddServiceBus(this IServiceCollection services, string bootstrapServer, IConfiguration configuration)
         {
-            services.AddSingleton<IServiceBus, ServiceBus>();
-
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddTransient<INotifierMediatorService, NotifierMediatorService>();
+            services.AddSharedKernel();
+            services.AddSingleton<IKafkaClusterManager, KafkaClusterManager>();
+            services.AddSingleton<IKafkaClusterManager, KafkaClusterManager>();
+            services.AddResiliencyServices();
+            services.AddOpenTelemetry(configuration);
 
-            services.AddSingleton<IServiceBusProvider>(x =>
+            services.AddSingleton<IServiceBusReceiver>(x =>
                 {
-                    var producerConfig = new ProducerConfig
-                    {
-                        BootstrapServers = bootstrapServer,
-                        EnableDeliveryReports = true,
-                        ClientId = Dns.GetHostName(),
-                        Debug = "msg",
-
-                        // retry settings:
-                        // Receive acknowledgement from all sync replicas
-                        Acks = Acks.All,
-                        // Number of times to retry before giving up
-                        MessageSendMaxRetries = 3,
-                        // Duration to retry before next attempt
-                        RetryBackoffMs = 1000,
-                        // Set to true if you don't want to reorder messages on retry
-                        EnableIdempotence = true
-                    };
-                    var producer = new ProducerBuilder<Null, string>(producerConfig)
-                   .SetKeySerializer(Serializers.Null)
-                   .SetValueSerializer(Serializers.Utf8)
-                   .SetLogHandler((_, message) =>
-                                   Console.WriteLine($"Facility: {message.Facility}-{message.Level} Message: {message.Message}"))
-                   .SetErrorHandler((_, e) =>
-                                   Console.WriteLine($"Error: {e.Reason}. Is Fatal: {e.IsFatal}"))
-                   .Build();
-
                     var consumerConfig = new ConsumerConfig
                     {
                         BootstrapServers = bootstrapServer,
@@ -59,17 +39,16 @@ namespace LogCorner.EduSync.Speech.ServiceBus
                     };
 
                     var consumer = new ConsumerBuilder<Null, string>(consumerConfig)
-                   .SetKeyDeserializer(Deserializers.Null)
-                   .SetValueDeserializer(Deserializers.Utf8)
-                   .SetErrorHandler((_, e) =>
-                                      Console.WriteLine($"Error: {e.Reason}"))
-                   .Build();
-                    // consumer.
-                    return new KafkaClient(producer,
-                        x.GetRequiredService<IJsonSerializer>(),
+                        .SetKeyDeserializer(Deserializers.Null)
+                        .SetValueDeserializer(Deserializers.Utf8)
+                        .SetErrorHandler((_, e) =>
+                             Console.WriteLine($"Error: {e.Reason}"))
+                        .Build();
+
+                    return new KafkaReceiver(
                         consumer,
-                        x.GetRequiredService<INotifierMediatorService>()
-                    );
+                        x.GetRequiredService<INotifierMediatorService>(), x.GetRequiredService<ITraceService>(),
+                        x.GetRequiredService<ILogger<KafkaReceiver>>(), configuration);
                 }
             );
         }

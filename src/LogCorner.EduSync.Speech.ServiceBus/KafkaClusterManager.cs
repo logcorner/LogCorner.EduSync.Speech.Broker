@@ -1,46 +1,45 @@
 ﻿using Confluent.Kafka;
 using Confluent.Kafka.Admin;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
-namespace LogCorner.EduSync.Speech.ServiceBus
+namespace LogCorner.EduSync.Speech.ServiceBus;
+
+public class KafkaClusterManager : IKafkaClusterManager
 {
-    public class KafkaClusterManager : IClusterManager
+    private readonly IConfiguration _configuration;
+    private readonly ILogger<KafkaClusterManager> _logger;
+
+    public KafkaClusterManager(IConfiguration configuration, ILogger<KafkaClusterManager> logger)
     {
-        private readonly IConfiguration _configuration;
+        _configuration = configuration;
+        _logger = logger;
+    }
 
-        public KafkaClusterManager(IConfiguration configuration)
+    public async Task EnsureTopicExistAsync(string topicName)
+    {
+        var bootstrapServers = _configuration["kafkaUrl"];
+        using var adminClient = new AdminClientBuilder(new AdminClientConfig { BootstrapServers = bootstrapServers }).Build();
+        try
         {
-            _configuration = configuration;
-        }
-
-        public async Task EnsureTopicExistAsync(string topicName)
-        {
-            var bootstrapServers = _configuration["kafkaUrl"];
-            using var adminClient = new AdminClientBuilder(new AdminClientConfig { BootstrapServers = bootstrapServers }).Build();
-            try
+            var metadata = adminClient.GetMetadata(TimeSpan.FromSeconds(10));
+            var topicExist = metadata.Topics.Any(a => a.Topic == topicName);
+            if (!topicExist)
             {
-                var metadata = adminClient.GetMetadata(TimeSpan.FromSeconds(10));
-                var topicExist = metadata.Topics.Any(a => a.Topic == topicName);
-                if (topicExist == false)
+                await adminClient.CreateTopicsAsync(new[]
                 {
-                    await adminClient.CreateTopicsAsync(new[]
+                    new TopicSpecification
                     {
-                        new TopicSpecification
-                        {
-                            Name = topicName,
-                            ReplicationFactor = 1,
-                            NumPartitions = 1
-                        }
-                    });
-                }
+                        Name = topicName,
+                        ReplicationFactor = 1,
+                        NumPartitions = 1
+                    }
+                });
             }
-            catch (CreateTopicsException e)
-            {
-                Console.WriteLine($"An error occured creating topic {e.Results[0].Topic}: {e.Results[0].Error.Reason}");
-            }
+        }
+        catch (CreateTopicsException e)
+        {
+            _logger.LogInformation($"An error occured creating topic {e.Results[0].Topic}: {e.Results[0].Error.Reason}");
         }
     }
 }

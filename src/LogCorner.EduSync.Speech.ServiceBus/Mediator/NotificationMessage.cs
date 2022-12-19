@@ -1,9 +1,8 @@
 ﻿using MediatR;
 
-namespace LogCorner.EduSync.Speech.ServiceBus.Mediator
+namespace LogCorner.EduSync.Speech.ServiceBus.Mediator;
+
+public class NotificationMessage<T> : INotification
 {
-    public class NotificationMessage<T> : INotification
-    {
-        public T Message { get; set; }
-    }
+    public T Message { get; set; }
 }

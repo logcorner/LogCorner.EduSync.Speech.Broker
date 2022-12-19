@@ -1,7 +1,4 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-
-namespace LogCorner.EduSync.Speech.Consumer
+﻿namespace LogCorner.EduSync.Speech.Consumer
 {
     public interface IConsumerService
     {

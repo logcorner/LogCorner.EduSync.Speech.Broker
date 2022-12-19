@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <AssemblyVersion>2.0.5</AssemblyVersion>
+    <FileVersion>2.0.5</FileVersion>
+    <Version>2.0.5</Version>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageId>$(AssemblyName)</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="LogCorner.EduSync.Speech.SharedKernel" Version="2.0.0" />
+  </ItemGroup>
+
+</Project>
