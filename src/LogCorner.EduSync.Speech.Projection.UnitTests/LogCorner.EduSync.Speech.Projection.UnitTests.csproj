@@ -23,11 +23,8 @@
     <ProjectReference Include="..\LogCorner.EduSync.Speech.Projection\LogCorner.EduSync.Speech.Projection.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="LogCorner.EduSync.Speech.Command.SharedKernel">
-      <HintPath>..\BINARIES\LogCorner.EduSync.Speech.Command.SharedKernel.dll</HintPath>
-    </Reference>
-  </ItemGroup>
+
+
 
 
 

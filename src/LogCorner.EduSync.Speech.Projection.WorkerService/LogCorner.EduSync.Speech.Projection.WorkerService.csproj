@@ -51,9 +51,5 @@
     <Folder Include="Logs\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="LogCorner.EduSync.Notification.Common">
-      <HintPath>..\BINARIES\LogCorner.EduSync.Notification.Common.dll</HintPath>
-    </Reference>
-  </ItemGroup>
+
 </Project>
