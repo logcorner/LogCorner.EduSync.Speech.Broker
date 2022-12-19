@@ -29,7 +29,7 @@ jobs:
     displayName: dotnet pack
     inputs:
       command: 'pack'
-      packagesToPack: '**/LogCorner.EduSync.Speech.Producer.csproj;**/LogCorner.EduSync.Speech.Resiliency.csproj;**/LogCorner.EduSync.Speech.Telemetry.csproj'
+      packagesToPack: '**/LogCorner.EduSync.Speech.Producer.csproj;**/LogCorner.EduSync.Speech.Resiliency.csproj;**/LogCorner.EduSync.Speech.Telemetry.csproj;**/LogCorner.EduSync.Speech.ServiceBus.csproj'
       packDirectory: '$(Build.ArtifactStagingDirectory)/Nugets'
       nobuild: true
       versioningScheme: 'off'
