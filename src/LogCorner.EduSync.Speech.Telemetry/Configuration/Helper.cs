@@ -1,4 +1,4 @@
-﻿namespace LogCorner.EduSync.Speech.Telemetry.Configuration;
+﻿
 
 public static class Helper
 {

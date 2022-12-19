@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace LogCorner.EduSync.Speech.Telemetry.Configuration;
+
 
 [Serializable]
 public class TelemetryException : Exception
