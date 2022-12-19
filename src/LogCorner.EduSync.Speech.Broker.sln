@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogCorner.EduSync.Speech.Co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogCorner.EduSync.Speech.Producer", "LogCorner.EduSync.Speech.Producer\LogCorner.EduSync.Speech.Producer.csproj", "{310E7DF0-EB07-45FD-BC4B-C8CFE4CB999F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogCorner.EduSync.Speech.Projection", "LogCorner.EduSync.Speech.Projection\LogCorner.EduSync.Speech.Projection.csproj", "{1B9CABDD-7C21-41CE-995C-16A0A2997976}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogCorner.EduSync.Speech.Repository", "LogCorner.EduSync.Speech.Projection\LogCorner.EduSync.Speech.Repository.csproj", "{1B9CABDD-7C21-41CE-995C-16A0A2997976}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogCorner.EduSync.Speech.Projection.UnitTests", "LogCorner.EduSync.Speech.Projection.UnitTests\LogCorner.EduSync.Speech.Projection.UnitTests.csproj", "{050B7108-71D6-42D7-BF2D-0FC5B485A657}"
 EndProject

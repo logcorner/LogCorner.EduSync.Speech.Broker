@@ -6,14 +6,11 @@
     <FileVersion>2.0.4</FileVersion>
     <Version>2.0.4</Version>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageId>$(AssemblyName)</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="LogCorner.EduSync.Speech.SharedKernel" Version="2.0.0" />
   </ItemGroup>
-
-
-
-
 
 </Project>

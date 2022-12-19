@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\LogCorner.EduSync.Speech.Projection\LogCorner.EduSync.Speech.Projection.csproj" />
+    <ProjectReference Include="..\LogCorner.EduSync.Speech.Projection\LogCorner.EduSync.Speech.Repository.csproj" />
   </ItemGroup>
 
 

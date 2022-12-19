@@ -5,9 +5,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>2.0.4</Version>
-    <AssemblyVersion>2.0.4</AssemblyVersion>
-    <FileVersion>2.0.4</FileVersion>
+    <Version>2.0.5</Version>
+    <AssemblyVersion>2.0.5</AssemblyVersion>
+    <FileVersion>2.0.5</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,7 +16,7 @@
 	  <PackageReference Include="MediatR" Version="11.1.0" />
 	  <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
 	  <ProjectReference Include="..\LogCorner.EduSync.Speech.ElasticSearch\LogCorner.EduSync.Speech.ElasticSearch.csproj" />
-	  <ProjectReference Include="..\LogCorner.EduSync.Speech.Projection\LogCorner.EduSync.Speech.Projection.csproj" />
+	  <ProjectReference Include="..\LogCorner.EduSync.Speech.Projection\LogCorner.EduSync.Speech.Repository.csproj" />
 	  
 	  <ProjectReference Include="..\LogCorner.EduSync.Speech.Resiliency\LogCorner.EduSync.Speech.Resiliency.csproj" />
 	  <ProjectReference Include="..\LogCorner.EduSync.Speech.Telemetry\LogCorner.EduSync.Speech.Telemetry.csproj" />
