@@ -1,13 +1,23 @@
 version: '3.4'
 services:
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    restart: on-failure
+    ports:
+      - '9090:9090'
+    volumes:
+      - /path/to/prometheus/config:/etc/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
   zipkin:
     image: openzipkin/zipkin:latest
     container_name: zipkin
     restart: on-failure
     ports:
       - 9412:9411
-    networks:
-      - speech_network
+    # networks:
+    #   - speech_network
 
   jaeger:
     image: jaegertracing/all-in-one
@@ -23,11 +33,11 @@ services:
       - 16686:16686
     depends_on:
       - zipkin
-    networks:
-      - speech_network
+    # networks:
+    #   - speech_network
 
-networks:
-  speech_network:
-    external:
-      name: speech_network
+# networks:
+#   speech_network:
+#     external: true
+      
 
