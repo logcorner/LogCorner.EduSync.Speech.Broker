@@ -13,7 +13,7 @@ IHost host = Host.CreateDefaultBuilder(args)
         var notificationHubEndpoint = configuration["HubUrl"];
         services.AddConsumer(configuration, kafkaEndpoint, elasticSearchEndpoint, "speech");
         services.AddSignalRServices($"{notificationHubEndpoint}?clientName=LogCorner.EduSync.Speech.Consumer");
-        services.AddOpenTelemetry(configuration);
+        services.AddOpenTelemetryServices(configuration);
         services.AddHostedService<Worker>();
     })
     .ConfigureLogging((context, loggingBuilder) =>
@@ -21,7 +21,7 @@ IHost host = Host.CreateDefaultBuilder(args)
         loggingBuilder.ClearProviders();
         loggingBuilder.AddConsole();
         loggingBuilder.AddSerilog(context.Configuration);
-        loggingBuilder.AddOpenTelemetry(context.Configuration);
+        //loggingBuilder.AddOpenTelemetry(context.Configuration);
     })
     .Build();
 

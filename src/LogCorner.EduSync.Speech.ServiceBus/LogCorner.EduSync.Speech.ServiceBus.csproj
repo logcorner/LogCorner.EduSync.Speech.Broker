@@ -14,7 +14,6 @@
 	  <PackageReference Include="Confluent.Kafka" Version="2.3.0" />
 	  <PackageReference Include="LogCorner.EduSync.Notification.Common" Version="2.0.1" />
 	  <PackageReference Include="MediatR" Version="12.2.0" />
-	  <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
 	  <ProjectReference Include="..\LogCorner.EduSync.Speech.ElasticSearch\LogCorner.EduSync.Speech.ElasticSearch.csproj" />
 	  <ProjectReference Include="..\LogCorner.EduSync.Speech.Projection\LogCorner.EduSync.Speech.Repository.csproj" />
 	  

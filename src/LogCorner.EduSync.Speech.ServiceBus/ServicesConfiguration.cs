@@ -16,13 +16,14 @@ namespace LogCorner.EduSync.Speech.ServiceBus
     {
         public static void AddServiceBus(this IServiceCollection services, string bootstrapServer, IConfiguration configuration)
         {
-            services.AddMediatR(Assembly.GetExecutingAssembly());
+            //services.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ServiceBus).Assembly));
             services.AddTransient<INotifierMediatorService, NotifierMediatorService>();
             services.AddSharedKernel();
             services.AddSingleton<IKafkaClusterManager, KafkaClusterManager>();
             services.AddSingleton<IKafkaClusterManager, KafkaClusterManager>();
             services.AddResiliencyServices();
-            services.AddOpenTelemetry(configuration);
+            services.AddOpenTelemetryServices(configuration);
 
             services.AddSingleton<IServiceBusReceiver>(x =>
                 {
