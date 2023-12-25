@@ -1,7 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-
-namespace LogCorner.EduSync.Speech.Telemetry.Configuration
+﻿namespace LogCorner.EduSync.Speech.Telemetry.Configuration
 {
     public static class ServicesConfiguration
     {

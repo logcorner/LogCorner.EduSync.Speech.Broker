@@ -2,9 +2,6 @@
 using LogCorner.EduSync.Speech.Command.SharedKernel.Events;
 using LogCorner.EduSync.Speech.Command.SharedKernel.Serialyser;
 using LogCorner.EduSync.Speech.ServiceBus.Mediator;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace LogCorner.EduSync.Speech.ServiceBus
 {

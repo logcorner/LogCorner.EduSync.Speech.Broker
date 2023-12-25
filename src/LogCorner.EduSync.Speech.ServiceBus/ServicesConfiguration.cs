@@ -4,11 +4,9 @@ using LogCorner.EduSync.Speech.Resiliency;
 using LogCorner.EduSync.Speech.ServiceBus.Mediator;
 using LogCorner.EduSync.Speech.Telemetry;
 using LogCorner.EduSync.Speech.Telemetry.Configuration;
-using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using System.Reflection;
 
 namespace LogCorner.EduSync.Speech.ServiceBus
 {

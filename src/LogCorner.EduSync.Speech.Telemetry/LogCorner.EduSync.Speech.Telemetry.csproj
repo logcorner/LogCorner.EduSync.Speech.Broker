@@ -7,6 +7,7 @@
     <FileVersion>2.0.6</FileVersion>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Azure.Monitor.OpenTelemetry.AspNetCore" Version="1.0.0" />
     <PackageReference Include="Azure.Monitor.OpenTelemetry.Exporter" Version="1.1.0" />
     <!-- OpenTelemetry API & SDK -->
 

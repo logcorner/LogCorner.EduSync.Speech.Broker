@@ -1,6 +1,4 @@
-﻿
-
-public static class Helper
+﻿public static class Helper
 {
     public static int ParseInt(string value)
     {

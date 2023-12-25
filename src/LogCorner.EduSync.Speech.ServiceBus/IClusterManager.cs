@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace LogCorner.EduSync.Speech.ServiceBus
+﻿namespace LogCorner.EduSync.Speech.ServiceBus
 {
     public interface IClusterManager
     {

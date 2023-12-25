@@ -7,8 +7,8 @@ using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 using Serilog;
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
 
 namespace LogCorner.EduSync.Speech.Telemetry.Configuration
 {
@@ -122,7 +122,6 @@ namespace LogCorner.EduSync.Speech.Telemetry.Configuration
                         metricReaderOptions.PeriodicExportingMetricReaderOptions.ExportIntervalMilliseconds = 1000;
                     })
                     .AddOtlpExporter(options => options.Endpoint = new Uri(otlpEndpoint)));
-
 
             Services.AddSingleton<ITraceService, TraceService>();
         }
