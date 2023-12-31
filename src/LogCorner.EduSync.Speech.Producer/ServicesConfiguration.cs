@@ -4,13 +4,14 @@ using LogCorner.EduSync.Speech.Telemetry;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Net;
 
-namespace LogCorner.EduSync.Speech.Producer
+namespace LogCorner.EduSync.Speech.Producer.Configuration
 {
     public static class ServicesConfiguration
     {
-        public static void AddProducer(this IServiceCollection services, string bootstrapServer, IConfiguration configuration)
+        public static void AddProducerServices(this IServiceCollection services, string bootstrapServer, IConfiguration configuration)
         {
             services.AddSingleton<IProducerService, ProducerService>();
             services.AddSingleton<IServiceBusProducer>(x =>

@@ -10,72 +10,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Reference Include="LogCorner.EduSync.Speech.SharedKernel">
-      <HintPath>..\..\..\LogCorner.EduSync.Speech.Command\src\LogCorner.EduSync.Speech.SharedKernel.UnitTests\bin\Debug\net8.0\LogCorner.EduSync.Speech.SharedKernel.dll</HintPath>
-    </Reference>
-    <Reference Include="LogCorner.EduSync.Speech.SharedKernel.UnitTests">
-      <HintPath>..\..\..\LogCorner.EduSync.Speech.Command\src\LogCorner.EduSync.Speech.SharedKernel.UnitTests\bin\Debug\net8.0\LogCorner.EduSync.Speech.SharedKernel.UnitTests.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.DependencyInjection">
-      <HintPath>..\..\..\LogCorner.EduSync.Speech.Command\src\LogCorner.EduSync.Speech.SharedKernel.UnitTests\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions">
-      <HintPath>..\..\..\LogCorner.EduSync.Speech.Command\src\LogCorner.EduSync.Speech.SharedKernel.UnitTests\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.TestPlatform.CommunicationUtilities">
-      <HintPath>..\..\..\LogCorner.EduSync.Speech.Command\src\LogCorner.EduSync.Speech.SharedKernel.UnitTests\bin\Debug\net8.0\Microsoft.TestPlatform.CommunicationUtilities.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.TestPlatform.CoreUtilities">
-      <HintPath>..\..\..\LogCorner.EduSync.Speech.Command\src\LogCorner.EduSync.Speech.SharedKernel.UnitTests\bin\Debug\net8.0\Microsoft.TestPlatform.CoreUtilities.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.TestPlatform.CrossPlatEngine">
-      <HintPath>..\..\..\LogCorner.EduSync.Speech.Command\src\LogCorner.EduSync.Speech.SharedKernel.UnitTests\bin\Debug\net8.0\Microsoft.TestPlatform.CrossPlatEngine.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.TestPlatform.PlatformAbstractions">
-      <HintPath>..\..\..\LogCorner.EduSync.Speech.Command\src\LogCorner.EduSync.Speech.SharedKernel.UnitTests\bin\Debug\net8.0\Microsoft.TestPlatform.PlatformAbstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.TestPlatform.Utilities">
-      <HintPath>..\..\..\LogCorner.EduSync.Speech.Command\src\LogCorner.EduSync.Speech.SharedKernel.UnitTests\bin\Debug\net8.0\Microsoft.TestPlatform.Utilities.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.VisualStudio.CodeCoverage.Shim">
-      <HintPath>..\..\..\LogCorner.EduSync.Speech.Command\src\LogCorner.EduSync.Speech.SharedKernel.UnitTests\bin\Debug\net8.0\Microsoft.VisualStudio.CodeCoverage.Shim.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.VisualStudio.TestPlatform.Common">
-      <HintPath>..\..\..\LogCorner.EduSync.Speech.Command\src\LogCorner.EduSync.Speech.SharedKernel.UnitTests\bin\Debug\net8.0\Microsoft.VisualStudio.TestPlatform.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.VisualStudio.TestPlatform.ObjectModel">
-      <HintPath>..\..\..\LogCorner.EduSync.Speech.Command\src\LogCorner.EduSync.Speech.SharedKernel.UnitTests\bin\Debug\net8.0\Microsoft.VisualStudio.TestPlatform.ObjectModel.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\LogCorner.EduSync.Speech.Command\src\LogCorner.EduSync.Speech.SharedKernel.UnitTests\bin\Debug\net8.0\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="NuGet.Frameworks">
-      <HintPath>..\..\..\LogCorner.EduSync.Speech.Command\src\LogCorner.EduSync.Speech.SharedKernel.UnitTests\bin\Debug\net8.0\NuGet.Frameworks.dll</HintPath>
-    </Reference>
-    <Reference Include="testhost">
-      <HintPath>..\..\..\LogCorner.EduSync.Speech.Command\src\LogCorner.EduSync.Speech.SharedKernel.UnitTests\bin\Debug\net8.0\testhost.dll</HintPath>
-    </Reference>
-    <Reference Include="xunit.abstractions">
-      <HintPath>..\..\..\LogCorner.EduSync.Speech.Command\src\LogCorner.EduSync.Speech.SharedKernel.UnitTests\bin\Debug\net8.0\xunit.abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="xunit.assert">
-      <HintPath>..\..\..\LogCorner.EduSync.Speech.Command\src\LogCorner.EduSync.Speech.SharedKernel.UnitTests\bin\Debug\net8.0\xunit.assert.dll</HintPath>
-    </Reference>
-    <Reference Include="xunit.core">
-      <HintPath>..\..\..\LogCorner.EduSync.Speech.Command\src\LogCorner.EduSync.Speech.SharedKernel.UnitTests\bin\Debug\net8.0\xunit.core.dll</HintPath>
-    </Reference>
-    <Reference Include="xunit.execution.dotnet">
-      <HintPath>..\..\..\LogCorner.EduSync.Speech.Command\src\LogCorner.EduSync.Speech.SharedKernel.UnitTests\bin\Debug\net8.0\xunit.execution.dotnet.dll</HintPath>
-    </Reference>
-    <Reference Include="xunit.runner.reporters.netcoreapp10">
-      <HintPath>..\..\..\LogCorner.EduSync.Speech.Command\src\LogCorner.EduSync.Speech.SharedKernel.UnitTests\bin\Debug\net8.0\xunit.runner.reporters.netcoreapp10.dll</HintPath>
-    </Reference>
-    <Reference Include="xunit.runner.utility.netcoreapp10">
-      <HintPath>..\..\..\LogCorner.EduSync.Speech.Command\src\LogCorner.EduSync.Speech.SharedKernel.UnitTests\bin\Debug\net8.0\xunit.runner.utility.netcoreapp10.dll</HintPath>
-    </Reference>
-    <Reference Include="xunit.runner.visualstudio.testadapter">
-      <HintPath>..\..\..\LogCorner.EduSync.Speech.Command\src\LogCorner.EduSync.Speech.SharedKernel.UnitTests\bin\Debug\net8.0\xunit.runner.visualstudio.testadapter.dll</HintPath>
-    </Reference>
+    <PackageReference Include="LogCorner.EduSync.Speech.SharedKernel" Version="3.0.0" />
   </ItemGroup>
+
+ 
 
 </Project>

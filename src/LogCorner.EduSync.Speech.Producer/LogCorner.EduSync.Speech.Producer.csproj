@@ -1,13 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <AssemblyVersion>2.0.5</AssemblyVersion>
-    <FileVersion>2.0.5</FileVersion>
-    <Version>2.0.5</Version>
+    <AssemblyVersion>3.0.4</AssemblyVersion>
+    <FileVersion>3.0.4</FileVersion>
+    <Version>3.0.4</Version>
   </PropertyGroup>
 
 	<ItemGroup>
