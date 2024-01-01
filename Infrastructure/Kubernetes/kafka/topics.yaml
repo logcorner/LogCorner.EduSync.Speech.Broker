@@ -4,7 +4,7 @@ metadata:
   name: speech
   namespace: kafka 
   labels:
-    strimzi.io/cluster: logconer-cluster
+    name: strimzi-cluster-operator
 spec:
   partitions: 1
   replicas: 1
@@ -19,7 +19,7 @@ metadata:
   name: synchro
   namespace: kafka 
   labels:
-    strimzi.io/cluster: logconer-cluster
+    name: strimzi-cluster-operator
 spec:
   partitions: 1
   replicas: 1

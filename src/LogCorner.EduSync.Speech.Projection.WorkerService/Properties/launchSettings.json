@@ -3,7 +3,7 @@
     "LogCorner.EduSync.Speech.Projection.WorkerService": {
       "commandName": "Project",
       "environmentVariables": {
-        "DOTNET_ENVIRONMENT": "Development"
+        "DOTNET_ENVIRONMENT": "Kubernetes"
       },
       "dotnetRunMessages": true
     },
